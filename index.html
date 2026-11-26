@@ -1311,6 +1311,12 @@ const sb = (window.supabase && CFG.supabaseUrl) ? window.supabase.createClient(C
 const PAY_LINK = () => CFG.paiementAbonnement || CFG.paiementComplete || CFG.paiementStandard || '';
 const LOGIN_DOMAIN = CFG.loginDomain || 'comptes.suivitri.app';
 const toEmail = id => id.includes('@') ? id : id.toLowerCase() + '@' + LOGIN_DOMAIN;
+// Identifiant d'un compte qui a aussi une vraie adresse e-mail (ex. le compte développeur) : la base donne l'adresse liée
+async function loginEmail(id){
+  if (id.includes('@')) return id;
+  try { const { data } = await sb.rpc('email_for_login', {ident:id}); if (data) return data; } catch(e){}
+  return toEmail(id);
+}
 const SITE_URL = (CFG.siteUrl || (location.origin + location.pathname)).replace(/index\.html$/, '');
 let snap = {sessions:new Map(), users:new Map(), libS:new Map(), libP:new Map()};
 const J = o => JSON.stringify(o);
@@ -3734,7 +3740,7 @@ async function authSubmit(mode){
   ui.authErr = ''; ui.authMsg = '';
   try {
     if (mode === 'login'){
-      const { error } = await sb.auth.signInWithPassword({ email:toEmail(v('lg').trim()), password:v('pw') });
+      const { error } = await sb.auth.signInWithPassword({ email:await loginEmail(v('lg').trim()), password:v('pw') });
       if (error) throw new Error(error.message === 'Invalid login credentials' ? 'Identifiant ou mot de passe incorrect.' : error.message === 'Email not confirmed' ? 'Confirmez d\'abord votre e-mail (lien reçu à l\'inscription).' : error.message);
       await startSession();
     } else if (mode === 'signup'){
