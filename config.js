@@ -16,7 +16,7 @@ window.SUIVITRI_CONFIG = {
   stravaLogin: false,
 
   // Adresse du site (laisser vide : détectée automatiquement)
-  siteUrl: '',
+  siteUrl: 'https://cc2spourtous.github.io/kit-triathlon',
 
   // Paiement en ligne (facultatif) : liens Stripe (https://buy.stripe.com/…)
   // Vides : l'utilisateur est invité à contacter son coach, qui active l'accès dans l'écran Comptes.
