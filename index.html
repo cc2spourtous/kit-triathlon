@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net 'sha256-v1TaZONnO2UCBCBQqiBxW4V/sy+4IO1oEAOFeyGUFuw='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://cdn.jsdelivr.net; media-src 'self' blob:; worker-src 'self'; manifest-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net 'sha256-3NcowNNdXtqtPJ49JIgHm3qZV8PvmZFy4K9mwt/ZRSQ='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://cdn.jsdelivr.net; media-src 'self' blob:; worker-src 'self'; manifest-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>CC2S Kit Triathlon — suivi coach & athlètes</title>
@@ -249,7 +249,7 @@ h2{font-size:1.25rem}
 .blk .bh .bt{flex:1;font-weight:600}
 .blk .bh .rp{width:42px!important;text-align:center}
 .blk .bh .du{font-size:.72rem;color:var(--muted);min-width:44px;text-align:right}
-table.st{border-collapse:collapse;width:100%;min-width:820px}
+table.st{border-collapse:collapse;width:100%;min-width:0}
 table.st th{font-size:.65rem;color:var(--muted);font-weight:600;text-align:left;padding:2px 3px 0;text-transform:uppercase}
 table.st td{padding:1px 2px}
 table.st th.cons{min-width:170px}
@@ -627,9 +627,10 @@ table.it td.na{color:#c3ccd5}
   table.st td{padding:0!important}
   table.st td:nth-child(1){grid-column:1;grid-row:1}
   table.st td:nth-child(2){grid-column:2;grid-row:1}
-  table.st td:nth-child(5){grid-column:3;grid-row:1}
-  table.st td:nth-child(3){grid-column:1/-1;grid-row:2}
-  table.st td:nth-child(4){grid-column:1/-1;grid-row:3}
+  table.st tr.stm td:nth-child(4){grid-column:3;grid-row:1}
+  table.st tr.stm td:nth-child(3){grid-column:1/-1;grid-row:2}
+  table.st tr.stm{border-bottom:0!important;padding-bottom:2px!important}
+  table.st tr.stc{display:block!important;padding:0 0 6px!important}
   table.st td input,table.st td select{min-width:0!important}
   table.st .dur,table.st .crit{display:flex;gap:3px}
   table.st .dur>*,table.st .crit>*{flex:1 1 auto;min-width:0}
@@ -853,6 +854,54 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);
 .wtsb{margin-top:6px;border-top:1px solid var(--line);padding-top:5px;font-size:.74rem;display:grid;grid-template-columns:1fr auto;gap:0 6px;align-items:baseline}
 .wtsb span{color:var(--muted)}.wtsb b{font-size:1.05rem}.wtsb small{grid-column:1/3;color:var(--muted);font-size:.66rem}
 @media (max-width:760px){.pmct{grid-template-columns:1fr 1fr 1fr;gap:4px}.pmcc{padding:5px 6px}.pmcc b{font-size:1.15rem}}
+
+/* mise en page compacte : total semaine, obligatoire/facultatif, commentaire, consignes, tableau TSS */
+.wcmp td,.wcmp tr.wtot td{font-size:.84rem!important}
+.wcmp th,.wcmp td{padding:1px 4px}
+.wcmp tr.wtot th,.wcmp tr.wtot td{border-top:1px solid var(--line);font-weight:700}
+.wcmp tr.wpol th{color:var(--muted)}
+.wcmp abbr{text-decoration:none;cursor:help}
+.agrow{grid-template-columns:minmax(0,1fr) 190px}
+.planpane .shrow{flex-wrap:wrap;row-gap:4px}
+.planpane .shrow .ti{flex:1 1 220px;min-width:180px}
+.planpane .shrow .shic{display:flex;gap:2px;align-items:center;margin-left:auto}
+.shrow .obseg{font-size:.72rem;flex:0 0 auto}
+.shrow .obseg button{padding:3px 8px}
+.obbdg{font-size:.7rem;font-weight:600;border-radius:999px;padding:1px 7px;margin-left:6px;vertical-align:2px;background:#fff7e0;border:1px solid #f1d998}
+.obbdg.obl{background:#eef6ff;border-color:#bcd7f0;color:#1769aa}
+.pnote{display:flex;gap:6px;align-items:flex-start;padding:3px 7px!important;margin:5px 0!important}
+.pnote .pnl{margin:3px 0 0!important;font-size:.9rem!important;flex:0 0 auto}
+.pnote textarea{min-height:28px!important;height:30px;max-height:160px;padding:4px 7px;font-size:.84rem;line-height:1.35;resize:none;field-sizing:content}
+.pnote.ro .pnt{font-size:.82rem;line-height:1.35}
+table.st tr.stm td{padding-top:3px}
+table.st tr.stc td{padding:0 2px 4px;border-bottom:1px solid #eef2f5}
+.stcin{display:flex;gap:3px;align-items:center}
+.stcin .stcl{color:var(--muted);font-size:.8rem;padding-left:6px}
+.stcin input{flex:1 1 auto;width:auto!important;min-width:0!important;font-size:.8rem}
+.tsstabw{max-height:280px;overflow:auto;margin-top:8px;border:1px solid var(--line);border-radius:10px;background:#fff}
+.tsstab{width:100%;border-collapse:collapse;font-size:.8rem;font-variant-numeric:tabular-nums}
+.tsstab th{position:sticky;top:0;background:#f4f0fa;color:#5b3394;font-size:.66rem;text-transform:uppercase;letter-spacing:.03em;padding:4px 6px;text-align:right;cursor:help}
+.tsstab th:first-child,.tsstab td:first-child{text-align:left}
+.tsstab td{padding:3px 6px;text-align:right;border-top:1px solid #f0f2f5}
+.tsstab td.tp{color:#6b7785}
+.tsstab tr{cursor:pointer}.tsstab tbody tr:hover{background:#faf7fd}
+.tsstab tr.cur td{background:#fdf8e8}
+
+.pkind{display:flex;flex-direction:column;gap:6px;margin:2px 0 8px}
+.pkind .seg{align-self:flex-start;font-size:.86rem}
+.pkind .seg button{padding:6px 14px;font-weight:600}
+.iawarn{border:1.5px solid #f1d998;background:#fffbef;color:#6b4e00;border-radius:10px;padding:6px 10px;font-size:.82rem}
+.tag.iatag{background:#eef1fd;color:#3f4fb3;border-color:#c9d1f5}
+
+/* statistiques plus compactes en hauteur */
+.pmc{padding:6px 10px!important;margin-top:6px!important}
+.pmch{margin-bottom:4px!important}
+.pmct{gap:6px!important;margin-bottom:4px!important}
+.pmcc{padding:3px 8px!important;display:flex;align-items:baseline;gap:6px;flex-wrap:wrap}
+.pmcc span{display:inline!important}.pmcc b{font-size:1.1rem!important}.pmcc small{display:inline!important}
+.tsschart{margin-top:6px}.tsstabw{max-height:200px}
+
+.exgrp{margin:4px 0 8px;flex-wrap:wrap}.exgrp button small{opacity:.6;font-size:.7em}
 </style>
 </head>
 <body>
@@ -2249,7 +2298,8 @@ function tipsView(){
 }
 function refreshTipList(){ const l = document.getElementById('tiplist'); if (l) l.innerHTML = tipCardsHTML();
   document.querySelectorAll('.tchip').forEach(b => b.classList.toggle('on', b.dataset.id === (ui.tipDisc || ''))); }
-document.addEventListener('input', e => { if (e.target.id === 'tip-q'){ ui.tipQ = e.target.value; refreshTipList(); } });
+document.addEventListener('input', e => { if (e.target.matches && e.target.matches('.pnote textarea')){ e.target.style.height = 'auto'; e.target.style.height = Math.min(160, e.target.scrollHeight + 2) + 'px'; }
+  if (e.target.id === 'tip-q'){ ui.tipQ = e.target.value; refreshTipList(); } });
 document.addEventListener('change', e => { if (e.target.id === 'modf'){ ui.modf = e.target.value; render(); return; } if (e.target.id === 'tip-disc'){ ui.tipDisc = e.target.value; refreshTipList(); } });
 // Comptes (administrateur) : publier une info à l'honneur
 function infoAdminHTML(){
@@ -2386,13 +2436,16 @@ function terrainHTML(s, ro){
     ${tr.lieu === 'ht' ? `<div class="terx"><input data-f="ter" data-k="note" class="ternote" value="${esc(tr.note || '')}" placeholder="précisions : application, ventilateur, résistance…" ${ro}></div>` : ''}
   </div>`;
 }
+function oblSegHTML(s, ro){
+  return `<div class="seg obseg"><button class="${!s.optional ? 'on' : ''}" data-a="sopt" data-v="0" title="Séance obligatoire" ${ro}><span class="obl">★</span> Obligatoire</button><button class="${s.optional ? 'on' : ''}" data-a="sopt" data-v="1" title="Séance facultative" ${ro}><span class="fac">☆</span> Facultative</button></div>`;
+}
 function sessOptsHTML(s, ro){
   const nx = nextInDay(s), pv = prevInDay(s), sib = dayList(s.athleteId, s.date).length > 1;
   const chainedFrom = pv && pv.chain;
+  if (!nx && !chainedFrom && !(sib && !ro)) return '';
   return `<div class="sopts">
-    <div class="seg"><button class="${!s.optional ? 'on' : ''}" data-a="sopt" data-v="0" ${ro}><span class="obl">★</span> Obligatoire</button><button class="${s.optional ? 'on' : ''}" data-a="sopt" data-v="1" ${ro}><span class="fac">☆</span> Facultative</button></div>
     ${nx ? `<label class="chk"><input type="checkbox" data-o="chain" ${s.chain ? 'checked' : ''} ${ro}> ⛓ Enchaînée avec la suivante : <b style="color:${SPORTS[nx.sport].color}">${icon(nx.sport, 12)} ${esc(nx.title || SPORTS[nx.sport].label)}</b></label>`
-         : `<span class="ztxt">${chainedFrom ? '⛓ Enchaînée après ' + esc(pv.title || SPORTS[pv.sport].label) : 'Ajoutez une autre séance ce jour-là pour créer un enchaînement.'}</span>`}
+         : chainedFrom ? `<span class="ztxt">⛓ Enchaînée après ${esc(pv.title || SPORTS[pv.sport].label)}</span>` : ''}
     ${sib && !ro ? `<span class="ztxt" style="margin-left:auto">Ordre dans la journée <button class="ib" title="Plus tôt" data-a="ordup">↑</button><button class="ib" title="Plus tard" data-a="orddown">↓</button></span>` : ''}
   </div>`;
 }
@@ -2402,21 +2455,39 @@ function chipInner(s){
     <div class="m"><span>${s.optional ? '<span class="fac" title="Séance facultative">☆</span>' : '<span class="obl" title="Séance obligatoire">★</span>'} ${chipMsgIcon(s)}${fmtC(sum(plannedZones(s)))}</span>${done ? `<span class="done">✓ ${fmtC(sum(realZones(s)))}</span>` : ''}</div>`;
 }
 // Totaux de la semaine affichés à droite de l'agenda (le graphique reste dans Statistiques)
+// Part du temps en endurance (I1-I2) : prévu d'après les blocs, réalisé d'après les bilans
+function polarPct(list, mode){
+  let lo = 0, T = 0;
+  list.forEach(s => { let t;
+    if (mode === 'realise'){ if (!isDone(s)) return;
+      try { const v = intsView(s.bilan); t = Object.fromEntries(INTS.map(it => [it.k, parseHM(v[it.k].time)])); } catch(e){ t = {}; }
+      if (!Object.values(t).some(x => x)) t = intTimes(s); }
+    else t = intTimes(s);
+    INTS.forEach(it => { const x = t[it.k] || 0; T += x; if (it.k === 'I1' || it.k === 'I2') lo += x; }); });
+  return T ? Math.round(lo / T * 100) : null;
+}
+function polarCell(v){
+  if (v == null) return '–';
+  const m = rule('controle_polarise').min_pct_basse || 75;
+  return `<span style="color:${v < m ? '#b45309' : '#2f9461'}" title="${v < m ? 'Sous les ' + m + ' % conseillés' : 'Conforme (' + m + ' % mini)'}">${v} %</span>`;
+}
+// Totaux de la semaine affichés à droite de l'agenda (le graphique reste dans Statistiques)
 function weekSide(aid){
   const real = weekTable(aid, ui.week, 'realise'), plan = weekTable(aid, ui.week, 'prevu');
-  const spT = (t, sp) => ZONES.reduce((a, z) => a + t[z][sp], 0);
-  const sports = SPORT_KEYS.filter(sp => spT(real.t, sp) || spT(plan.t, sp));
+  const spT = (t, sp) => ZONES.reduce((a, z) => a + t[z][sp], 0), dz = v => v ? fmtC(v) : '–';
   const R = tTotal(real.t), P = tTotal(plan.t), pct = P ? Math.round(R / P * 100) : 0;
   const ob = plan.list.filter(s => !s.optional), fac = plan.list.filter(s => s.optional);
   const row = (lab, r, p, cls, st) => `<tr class="${cls || ''}"${st ? ` style="${st}"` : ''}><th>${lab}</th><td class="wr">${r}</td><td class="wp">${p}</td></tr>`;
+  const tsr = weekTSS(aid, ui.week, 'realise'), tsp = weekTSS(aid, ui.week, 'prevu');
   return `<div class="wsh">Total semaine</div>
     <table class="wcmp"><thead><tr><th></th><th class="wr">Réalisé</th><th class="wp">Prévu</th></tr></thead><tbody>
-      ${row('Total', fmtC(R), fmtC(P), 'wtot')}
-      ${sports.map(sp => row(`${icon(sp, 12)} ${SPORTS[sp].label}`, fmtC(spT(real.t, sp)), fmtC(spT(plan.t, sp)), 'wsp', `color:${SPORTS[sp].color}`)).join('')}
-      ${row('<abbr title="Training Stress Score : charge d\'entraînement">TSS</abbr>', weekTSS(aid, ui.week, 'realise'), weekTSS(aid, ui.week, 'prevu'), 'wtss')}
-      ${row('Séances', ob.filter(isDone).length, ob.length, 'wsep')}
+      ${SPORT_KEYS.map(sp => row(`${icon(sp, 11)} ${SPORTS[sp].label}`, dz(spT(real.t, sp)), dz(spT(plan.t, sp)), 'wsp', `color:${SPORTS[sp].color}`)).join('')}
+      ${row('Total', dz(R), dz(P), 'wtot')}
+      ${row('<abbr title="Training Stress Score : charge d\'entraînement">TSS</abbr>', tsr || '–', tsp || '–', 'wtss wsep')}
+      ${row('<abbr title="Part du temps en endurance fondamentale (I1-I2) : entraînement polarisé">Polarisé</abbr>', polarCell(polarPct(plan.list, 'realise')), polarCell(polarPct(plan.list, 'prevu')), 'wpol')}
+      ${row('Séances', ob.filter(isDone).length, ob.length)}
       ${fac.length ? row('Facultatives', fac.filter(isDone).length, fac.length) : ''}
-      ${row('Jours off', real.off, '', '')}
+      ${row('Jours off', real.off, '')}
     </tbody></table>
     ${(() => { const day = ui.week <= todayStr() && todayStr() <= addDays(ui.week, 6) ? todayStr() : addDays(ui.week, 6), p = pmcNow(aid, day), lb = tsbLabel(p.tsb);
       return p.ctl || p.atl ? `<div class="wtsb" title="Forme ${p.ctl} · fatigue ${p.atl}"><span>Fraîcheur (TSB)</span><b style="color:${lb[1]}">${p.tsb > 0 ? '+' : ''}${p.tsb}</b><small>${lb[0]}</small></div>` : ''; })()}
@@ -2534,13 +2605,13 @@ function readPlanHTML(s){
   return `<div class="pane rview planpane" style="--spc:${sp.color};--spb:${sp.bg}">
     <h4 class="pph">📋 Séance prévue</h4>
     <div class="rhead"><span style="color:${sp.color}">${icon(s.sport, 22)}</span>
-      <div class="rtt"><b>${esc(s.title || sp.label)}</b><span class="ztxt">${longDate(s.date)} · ${s.optional ? '<span class="fac">☆</span> facultative' : '<span class="obl">★</span> obligatoire'}${s.chain && nx ? ' · ⛓ enchaînée avec ' + esc(nx.title || SPORTS[nx.sport].label) : ''}${pv && pv.chain ? ' · ⛓ après ' + esc(pv.title || SPORTS[pv.sport].label) : ''}</span></div>
+      <div class="rtt"><b>${esc(s.title || sp.label)} ${s.optional ? '<span class="obbdg fac">☆ facultative</span>' : '<span class="obbdg obl">★ obligatoire</span>'}</b><span class="ztxt">${longDate(s.date)}${s.chain && nx ? ' · ⛓ enchaînée avec ' + esc(nx.title || SPORTS[nx.sport].label) : ''}${pv && pv.chain ? ' · ⛓ après ' + esc(pv.title || SPORTS[pv.sport].label) : ''}</span></div>
       <span class="rtot">${fmtC(sum(plannedZones(s)))}</span>
       <button class="ib" title="Exporter vers montre GPS (.fit)" data-a="exportfit">⌚</button>
       ${canEdit(s) ? '<button class="btn sm" data-a="editmode" title="Passer en mode édition">✏️ Modifier</button>' : ''}</div>
     <div class="sgraph">${sessionGraph(s, 34, true)}</div>
     ${s.sport === 'bike' && s.terrain && s.terrain.lieu ? `<div class="terro">${esc(terrainTxt(s.terrain))}</div>` : ''}
-    ${s.note ? `<div class="pnote ro"><div class="pnl">💬 Commentaire / consignes</div><div class="pnt">${esc(s.note).replace(/\n/g, '<br>')}</div></div>` : ''}${rows || '<div class="empty">Aucun contenu prévu.</div>'}
+    ${s.note ? `<div class="pnote ro"><span class="pnl" title="Commentaire / consignes">💬</span><div class="pnt">${esc(s.note).replace(/\n/g, '<br>')}</div></div>` : ''}${rows || '<div class="empty">Aucun contenu prévu.</div>'}
     ${doneBtnHTML(s)}
   </div>`;
 }
@@ -2591,8 +2662,8 @@ function detailHTML(s){
         ${ro ? '' : `<button class="ib" title="Monter" data-a="bup" data-b="${bi}">↑</button><button class="ib" title="Descendre" data-a="bdown" data-b="${bi}">↓</button><button class="ib" title="Dupliquer" data-a="bdup" data-b="${bi}">⧉</button><button class="ib red" title="Supprimer le bloc" data-a="bdel" data-b="${bi}">✕</button>`}
       </div>
       <div class="scroll"><table class="st">
-        <thead><tr><th style="width:160px;white-space:nowrap">Durée / distance</th><th style="width:150px">Critère saisi</th><th>Repères</th><th class="cons">Consigne</th><th style="width:22px"></th></tr></thead>
-        <tbody>${b.steps.map((st, si) => { const L = stepLabelsHTML(st, s, bi, si), c = critOf(st); return `<tr>
+        <thead><tr><th style="width:160px;white-space:nowrap">Durée / distance</th><th style="width:150px">Critère saisi</th><th>Repères</th><th style="width:22px"></th></tr></thead>
+        <tbody>${b.steps.map((st, si) => { const L = stepLabelsHTML(st, s, bi, si), c = critOf(st); return `<tr class="stm">
           <td><div class="dur">${s.sport === 'strength' ? '' : `<select class="md" title="Répétition au temps ou à la distance" data-f="step" data-b="${bi}" data-s="${si}" data-k="mode" ${ro}><option value="time" ${st.mode !== 'dist' ? 'selected' : ''}>⏱</option><option value="dist" ${st.mode === 'dist' ? 'selected' : ''}>📏</option></select>`}
             ${st.mode === 'dist' && s.sport !== 'strength'
               ? `<input class="dv" inputmode="decimal" placeholder="distance" data-f="step" data-b="${bi}" data-s="${si}" data-k="dist" value="${esc(st.dist || '')}" ${ro}><select class="un" data-f="step" data-b="${bi}" data-s="${si}" data-k="unit" ${ro}><option value="m" ${st.unit === 'm' ? 'selected' : ''}>m</option><option value="km" ${st.unit === 'km' ? 'selected' : ''}>km</option></select><span class="est" id="est-${bi}-${si}" title="Durée estimée d'après l'intensité et le profil">${estTxt(st, s)}</span>`
@@ -2603,9 +2674,8 @@ function detailHTML(s){
               : c === 'rpe' ? `<select class="cv" data-f="step" data-b="${bi}" data-s="${si}" data-k="cval" ${ro}>${[1,2,3,4,5,6,7,8,9,10].map(n=>`<option ${String(st.cval)===String(n)?'selected':''}>${n}</option>`).join('')}</select>`
               : `<input class="cv" inputmode="decimal" data-f="step" data-b="${bi}" data-s="${si}" data-k="cval" value="${esc(st.cval || '')}" placeholder="${c === 'fc' ? 'bpm' : '%'}" ${ro}><span class="cu">${c === 'fc' ? 'bpm' : '%'}</span>`}</div></td>
           <td id="lx-${bi}-${si}">${stepInfoText(st, s)}</td>
-          <td><div style="display:flex;gap:2px;align-items:center"><input data-f="step" data-b="${bi}" data-s="${si}" data-k="autre" value="${esc(st.autre)}" placeholder="consigne" ${ro}>${exFor(st.autre) ? `<button class="ib" title="Voir l'exercice animé" data-a="exshow" data-id="${exFor(st.autre).id}">🎬</button>` : ''}${ro ? '' : `<button class="ib" title="Choisir un exercice pour cette ligne" data-a="expick0" data-b="${bi}" data-s="${si}">🏋</button>`}</div></td>
           <td>${ro ? '' : `<button class="ib red" title="Supprimer la ligne" data-a="sdel" data-b="${bi}" data-s="${si}">✕</button>`}</td>
-        </tr>`; }).join('')}</tbody>
+        </tr><tr class="stc"><td colspan="4"><div class="stcin"><span class="stcl">↳</span><input data-f="step" data-b="${bi}" data-s="${si}" data-k="autre" value="${esc(st.autre)}" placeholder="consigne ou exercice (facultatif)" ${ro}>${exFor(st.autre) ? `<button class="ib" title="Voir l'exercice animé" data-a="exshow" data-id="${exFor(st.autre).id}">🎬</button>` : ''}${ro ? '' : `<button class="ib" title="Choisir un exercice pour cette ligne" data-a="expick0" data-b="${bi}" data-s="${si}">🏋</button>`}</div></td></tr>`; }).join('')}</tbody>
       </table></div>
       ${ro ? '' : `<button class="lk" data-a="sadd" data-b="${bi}">+ ligne</button><button class="lk" data-a="expick0" data-b="${bi}">+ exercice</button>`}
     </div>`).join('');
@@ -2615,13 +2685,13 @@ function detailHTML(s){
       <h4 class="pph">📋 Séance prévue</h4>
       <div class="shrow">
         <span style="color:${sp.color}">${icon(s.sport, 20)}</span><select data-f="sport" style="color:${sp.color}" ${ro}>${SPORT_KEYS.map(k=>`<option value="${k}" ${k===s.sport?'selected':''}>${SPORTS[k].label}</option>`).join('')}</select>
-        <input class="ti" placeholder="Titre de la séance" data-f="title" value="${esc(s.title)}" ${ro}>
+        <input class="ti" placeholder="Titre de la séance" data-f="title" value="${esc(s.title)}" ${ro}>${oblSegHTML(s, ro)}
         <input type="date" data-f="date" value="${s.date}" ${ro}>
-        ${ro ? '' : `<button class="ib" title="Déplacer au jour précédent" data-a="mvday" data-v="-1">◀</button><button class="ib" title="Déplacer au jour suivant" data-a="mvday" data-v="1">▶</button><button class="ib" title="Charger une séance type" data-a="loadtpl">📂</button><button class="ib" title="Dupliquer au lendemain" data-a="dupsess">⧉</button><button class="ib" title="Mode lecture" data-a="editmode">👁</button><button class="ib" title="Exporter vers montre GPS (.fit)" data-a="exportfit">⌚</button><button class="ib" title="Enregistrer comme séance type" data-a="savetpl">★</button><button class="ib red" title="Supprimer la séance" data-a="delsess">🗑</button>`}
+        ${ro ? '' : `<span class="shic"><button class="ib" title="Déplacer au jour précédent" data-a="mvday" data-v="-1">◀</button><button class="ib" title="Déplacer au jour suivant" data-a="mvday" data-v="1">▶</button><button class="ib" title="Charger une séance type" data-a="loadtpl">📂</button><button class="ib" title="Dupliquer au lendemain" data-a="dupsess">⧉</button><button class="ib" title="Mode lecture" data-a="editmode">👁</button><button class="ib" title="Exporter vers montre GPS (.fit)" data-a="exportfit">⌚</button><button class="ib" title="Enregistrer comme séance type" data-a="savetpl">★</button><button class="ib red" title="Supprimer la séance" data-a="delsess">🗑</button></span>`}
       </div>
       ${sessOptsHTML(s, ro)}
       ${terrainHTML(s, ro)}
-      <div class="pnote"><div class="pnl">💬 Commentaire / consignes</div><textarea rows="2" data-f="note" placeholder="Objectif de la séance, consignes, points d'attention…" ${ro}>${esc(s.note || '')}</textarea></div>
+      <div class="pnote"><span class="pnl" title="Commentaire / consignes">💬</span><textarea rows="1" data-f="note" placeholder="Commentaire : objectif, consignes, points d'attention…" ${ro}>${esc(s.note || '')}</textarea></div>
       <div class="sline" id="summary">${summaryHTML(s)}</div>
       <div class="sgraph" id="sgraph">${sessionGraph(s, 46, true)}</div>
       ${isSimple(s) ? simpleEditorHTML(s, ro) : `${blocks || '<div class="empty">Aucun bloc.</div>'}
@@ -2935,7 +3005,7 @@ function pmcHTML(aid, from, to){
   const S = pmcSeries(aid, from, to);
   if (!S.length || !S.some(p => p.ctl > 0.5 || p.atl > 0.5)) return `<div class="pmc"><div class="pmch">📈 Forme, fatigue et fraîcheur</div><p class="ztxt">Pas encore assez de séances réalisées pour calculer la forme (CTL), la fatigue (ATL) et la fraîcheur (TSB).</p></div>`;
   const today = todayStr(), cur = S.filter(p => !p.proj).pop() || S[0], lab = tsbLabel(cur.tsb);
-  const W = 1000, H1 = 150, H2 = 80, L = 44, R = 10, T = 12, n = S.length, x = i => L + (W - L - R) * i / Math.max(1, n - 1);
+  const W = 1000, H1 = 104, H2 = 54, L = 44, R = 10, T = 12, n = S.length, x = i => L + (W - L - R) * i / Math.max(1, n - 1);
   const mx = Math.max(20, ...S.map(p => Math.max(p.ctl, p.atl))), st = mx > 120 ? 40 : mx > 60 ? 20 : 10, ym = Math.ceil(mx * 1.1 / st) * st;
   const y1 = v => T + (H1 - T - 16) * (1 - v / ym);
   const li = S.reduce((m, p, i) => p.proj ? m : i, 0);
@@ -3006,6 +3076,16 @@ function asStatsHTML(aid, from, to){
     </tbody></table></details>` : '<div class="ztxt" style="font-size:.74rem;margin-top:4px">Les allures viennent du bilan des séances de course (allure moyenne en I3 à I6).</div>'}
   </div>`;
 }
+// Tableau hebdomadaire : volume, TSS réalisé / prévu, forme (CTL), fatigue (ATL), fraîcheur (TSB) en fin de semaine, polarisation
+function tssTableHTML(aid, data, end){
+  const n = data.length, re = weeklyStats(aid, end, n, 'realise'), pr = weeklyStats(aid, end, n, 'prevu');
+  const pm = {}; pmcSeries(aid, data[0].ws, addDays(end, 6)).forEach(p => pm[p.d] = p);
+  const cur = mondayOf(todayStr());
+  const rows = data.map((d, i) => { const dt = parseYmd(d.ws), p0 = d.ws === cur ? pm[todayStr()] : pm[addDays(d.ws, 6)], p = p0 && (p0.ctl >= 0.5 || p0.atl >= 0.5) ? p0 : null, lb = p ? tsbLabel(p.tsb) : null;
+    return `<tr class="${d.ws === cur ? 'cur' : ''}" data-a="statweek" data-i="${i}"><td>${dt.getDate()} ${MONTHS[dt.getMonth()]}</td><td>${re[i].total ? fmtC(re[i].total) : '–'}</td><td><b>${re[i].tss || '–'}</b></td><td class="tp">${pr[i].tss || '–'}</td>
+      <td>${p ? Math.round(p.ctl) : '–'}</td><td>${p ? Math.round(p.atl) : '–'}</td><td>${p ? `<b style="color:${lb[1]}">${p.tsb > 0 ? '+' : ''}${Math.round(p.tsb)}</b>` : '–'}</td><td>${polarCell(polarPct(sessionsOf(aid, d.ws), 'realise'))}</td></tr>`; }).reverse().join('');
+  return `<div class="tsstabw"><table class="tsstab"><thead><tr><th>Semaine</th><th>Volume</th><th>TSS réalisé</th><th>TSS prévu</th><th title="Forme : charge chronique sur 42 jours">CTL</th><th title="Fatigue : charge aiguë sur 7 jours">ATL</th><th title="Fraîcheur = CTL − ATL">TSB</th><th title="Part du temps en I1-I2">Polarisé</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+}
 function weeklyStats(aid, endWeek, n, mode){
   const out = [];
   for (let i = n - 1; i >= 0; i--){
@@ -3019,7 +3099,7 @@ function weeklyStats(aid, endWeek, n, mode){
 }
 function niceStep(maxH){ const steps = [0.5, 1, 2, 3, 5, 10, 15, 20]; return steps.find(s => maxH / s <= 5) || 25; }
 function tssChart(data){
-  const W = 1000, H = 110, L = 44, R = 10, T = 14, B = 20, pw = W - L - R, ph = H - T - B, n = data.length, slot = pw / n, bw = Math.min(46, slot * 0.58);
+  const W = 1000, H = 84, L = 44, R = 10, T = 12, B = 18, pw = W - L - R, ph = H - T - B, n = data.length, slot = pw / n, bw = Math.min(46, slot * 0.58);
   const mx = Math.max(50, ...data.map(d => d.tss)), step = mx > 600 ? 200 : mx > 300 ? 100 : 50, ymax = Math.ceil(mx * 1.1 / step) * step;
   const y = v => T + ph - v / ymax * ph, cx = i => L + slot * i + slot / 2;
   let g = '';
@@ -3031,7 +3111,7 @@ function tssChart(data){
   return `<svg viewBox="0 0 ${W} ${H}" width="100%" preserveAspectRatio="none" style="display:block;height:${H}px">${g}</svg>`;
 }
 function statsChart(data){
-  const W = 1000, H = 190, L = 44, R = 10, T = 16, B = 24, pw = W - L - R, ph = H - T - B;
+  const W = 1000, H = 132, L = 44, R = 10, T = 14, B = 22, pw = W - L - R, ph = H - T - B;
   const maxS = Math.max(3600, ...data.map(d => Math.max(d.total, ...LONG3.map(k => d.lng[k]))));
   const step = niceStep(maxS / 3600) * 3600, ymax = Math.ceil(maxS * 1.08 / step) * step;
   const y = v => T + ph - v / ymax * ph, n = data.length, slot = pw / n, bw = Math.min(46, slot * 0.58);
@@ -3089,6 +3169,7 @@ function statsView(aid){
       <div class="tip" id="stattip"></div>
     </div>
     <div class="chart tsschart"><div class="lg"><span class="sep">TSS par semaine</span><span class="ztxt">charge d'entraînement (${mode === 'prevu' ? 'prévue' : 'réalisée'}) · cliquez une barre pour le bilan de la semaine</span></div>${tssChart(data)}</div>
+    ${tssTableHTML(aid, data, end)}
     ${pmcHTML(aid, data[0].ws, addDays(end, 13))}
     ${kstrip}
     ${statWeekHTML(aid)}
@@ -3160,16 +3241,17 @@ function svgGiclee(){
   // vue de côté, tête à droite ; épaule S(170,84), hanche H(125,88) ; surface de l'eau y = 82
   // Cycle de bras (2 s) : entrée/allonge → prise d'appui coude haut → traction → poussée accélérée jusqu'à la cuisse (giclée)
   // → sortie coude en premier → retour aérien coude haut, avant-bras et main relâchés → entrée doigts en premier
-  const KT = '0;.12;.28;.40;.48;.55;.65;.75;.88;1';
-  const sh = [0, 22, 50, 118, 170, 200, 240, 275, 320, 360];   // épaule (angle du bras)
-  const el = [0, 62, 62, 42, 8, -10, -80, -145, -280, -360];   // coude (angle relatif de l'avant-bras)
-  const wr = [0, 14, 6, 0, -6, 10, 28, 30, 10, 0];             // poignet (main relâchée au retour)
+  // allonge maintenue devant jusqu'à ce que l'autre main revienne : toujours un bras devant
+  const KT = '0;.42;.50;.56;.62;.67;.71;.77;.84;.93;1';
+  const sh = [0, 4, 22, 50, 118, 170, 200, 240, 275, 320, 360];   // épaule (angle du bras)
+  const el = [0, 6, 62, 62, 42, 8, -10, -80, -145, -280, -360];   // coude (angle relatif de l'avant-bras)
+  const wr = [0, 2, 14, 6, 0, -6, 10, 28, 30, 10, 0];             // poignet (main relâchée au retour)
   const anim = (vals, cx, cy, begin) => `<animateTransform attributeName="transform" type="rotate" values="${vals.map(v => v + ' ' + cx + ' ' + cy).join(';')}" keyTimes="${KT}" dur="2s" begin="${begin}" repeatCount="indefinite"/>`;
   const hand = (x, y, c, c2) => `<path d="M${x} ${y - 3.2} C${x + 5} ${y - 4} ${x + 10} ${y - 3.4} ${x + 13} ${y - 1.4} C${x + 14.4} ${y - .4} ${x + 14.4} ${y + 1} ${x + 13} ${y + 1.8} C${x + 9} ${y + 3.6} ${x + 4} ${y + 3.6} ${x} ${y + 2.8} Z" fill="${c}"/>
       <path d="M${x + 2.5} ${y - 2.6} C${x + 4.5} ${y - 6} ${x + 7.5} ${y - 6.6} ${x + 8.6} ${y - 5.4} C${x + 9} ${y - 4.6} ${x + 7} ${y - 3.4} ${x + 6} ${y - 2.8}" fill="${c2}"/>
       <path d="M${x + 5} ${y - .8} H${x + 12} M${x + 5} ${y + 1} H${x + 11.5}" stroke="${c2}" stroke-width=".6" stroke-linecap="round"/>`;
   // l'épaule remonte pendant le retour (roulis) : coude haut, main hors de l'eau
-  const arm = (begin, c, c2) => `<g><animateTransform attributeName="transform" type="translate" values="0 0;0 0;0 -11;0 -11;0 0" keyTimes="0;.5;.6;.84;1" dur="2s" begin="${begin}" repeatCount="indefinite"/><g>${anim(sh, 170, 84, begin)}
+  const arm = (begin, c, c2) => `<g><animateTransform attributeName="transform" type="translate" values="0 0;0 0;0 -11;0 -11;0 0" keyTimes="0;.68;.74;.94;1" dur="2s" begin="${begin}" repeatCount="indefinite"/><g>${anim(sh, 170, 84, begin)}
       <line x1="170" y1="84" x2="198" y2="84" stroke="${c}" stroke-width="8.4" stroke-linecap="round"/>
       <g>${anim(el, 198, 84, begin)}
         <line x1="198" y1="84" x2="222" y2="84" stroke="${c}" stroke-width="7" stroke-linecap="round"/>
@@ -3184,7 +3266,7 @@ function svgGiclee(){
           <path d="M54 86.6 C48 85.4 41 85.6 35.5 87.6 C33.6 88.4 33.6 90.6 35.6 91.4 C40.5 92.8 47 93.2 54 93.4 C56 91.4 56 88.6 54 86.6 Z" fill="${c}"/>
           <path d="M36 88.4 q-1.6 1.2 0 2.4" stroke="${c === SKIN ? SKIN2 : '#b88a66'}" stroke-width=".7" fill="none"/>
         </g></g></g>`;
-  const drop = (dx, dy, r) => `<circle cx="106" cy="80" r="${r}" fill="#1f7fbf"><animate attributeName="opacity" values="0;1;0;0" keyTimes="0;.06;.42;1" dur="1s" begin="-.06s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 0;${dx} ${dy};${dx} ${dy}" keyTimes="0;.06;.42;1" dur="1s" begin="-.06s" repeatCount="indefinite"/></circle>`;
+  const drop = (dx, dy, r) => `<circle cx="106" cy="80" r="${r}" fill="#1f7fbf"><animate attributeName="opacity" values="0;1;0;0" keyTimes="0;.06;.42;1" dur="1s" begin=".34s" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 0;${dx} ${dy};${dx} ${dy}" keyTimes="0;.06;.42;1" dur="1s" begin=".34s" repeatCount="indefinite"/></circle>`;
   return `<svg viewBox="22 30 214 142" role="img" aria-label="Animation : éducatif giclée en crawl">
     <rect x="22" y="30" width="214" height="142" rx="10" fill="#eef6fb"/>
     ${arm('-1s', SKIN2, '#b88a66')}
@@ -3208,10 +3290,10 @@ function svgGiclee(){
 }
 function svgGicleeDessus(){
   // vue de dessus, tête à droite ; axe du corps y = 100 ; épaules (168,88) et (168,112)
-  const KT = [0, .12, .28, .40, .48, .55, .65, .75, .88, 1];
-  const E = [[196,86],[198,88],[177,84],[151,86],[141,89],[147,79],[160,68],[177,68],[191,76],[196,86]];   // coude
-  const W = [[222,88],[214,95],[178,99],[147,97],[119,92],[124,84],[146,79],[176,81],[206,86],[222,88]];   // poignet
-  const A = [0, 22, 12, 0, -6, 16, 32, 26, 10, 0];                                                       // main relâchée
+  const KT = [0, .42, .50, .56, .62, .67, .71, .77, .84, .93, 1];
+  const E = [[196,86],[197,86],[198,88],[177,84],[151,86],[141,89],[147,79],[160,68],[177,68],[191,76],[196,86]];   // coude
+  const W = [[222,88],[221,89],[214,95],[178,99],[147,97],[119,92],[124,84],[146,79],[176,81],[206,86],[222,88]];   // poignet
+  const A = [0, 4, 22, 12, 0, -6, 16, 32, 26, 10, 0];                                                       // main relâchée
   const S = [168, 88];
   const tip = (e, w, a, s) => { let dx = w[0] - e[0], dy = w[1] - e[1]; const n = Math.hypot(dx, dy) || 1; dx /= n; dy /= n;
     const r = a * s * Math.PI / 180, c = Math.cos(r), si = Math.sin(r); return [w[0] + 11 * (dx * c - dy * si), w[1] + 11 * (dx * si + dy * c)]; };
@@ -3225,7 +3307,7 @@ function svgGicleeDessus(){
   const kt = KT.join(';');
   const armSVG = (s, begin, color, layer) => { const d = series(s);
     // layer « dessous » : toujours visible (teinte d'eau) ; layer « dessus » : visible seulement hors de l'eau (retour aérien)
-    const op = layer === 'under' ? '' : `<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;.5;.53;.92;1" dur="2s" begin="${begin}" repeatCount="indefinite"/>`;
+    const op = layer === 'under' ? '' : `<animate attributeName="opacity" values="0;0;1;1;0" keyTimes="0;.69;.72;.97;1" dur="2s" begin="${begin}" repeatCount="indefinite"/>`;
     return `<g opacity="${layer === 'under' ? .6 : 0}">${op}
       <polyline points="${d.first}" fill="none" stroke="${color}" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"><animate attributeName="points" values="${d.arm}" keyTimes="${kt}" dur="2s" begin="${begin}" repeatCount="indefinite"/></polyline>
       <polyline points="${d.firstH}" fill="none" stroke="${color}" stroke-width="8" stroke-linecap="round"><animate attributeName="points" values="${d.hand}" keyTimes="${kt}" dur="2s" begin="${begin}" repeatCount="indefinite"/></polyline>
@@ -3234,7 +3316,7 @@ function svgGicleeDessus(){
     const pts = d => `122,${y} 86,${y + s * .8} ${52 + d},${y + s * 1.6} ${40 + d * 1.6},${y + s * 1.4}`;
     return `<polyline points="${pts(0)}" fill="none" stroke="${SKIN}" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"><animate attributeName="points" values="${pts(0)};${pts(4)};${pts(0)}" keyTimes="0;.5;1" dur=".66s" begin="${begin}" repeatCount="indefinite"/></polyline>`; };
   const splash = (y, begin) => [[-14,-6,3],[-8,-12,2.6],[-20,4,2.4],[-6,8,2.2],[-18,-12,2]].map(([dx, dy, r]) =>
-    `<circle cx="122" cy="${y}" r="${r}" fill="#ffffff"><animate attributeName="opacity" values="0;0;.95;0;0" keyTimes="0;.47;.5;.7;1" dur="2s" begin="${begin}" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 0;0 0;${dx} ${dy};${dx} ${dy}" keyTimes="0;.47;.5;.7;1" dur="2s" begin="${begin}" repeatCount="indefinite"/></circle>`).join('');
+    `<circle cx="122" cy="${y}" r="${r}" fill="#ffffff"><animate attributeName="opacity" values="0;0;.95;0;0" keyTimes="0;.65;.68;.84;1" dur="2s" begin="${begin}" repeatCount="indefinite"/><animateTransform attributeName="transform" type="translate" values="0 0;0 0;0 0;${dx} ${dy};${dx} ${dy}" keyTimes="0;.65;.68;.84;1" dur="2s" begin="${begin}" repeatCount="indefinite"/></circle>`).join('');
   return `<svg viewBox="22 34 226 132" role="img" aria-label="Animation : éducatif giclée en crawl, vue de dessus">
     <rect x="22" y="34" width="226" height="132" rx="10" fill="#9fd3ee"/>
     <rect x="22" y="96.5" width="226" height="7" fill="#1b4f72" opacity=".22"/>
@@ -3272,7 +3354,8 @@ const flerp = (x, y, k) => typeof x === 'number' ? x + (y - x) * k : Array.isArr
 // chaque membre est ramené à une cible (main / cheville) pour que les appuis restent fixes pendant la transition
 function fnorm(p){
   const S = fadd(p.H, p.t, FIG.torso), out = Object.assign({}, p);
-  const conv = (v, root, l1, l2, defBend) => { if (!Array.isArray(v)) return Object.assign({bend:defBend, f:0}, v);
+  const conv = (v, root, l1, l2, defBend) => { if (v && v.rel) return {rel:v.rel.slice(), bend:defBend, f:0}; // reste relatif au buste pendant la transition
+    if (!Array.isArray(v)) return Object.assign({bend:defBend, f:0}, v);
     const j = fadd(root, v[0], l1), e = fadd(j, v[1], l2), t0 = fang(root, e), dif = ((v[0] - t0 + 540) % 360) - 180;
     return {ik:e, bend:Math.abs(dif) < 0.5 ? defBend : Math.sign(dif), f:v[2] || 0}; };
   ['na','fa'].forEach(q => out[q] = conv(p[q], S, FIG.ua, FIG.fa, -1));
@@ -3280,15 +3363,17 @@ function fnorm(p){
   out.h = p.h || 0; out.face = p.face || 1; return out;
 }
 const fkeys = raw => { const frames = raw.map(fnorm); return u => { const K = frames.length, x = u * K, j = Math.floor(x) % K, k = x - Math.floor(x), e = k * k * (3 - 2 * k); const A = frames[j], B = frames[(j + 1) % K], P = flerp(A, B, e);
-  ['na','fa','nl','fl'].forEach(q => P[q].bend = (e < 0.5 ? A : B)[q].bend); P.face = A.face; return P; }; };
+  ['na','fa','nl','fl'].forEach(q => P[q].bend = (e < 0.5 ? A : B)[q].bend); P.face = A.face; P.look = A.look; return P; }; };
 function fsolve(p){
   const H = p.H, t = p.t, S = fadd(H, t, FIG.torso), C = fadd(H, t + (p.h || 0), FIG.head);
-  const arm = v => { const [a1, a2] = Array.isArray(v) ? v : fik(S, v.ik, FIG.ua, FIG.fa, v.bend || -1); const E = fadd(S, a1, FIG.ua); return {S, E, W:fadd(E, a2, FIG.fa), a1, a2}; };
-  const leg = v => { const [l1, l2] = Array.isArray(v) ? v : fik(H, v.ik, FIG.th, FIG.sh, v.bend || 1); const K = fadd(H, l1, FIG.th), A = fadd(K, l2, FIG.sh);
+  const arm = v => { if (v && v.rel) v = [t - 180 + v.rel[0], t - 180 + v.rel[1]]; const [a1, a2] = Array.isArray(v) ? v : fik(S, v.ik, FIG.ua, FIG.fa, v.bend || -1); const E = fadd(S, a1, FIG.ua); return {S, E, W:fadd(E, a2, FIG.fa), a1, a2}; };
+  const leg = v => { if (v && v.rel) v = [t - 180 + v.rel[0], t - 180 + v.rel[1], v.rel[2] || 0]; const [l1, l2] = Array.isArray(v) ? v : fik(H, v.ik, FIG.th, FIG.sh, v.bend || 1); const K = fadd(H, l1, FIG.th), A = fadd(K, l2, FIG.sh);
     return {H, K, A, T:fadd(A, l2 + 90 + ((Array.isArray(v) ? v[2] : v.f) || 0), FIG.foot), l1}; };
-  return {H, S, C, hair:fadd(fadd(C, t, 2.2), t + 90 * (p.face || 1), 2.4), na:arm(p.na), fa:arm(p.fa), nl:leg(p.nl), fl:leg(p.fl), prop:p.prop};
+  const fc = p.face || 1;
+  return {H, S, C, hair:fadd(fadd(C, t, 2.2), t + 90 * fc, 2.4), cap:fadd(fadd(C, t + 90 * fc, 3.2), t + 180, 1.6), eye:fadd(C, t - (p.look ?? 62) * fc, 7.4 * (1 - (p.turn || 0) * .85)), eye2:fadd(C, t - ((p.look ?? 62) - 32) * fc, 8.6 * (1 - (p.turn || 0) * .3)), na:arm(p.na), fa:arm(p.fa), nl:leg(p.nl), fl:leg(p.fl), prop:p.prop, t, face:fc};
 }
 function figAnim(o){
+  if (o.top) return figTop(o);
   const N = o.n || 36, pose = typeof o.pose === 'function' ? o.pose : fkeys(o.pose), F = [];
   for (let i = 0; i <= N; i++) F.push(fsolve(pose((i % N) / N)));
   const L = `dur="${o.dur || 2}s" repeatCount="indefinite"`, r1 = v => v.toFixed(1);
@@ -3309,13 +3394,70 @@ function figAnim(o){
     : `<rect x="0" y="-22" width="200" height="232" rx="14" fill="#eef6fb"/><rect x="0" y="205" width="200" height="5" fill="#dfeaf2"/>${o.mat ? '<rect x="8" y="203" width="184" height="3" rx="1.5" fill="#7fb7a4"/>' : ''}${o.wall ? `<rect x="${o.wall - 8}" y="-22" width="8" height="227" fill="#d5dee6"/>` : ''}`;
   const board = o.board ? `<rect x="0" y="0" width="26" height="6" rx="3" fill="#ffd34d" stroke="#e0a800">
       <animate attributeName="x" values="${vals(f => along(f.na.E, f.na.W, 1.1)[0] - 4)}" ${L}/><animate attributeName="y" values="${vals(f => along(f.na.E, f.na.W, 1.1)[1] - 4)}" ${L}/></rect>` : '';
-  return `<svg viewBox="0 -22 200 232" role="img" aria-label="Animation : ${esc(o.label || '')}">${bg}
-    ${legG('fl', true)}${armG('fa', true)}
+  // accessoires : banc / chaise / marche (box), barre (bar), haltères (db), élastiques (links), ballon (balls)
+  const PT = (f, key) => { if (Array.isArray(key)) return key;
+    if (key.startsWith('mid:')){ const [a, b] = key.slice(4).split(','); return along(PT(f, a), PT(f, b), .5); }
+    const [q, k] = key.split('.'); return k === 'h' ? along(f[q].E, f[q].W, 1.1) : k === 'Hk' ? along(f[q].H, f[q].K, .55) : f[q][k]; };
+  const stat = (o.box ? [].concat(Array.isArray(o.box[0]) ? o.box : [o.box]).map(([x, y, w, h]) => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="3" fill="#c9d6e2" stroke="#9fb2c4"/><rect x="${x}" y="${y}" width="${w}" height="4" rx="2" fill="#9fb2c4"/>`).join('') : '')
+    + (o.bar ? `<line x1="${o.bar[0]}" y1="${o.bar[2]}" x2="${o.bar[1]}" y2="${o.bar[2]}" stroke="#5d6b78" stroke-width="4" stroke-linecap="round"/><line x1="${o.bar[0] + 4}" y1="${o.bar[2]}" x2="${o.bar[0] + 4}" y2="205" stroke="#9fb2c4" stroke-width="3"/><line x1="${o.bar[1] - 4}" y1="${o.bar[2]}" x2="${o.bar[1] - 4}" y2="205" stroke="#9fb2c4" stroke-width="3"/>` : '');
+  const links = (o.links || []).map(([a, b, col]) => seg(f => PT(f, a), f => PT(f, b), col || '#d64545', 2.6)).join('');
+  const balls = (o.balls || []).map(([k, r, col]) => dot(f => PT(f, k), r, col || '#e2654f')).join('');
+  const dbs = o.db ? [dot(f => PT(f, 'na.h'), 5.4, '#3a4654'), dot(f => PT(f, 'na.h'), 2.2, '#8796a5')].join('') : '';
+  const dbsFar = o.db ? dot(f => PT(f, 'fa.h'), 5, '#56626e') : '';
+  return `<svg viewBox="0 -22 200 232" role="img" aria-label="Animation : ${esc(o.label || '')}">${bg}${stat}
+    ${legG('fl', true)}${armG('fa', true)}${dbsFar}
     ${seg(f => f.H, f => along(f.H, f.S, .25), '#2b3a4a', 17)}${seg(f => along(f.H, f.S, .18), f => f.S, '#0f5c8c', 17)}
     ${seg(f => f.S, f => along(f.S, f.C, .55), SKIN, 7)}
-    ${dot(f => f.hair, 10.6, HAIR)}${dot(f => f.C, 10, SKIN)}
-    ${legG('nl')}${armG('na')}${board}
+    ${water ? `${dot(f => f.C, 10, SKIN)}${dot(f => f.cap, 9.6, '#e2654f')}${dot(f => f.eye, 2.7, '#16202b')}${dot(f => f.eye2, 1.4, '#16202b')}` : `${dot(f => f.hair, 10.6, HAIR)}${dot(f => f.C, 10, SKIN)}`}
+    ${balls}${legG('nl')}${armG('na')}${board}${dbs}${links}
     ${water ? `<rect x="0" y="${(o.wy || 96) + 1}" width="200" height="${209 - (o.wy || 96)}" fill="#3a9bd1" opacity=".18"/>` : ''}
+  </svg>`;
+}
+/* ----- Vue aérienne des éducatifs de natation -----
+   Déduite de la vue de côté : même position le long du corps (x), écartement latéral selon la phase.
+   Membre sous l'eau : estompé ; bras en retour aérien (au-dessus de la surface) : net, coude écarté. */
+function figTop(o){
+  const N = o.n || 36, pose = typeof o.pose === 'function' ? o.pose : fkeys(o.pose), F = [];
+  for (let i = 0; i <= N; i++) F.push(fsolve(pose((i % N) / N)));
+  const L = `dur="${o.dur || 2}s" repeatCount="indefinite"`, r1 = v => v.toFixed(1), Y0 = 94, wy = o.wy || 96;
+  const vals = g => F.map(g).map(r1).join(';');
+  const back = F[0].face === -1;
+  // côté : na = bras proche (bas de l'image), fa = bras éloigné (haut)
+  const lat = (f, q, k) => { const s = q[0] === 'n' ? 1 : -1, P = f[q];
+    if (q === 'na' || q === 'fa'){ const up = pt => Math.max(0, wy - pt[1]);
+      if (k === 'S') return Y0 + s * 13;
+      if (k === 'E') return Y0 + s * (14 + up(P.E) * .55 + (up(P.E) ? 4 : 0));
+      return Y0 + s * (o.board ? 9 : 8 + up(P.W) * .35 + (up(P.W) ? 4 : 0)); }
+    const d = o.wideKick ? Math.max(0, 78 - (P.H[0] - P.A[0])) : 0; // brasse : genoux et pieds s'écartent
+    return Y0 + s * (k === 'H' ? 6 : k === 'K' ? 6.5 + d * .22 : k === 'A' ? 7 + d * .5 : 7 + d * .62); };
+  const above = (f, q) => f[q].E[1] < wy - 1 || f[q].W[1] < wy - 1;
+  const seg = (q, a, b, col, w, fade) => { const f0 = F[0];
+    const op = fade ? `<animate attributeName="opacity" values="${F.map(f => above(f, q) ? 1 : .5).join(';')}" ${L}/>` : '';
+    return `<line x1="${r1(f0[q][a][0])}" y1="${r1(lat(f0, q, a))}" x2="${r1(f0[q][b][0])}" y2="${r1(lat(f0, q, b))}" stroke="${col}" stroke-width="${w}" stroke-linecap="round">${op}
+      <animate attributeName="x1" values="${vals(f => f[q][a][0])}" ${L}/><animate attributeName="y1" values="${vals(f => lat(f, q, a))}" ${L}/>
+      <animate attributeName="x2" values="${vals(f => f[q][b][0])}" ${L}/><animate attributeName="y2" values="${vals(f => lat(f, q, b))}" ${L}/></line>`; };
+  const handDot = (q, col) => { const g = f => [f[q].E[0] + (f[q].W[0] - f[q].E[0]) * 1.12, lat(f, q, 'W')];
+    return `<circle cx="${r1(g(F[0])[0])}" cy="${r1(g(F[0])[1])}" r="${o.fist ? 3.6 : 4.2}" fill="${col}"><animate attributeName="opacity" values="${F.map(f => above(f, q) ? 1 : .5).join(';')}" ${L}/>
+      <animate attributeName="cx" values="${vals(f => g(f)[0])}" ${L}/><animate attributeName="cy" values="${vals(f => g(f)[1])}" ${L}/></circle>`; };
+  const arm = q => seg(q, 'S', 'E', SKIN, 7.4, true) + seg(q, 'E', 'W', SKIN, 6.4, true) + handDot(q, SKIN);
+  const leg = q => seg(q, 'H', 'K', SKIN, 10.5) + seg(q, 'K', 'A', SKIN, 8.4) + seg(q, 'A', 'T', '#e2654f', 6);
+  const ax = v => vals(f => v(f)), H0 = F[0].H, S0 = F[0].S, C0 = F[0].C;
+  const board = o.board ? (() => { const g = f => (f.na.W[0] + f.fa.W[0]) / 2 + 3; return `<rect x="${r1(g(F[0]))}" y="${Y0 - 15}" width="22" height="30" rx="7" fill="#ffd34d" stroke="#e0a800"><animate attributeName="x" values="${vals(g)}" ${L}/></rect>`; })() : '';
+  const head = back
+    ? `<g><animateTransform attributeName="transform" type="translate" values="${F.map(f => r1(f.C[0] - C0[0]) + ' 0').join(';')}" ${L}/>
+        <circle cx="${r1(C0[0])}" cy="${Y0}" r="10" fill="${SKIN}"/><path d="M${r1(C0[0] - 10)} ${Y0 - 4} A10 10 0 0 1 ${r1(C0[0] - 10)} ${Y0 + 4} L${r1(C0[0] - 4)} ${Y0} Z" fill="#e2654f"/>
+        <circle cx="${r1(C0[0] + 3)}" cy="${Y0 - 3.6}" r="2.2" fill="#16202b"/><circle cx="${r1(C0[0] + 3)}" cy="${Y0 + 3.6}" r="2.2" fill="#16202b"/><path d="M${r1(C0[0] + 3)} ${Y0 - 3.6} V${Y0 + 3.6}" stroke="#16202b" stroke-width="1"/></g>`
+    : `<g><animateTransform attributeName="transform" type="translate" values="${F.map(f => r1(f.C[0] - C0[0]) + ' 0').join(';')}" ${L}/>
+        <ellipse cx="${r1(C0[0])}" cy="${Y0}" rx="10.5" ry="9.4" fill="#e2654f"/><path d="M${r1(C0[0] - 1)} ${Y0 - 9.2} Q${r1(C0[0] + 3)} ${Y0} ${r1(C0[0] - 1)} ${Y0 + 9.2}" stroke="#16202b" stroke-width="1.3" fill="none"/></g>`;
+  return `<svg viewBox="0 30 200 128" role="img" aria-label="Animation vue de dessus : ${esc(o.label || '')}">
+    <rect x="0" y="30" width="200" height="128" rx="14" fill="#9fd3ee"/>
+    <path d="M0 40 H200 M0 148 H200" stroke="#e2654f" stroke-width="4" stroke-dasharray="8 8"/><path d="M0 40 H200 M0 148 H200" stroke="#fff" stroke-width="4" stroke-dasharray="8 8" stroke-dashoffset="8"/>
+    <rect x="0" y="${Y0 - 3}" width="200" height="6" fill="#1b4f72" opacity=".18"/>
+    ${board}${leg('fl')}${leg('nl')}
+    <line x1="${r1(H0[0])}" y1="${Y0}" x2="${r1(S0[0])}" y2="${Y0}" stroke="#0f5c8c" stroke-width="25" stroke-linecap="round"><animate attributeName="x1" values="${ax(f => f.H[0])}" ${L}/><animate attributeName="x2" values="${ax(f => f.S[0])}" ${L}/></line>
+    <line x1="${r1(H0[0])}" y1="${Y0}" x2="${r1(H0[0] + 9)}" y2="${Y0}" stroke="#2b3a4a" stroke-width="23" stroke-linecap="round"><animate attributeName="x1" values="${ax(f => f.H[0])}" ${L}/><animate attributeName="x2" values="${ax(f => f.H[0] + 9)}" ${L}/></line>
+    ${head}${arm('fa')}${arm('na')}
+    <text x="8" y="53" font-size="8" font-weight="700" fill="#0b4b73" font-family="Inter,system-ui,sans-serif">VUE DE DESSUS</text>
   </svg>`;
 }
 /* ----- Exercices de renforcement ----- */
@@ -3350,23 +3492,26 @@ const svgSuperman = () => figAnim({label:'superman', dur:2.4, mat:true, pose:[
   {H:[90,196], t:90, h:0, na:[90,90], fa:[92,92], nl:[-90,-90,-80], fl:[-92,-92,-80]},
   {H:[90,196], t:100, h:12, na:[106,106], fa:[108,108], nl:[-100,-100,-80], fl:[-102,-102,-80]}]});
 /* ----- Éducatifs de natation (vue de côté, surface à y = 96) ----- */
-const crawlArm = u => { u = ((u % 1) + 1) % 1; // 0-0.6 sous l'eau (avant → bas → arrière), 0.6-1 retour aérien
-  if (u < 0.6){ const k = u / 0.6, a = 90 - 180 * k; return [a, a - 30 * Math.sin(Math.PI * k)]; }
-  const k = (u - 0.6) / 0.4, a = -90 - 180 * k; return [a, a + 70 * Math.sin(Math.PI * k)]; };
+// 0-0,42 : bras allongé devant (glisse, attend le retour de l'autre bras → toujours un bras devant)
+// 0,42-0,74 : traction sous l'eau (avant → bas → arrière, coude haut) ; 0,74-1 : retour aérien coude haut
+const crawlArm = u => { u = ((u % 1) + 1) % 1;
+  if (u < 0.42){ const k = u / 0.42; return [90 - 4 * k, 88 - 6 * k]; }
+  if (u < 0.74){ const k = (u - 0.42) / 0.32, a = 86 - 176 * k; return [a, a - 34 * Math.sin(Math.PI * k)]; }
+  const k = (u - 0.74) / 0.26, a = -90 - 180 * k; return [a, a + 70 * Math.sin(Math.PI * k)]; };
 const flutter = (u, n, amp) => { const s = Math.sin(2 * Math.PI * n * u); return [[-90 + amp * s, -90 + amp * 1.6 * s, -60], [-90 - amp * s, -90 - amp * 1.6 * s, -60]]; };
 const swimPose = (u, arms, legs, extra) => Object.assign({H:[78,100], t:90, h:0, face:1, na:arms[0], fa:arms[1], nl:legs[0], fl:legs[1]}, extra || {});
-const svgRattrape = () => figAnim({label:'rattrapé', scene:'water', dur:3, n:48, pose:u => swimPose(u,
+const svgRattrape = top => figAnim({top, label:'rattrapé', scene:'water', dur:3, n:48, pose:u => swimPose(u,
   [u < 0.5 ? crawlArm(u * 2) : [90, 90], u >= 0.5 ? crawlArm((u - 0.5) * 2) : [88, 88]], flutter(u, 6, 10))});
-const svgUnBras = () => figAnim({label:'crawl un bras', scene:'water', dur:2, n:40, pose:u => swimPose(u, [crawlArm(u), [88, 88]], flutter(u, 4, 10))});
-const svgPlanche = () => figAnim({label:'battements avec planche', scene:'water', board:true, dur:1.2, n:30, pose:u => swimPose(u, [[96, 92], [98, 94]], flutter(u, 2, 14), {t:94})});
-const svgPoings = () => figAnim({label:'poings fermés', scene:'water', fist:true, dur:2, n:40, pose:u => swimPose(u, [crawlArm(u), crawlArm(u + 0.5)], flutter(u, 3, 10))});
-const svgDos = () => figAnim({label:'dos crawlé', scene:'water', dur:2.4, n:44, pose:u => { const arm = v => { const a = crawlArm(v); return [a[0], a[0]]; };
+const svgUnBras = top => figAnim({top, label:'crawl un bras', scene:'water', dur:2, n:40, pose:u => swimPose(u, [crawlArm(u), [88, 88]], flutter(u, 4, 10))});
+const svgPlanche = top => figAnim({top, label:'battements avec planche', scene:'water', board:true, dur:1.2, n:30, pose:u => swimPose(u, [[96, 92], [98, 94]], flutter(u, 2, 14), {t:94})});
+const svgPoings = top => figAnim({top, label:'poings fermés', scene:'water', fist:true, dur:2, n:40, pose:u => swimPose(u, [crawlArm(u), crawlArm(u + 0.5)], flutter(u, 3, 10))});
+const svgDos = top => figAnim({top, label:'dos crawlé', scene:'water', dur:2.4, n:44, pose:u => { const arm = v => { const a = crawlArm(v); return [a[0], a[0]]; };
   return swimPose(u, [arm(u), arm(u + 0.5)], flutter(u, 3, 9), {face:-1, h:-8, H:[78,98]}); }});
-const svgBrasse = () => figAnim({label:'brasse jambes', scene:'water', board:true, dur:1.8, pose:[
+const svgBrasse = top => figAnim({top, label:'brasse jambes', scene:'water', wideKick:true, board:true, dur:1.8, pose:[
   {H:[80,100], t:93, na:[96,92], fa:[98,94], nl:[-92,-92,-80], fl:[-94,-94,-80]},
   {H:[82,101], t:93, na:[96,92], fa:[98,94], nl:{ik:[60,96], bend:1, f:-40}, fl:{ik:[62,98], bend:1, f:-40}},
   {H:[80,100], t:93, na:[96,92], fa:[98,94], nl:[-100,-104,-20], fl:[-80,-84,-20]}]});
-const svgOndulation = () => figAnim({label:'ondulations', scene:'water', dur:1.4, n:36, pose:u => { const s = Math.sin(2 * Math.PI * u), c = Math.cos(2 * Math.PI * u);
+const svgOndulation = top => figAnim({top, label:'ondulations', scene:'water', dur:1.4, n:36, pose:u => { const s = Math.sin(2 * Math.PI * u), c = Math.cos(2 * Math.PI * u);
   return {H:[80, 110 + 5 * s], t:90 - 10 * c, h:4 * c, face:1, na:[90 - 6 * c, 90 - 6 * c], fa:[92 - 6 * c, 92 - 6 * c], nl:[-90 + 14 * c, -90 + 26 * Math.cos(2 * Math.PI * u - 1), -60], fl:[-92 + 14 * c, -92 + 26 * Math.cos(2 * Math.PI * u - 1), -60]}; }});
 
 const EXERCISES = [
@@ -3454,49 +3599,49 @@ const EXERCISES = [
    errors:['Lever la tête et casser la nuque','Monter trop haut en cambrant fort','Mouvement saccadé'],
    variants:['Bras et jambe opposés en alternance','Mains aux tempes','En statique, 20 à 30"'],
    dose:'3 × 12 · récup 30"', line:{dur:'0:45', int:'I2'}},
-  {id:'ex-rattrape', sport:'swim', cat:'Éducatif crawl', lvl:'deb', title:'Rattrapé', svg:svgRattrape,
+  {id:'ex-rattrape', sport:'swim', cat:'Éducatif crawl', lvl:'deb', title:'Rattrapé', svg:svgRattrape, svg2:() => svgRattrape(true),
    muscles:'Amplitude, glisse, coordination',
    desc:'Un bras attend devant que l\'autre ait terminé son cycle et vienne le « rattraper ». Allonge la nage et apprend à glisser.',
    steps:['Les deux bras tendus devant, battements réguliers','Un bras réalise un cycle complet de crawl pendant que l\'autre reste devant','La main qui revient touche l\'autre main, puis on change de bras','Respirer du côté du bras qui tire'],
    errors:['Bras de devant qui s\'enfonce','Battements qui s\'arrêtent','Cycle de bras raccourci'],
    variants:['Avec une planche ou un bâton tenu devant','Rattrapé 3 temps (respiration alternée)','Demi-rattrapé : départ du bras quand l\'autre passe la tête'],
    dose:'6 × 25 m · récup 20"', line:{dist:'25', unit:'m', int:'I2'}},
-  {id:'ex-unbras', sport:'swim', cat:'Éducatif crawl', lvl:'int', title:'Crawl un bras', svg:svgUnBras,
+  {id:'ex-unbras', sport:'swim', cat:'Éducatif crawl', lvl:'int', title:'Crawl un bras', svg:svgUnBras, svg2:() => svgUnBras(true),
    muscles:'Appui, rotation des épaules',
    desc:'Nager avec un seul bras, l\'autre reste tendu devant. Isole le trajet moteur pour mieux sentir l\'appui et la rotation du corps.',
    steps:['Un bras tendu devant (ou le long du corps pour plus de difficulté)','L\'autre bras nage le crawl complet','Rouler les épaules à chaque traction','Changer de bras à chaque longueur'],
    errors:['Nager à plat sans rotation','Respirer en relevant la tête','Battements trop faibles'],
    variants:['Bras inactif le long du corps','Avec palmes pour garder la vitesse','3 mouvements bras droit, 3 bras gauche'],
    dose:'8 × 25 m · récup 20"', line:{dist:'25', unit:'m', int:'I2'}},
-  {id:'ex-planche', sport:'swim', cat:'Jambes', lvl:'deb', title:'Battements avec planche', svg:svgPlanche,
+  {id:'ex-planche', sport:'swim', cat:'Jambes', lvl:'deb', title:'Battements avec planche', svg:svgPlanche, svg2:() => svgPlanche(true),
    muscles:'Cuisses, fessiers, chevilles souples',
    desc:'Bras tendus sur la planche, battements de jambes réguliers partant de la hanche. Travaille la propulsion et l\'équilibre du corps.',
    steps:['Bras tendus, mains sur le bout de la planche','Battements partant de la hanche, jambes presque tendues','Chevilles relâchées, pieds en extension','Petite amplitude, rythme régulier, pieds qui affleurent'],
    errors:['Pédaler (genoux qui fléchissent trop)','Pieds en flexion','Battements trop amples qui sortent de l\'eau'],
    variants:['Avec palmes courtes','Sur le côté, bras tendu devant','Sans planche, bras devant ou le long du corps'],
    dose:'6 × 50 m · récup 20"', line:{dist:'50', unit:'m', int:'I2'}},
-  {id:'ex-poings', sport:'swim', cat:'Éducatif crawl', lvl:'int', title:'Poings fermés', svg:svgPoings,
+  {id:'ex-poings', sport:'swim', cat:'Éducatif crawl', lvl:'int', title:'Poings fermés', svg:svgPoings, svg2:() => svgPoings(true),
    muscles:'Avant-bras, prise d\'appui « coude haut »',
    desc:'Nager le crawl poings fermés : sans la surface de la main, on apprend à prendre l\'eau avec tout l\'avant-bras. Quand on rouvre les mains, l\'appui paraît énorme.',
    steps:['Fermer les poings, pouce à l\'extérieur','Nager le crawl normalement, sans précipitation','Chercher l\'appui avec l\'avant-bras, coude haut','Rouvrir les mains sur la fin de la longueur et sentir la différence'],
    errors:['Mouliner vite pour compenser','Coude qui passe sous la main','Bras tendu qui appuie vers le bas'],
    variants:['25 m poings fermés / 25 m mains ouvertes','Avec pull-buoy','Doigts écartés (même principe)'],
    dose:'6 × 50 m (25 poings / 25 normal) · récup 20"', line:{dist:'50', unit:'m', int:'I2'}},
-  {id:'ex-dos', sport:'swim', cat:'Dos', lvl:'deb', title:'Dos crawlé', svg:svgDos,
+  {id:'ex-dos', sport:'swim', cat:'Dos', lvl:'deb', title:'Dos crawlé', svg:svgDos, svg2:() => svgDos(true),
    muscles:'Dorsaux, épaules · récupération du crawl',
    desc:'Sur le dos, bras qui tournent en opposition, retour aérien bras tendu. Parfait pour récupérer et équilibrer les épaules.',
    steps:['Sur le dos, regard vers le plafond, oreilles dans l\'eau','Entrer la main dans le prolongement de l\'épaule, petit doigt en premier','Tirer sous l\'eau jusqu\'à la cuisse','Retour aérien bras tendu, battements réguliers'],
    errors:['Bassin qui s\'enfonce (position assise)','Tête relevée','Main qui entre derrière la tête'],
    variants:['Un bras, l\'autre le long du corps','Double bras simultanés','Avec un verre d\'eau sur le front (stabilité de la tête)'],
    dose:'4 × 50 m · récup 20"', line:{dist:'50', unit:'m', int:'I1'}},
-  {id:'ex-brasse', sport:'swim', cat:'Jambes', lvl:'deb', title:'Brasse jambes', svg:svgBrasse,
+  {id:'ex-brasse', sport:'swim', cat:'Jambes', lvl:'deb', title:'Brasse jambes', svg:svgBrasse, svg2:() => svgBrasse(true),
    muscles:'Adducteurs, cuisses, chevilles',
    desc:'Ramener les talons vers les fesses, pieds en flexion vers l\'extérieur, puis pousser l\'eau en fouettant et serrer les jambes. Avec la planche, on se concentre sur le ciseau.',
    steps:['Bras tendus sur la planche, corps allongé','Ramener les talons vers les fesses, genoux écartés de la largeur du bassin','Tourner les pieds vers l\'extérieur (flexion)','Pousser l\'eau vers l\'arrière en fouettant, jambes serrées, puis glisser'],
    errors:['Genoux qui descendent sous le ventre','Pieds en extension (pas d\'appui)','Ne pas marquer la glisse'],
    variants:['Sans planche, bras le long du corps (talons touchent les mains)','Sur le dos','2 ciseaux pour 1 mouvement de bras'],
    dose:'4 × 50 m · récup 30"', line:{dist:'50', unit:'m', int:'I2'}},
-  {id:'ex-ondul', sport:'swim', cat:'Ondulations', lvl:'av', title:'Ondulations', svg:svgOndulation,
+  {id:'ex-ondul', sport:'swim', cat:'Ondulations', lvl:'av', title:'Ondulations', svg:svgOndulation, svg2:() => svgOndulation(true),
    muscles:'Gainage, lombaires, fessiers',
    desc:'Le corps ondule de la poitrine aux pieds, jambes serrées, comme un dauphin. Améliore le gainage et la propulsion après les départs et virages.',
    steps:['Bras tendus devant, mains l\'une sur l\'autre','Lancer l\'ondulation depuis la poitrine, pas seulement des genoux','Jambes serrées, pieds en extension','Petite amplitude, rythme régulier'],
@@ -3505,8 +3650,584 @@ const EXERCISES = [
    dose:'6 × 25 m · récup 30"', line:{dist:'25', unit:'m', int:'I3'}}
 
 ];
+/* ===== Bibliothèque d'exercices enrichie : animations ===== */
+// repères : sol y ≈ 201 (chevilles), debout hanche (100,120) ; tapis à y = 203
+const HB = {rel:[160, -49]};   // mains derrière la tête
+const SUP = (H, t, extra) => Object.assign({H, t, face:1, h:0, na:[-80,-80], fa:[-82,-82], nl:{ik:[140,199], bend:1}, fl:{ik:[136,199], bend:1}}, extra || {});
+const QUAD = (extra) => Object.assign({H:[80,160], t:90, h:6, na:{ik:[128,201]}, fa:{ik:[124,201]}, nl:[0,-90,-60], fl:[2,-88,-60]}, extra || {});
+const LYS = (extra) => Object.assign({H:[86,190], t:90, h:-6, na:{ik:[118,201], bend:1}, fa:[-84,-88], nl:[-88,-88,-90], fl:[-90,-90,-90]}, extra || {});
+/* --- Mollets --- */
+const svgMolletUni = () => figAnim({label:'montée sur pointe unipodale', dur:1.8, wall:150, pose:[
+  {H:[100,120], t:182, na:{ik:[134,96]}, fa:{ik:[132,100]}, nl:[0,0], fl:[18,-70]},
+  {H:[100,110], t:182, na:{ik:[134,96]}, fa:{ik:[132,100]}, nl:[0,0,-45], fl:[18,-70]}]});
+const svgMolletMarche = () => figAnim({label:'mollets sur une marche', dur:2.2, box:[106,186,64,19], pose:[
+  {H:[100,108], t:180, na:[6,4], fa:[-4,-2], nl:[0,0,30], fl:[0,0,30]},
+  {H:[100,96], t:180, na:[6,4], fa:[-4,-2], nl:[0,0,-40], fl:[0,0,-40]}]});
+const svgPogo = () => figAnim({label:'sautillements pieds joints', dur:.9, pose:[
+  {H:[100,123], t:180, na:[14,40], fa:[10,36], nl:{ik:[101,201], f:0}, fl:{ik:[99,201], f:0}},
+  {H:[100,106], t:180, na:[20,50], fa:[16,46], nl:[0,0,-50], fl:[0,0,-50]}]});
+const svgPointes = () => figAnim({label:'marche sur la pointe des pieds', dur:1.4, pose:[
+  {H:[100,113], t:180, na:[-18,-10], fa:[18,30], nl:[0,0,-40], fl:[30,-10,-40]},
+  {H:[100,113], t:180, na:[18,30], fa:[-18,-10], nl:[30,-10,-40], fl:[0,0,-40]}]});
+const svgSoleaire = () => figAnim({label:'mollets genoux fléchis', dur:2, pose:[
+  {H:[96,136], t:176, na:[70,90], fa:[66,86], nl:{ik:[104,201], f:0}, fl:{ik:[101,201], f:0}},
+  {H:[98,128], t:176, na:[70,90], fa:[66,86], nl:{ik:[106,193], f:-40}, fl:{ik:[103,193], f:-40}}]});
+/* --- Quadriceps --- */
+const svgSquatSaute = () => figAnim({label:'squat sauté', dur:1.6, pose:[
+  {H:[84,160], t:138, na:[88,88], fa:[84,84], nl:{ik:[104,201]}, fl:{ik:[100,201]}},
+  {H:[100,104], t:180, na:[170,176], fa:[166,172], nl:[0,0,-45], fl:[0,0,-45]},
+  {H:[96,128], t:172, na:[60,80], fa:[56,76], nl:{ik:[104,201]}, fl:{ik:[100,201]}}]});
+const svgBulgare = () => figAnim({label:'fente bulgare', dur:2.6, box:[8,166,50,39], pose:[
+  {H:[96,122], t:180, na:[-6,-2], fa:[6,4], nl:{ik:[128,201]}, fl:{ik:[42,160], bend:1, f:70}},
+  {H:[94,156], t:176, na:[-10,-4], fa:[10,6], nl:{ik:[128,201]}, fl:{ik:[42,160], bend:1, f:70}}]});
+const svgStepUp = () => figAnim({label:'montée sur banc', dur:2.6, box:[112,166,70,39], pose:[
+  {H:[96,120], t:178, na:[-12,-6], fa:[12,8], nl:{ik:[134,163]}, fl:{ik:[98,201]}},
+  {H:[126,86], t:176, na:[10,6], fa:[-8,-4], nl:{ik:[134,163]}, fl:{ik:[116,146], f:-30}},
+  {H:[96,120], t:178, na:[-12,-6], fa:[12,8], nl:{ik:[134,163]}, fl:{ik:[98,201]}}]});
+const svgExtGenou = () => figAnim({label:'extension de genou assis', dur:2.2, box:[58,150,48,55], pose:[
+  {H:[84,146], t:178, na:[-12,-10], fa:[-8,-6], nl:[90,0], fl:[90,2]},
+  {H:[84,146], t:178, na:[-12,-10], fa:[-8,-6], nl:[90,88,-20], fl:[90,2]}]});
+/* --- Ischios --- */
+const svgPontUni = () => figAnim({label:'pont fessier unipodal', dur:2.6, mat:true, pose:[
+  SUP([112,193], -90, {fl:[110,110,-80]}),
+  SUP([106,166], -61, {h:-25, fl:[132,132,-80]})]});
+const svgRDL = () => figAnim({label:'soulevé de terre jambes tendues', dur:3, db:true, pose:[
+  {H:[100,120], t:180, na:[2,2], fa:[0,0], nl:{ik:[101,201]}, fl:{ik:[99,201]}},
+  {H:[86,124], t:98, h:-6, na:[2,2], fa:[0,0], nl:{ik:[101,201]}, fl:{ik:[99,201]}}]});
+const svgGoodMorning = () => figAnim({label:'good morning', dur:3, pose:[
+  {H:[100,120], t:180, na:HB, fa:{rel:[156,-52]}, nl:{ik:[101,201]}, fl:{ik:[99,201]}},
+  {H:[84,126], t:96, h:-4, na:HB, fa:{rel:[156,-52]}, nl:{ik:[101,201]}, fl:{ik:[99,201]}}]});
+const svgNordic = () => figAnim({label:'nordic curl', dur:3.2, mat:true, pose:[
+  {H:[80,160], t:180, na:[30,40], fa:[26,36], nl:[0,-90,-70], fl:[0,-90,-70]},
+  {H:[112,176], t:126, h:6, na:[80,70], fa:[76,66], nl:[-52,-90,-70], fl:[-52,-90,-70]}]});
+const svgPontChaise = () => figAnim({label:'pont talons sur chaise', dur:2.6, mat:true, box:[140,164,44,41], pose:[
+  SUP([104,195], -90, {nl:{ik:[156,160], bend:1, f:-20}, fl:{ik:[152,160], bend:1, f:-20}}),
+  SUP([110,168], -66, {h:-20, nl:{ik:[156,160], bend:1, f:-20}, fl:{ik:[152,160], bend:1, f:-20}})]});
+/* --- Fessiers --- */
+const svgKickback = () => figAnim({label:'kickback à quatre pattes', dur:2.2, mat:true, pose:[
+  QUAD(), QUAD({nl:[-96,178,-80]})]});
+const svgHipThrust = () => figAnim({label:'hip thrust sur banc', dur:2.6, box:[14,160,42,45], pose:[
+  {H:[90,192], t:-133, face:1, h:-30, na:[-60,-20], fa:[-62,-22], nl:{ik:[132,201], bend:1}, fl:{ik:[128,201], bend:1}},
+  {H:[100,158], t:-90, face:1, h:-40, na:[-40,0], fa:[-42,-2], nl:{ik:[132,201], bend:1}, fl:{ik:[128,201], bend:1}}]});
+const svgFenteArr = () => figAnim({label:'fente arrière', dur:2.6, pose:[
+  {H:[100,120], t:180, na:[30,-20], fa:[26,-24], nl:{ik:[104,201]}, fl:{ik:[98,201]}},
+  {H:[96,156], t:180, na:[30,-20], fa:[26,-24], nl:{ik:[118,201]}, fl:{ik:[50,197], bend:1, f:40}}]});
+const svgExtHanche = () => figAnim({label:'extension de hanche debout', dur:2, wall:156, pose:[
+  {H:[100,120], t:178, na:{ik:[140,100]}, fa:{ik:[138,104]}, nl:[0,0], fl:[0,0]},
+  {H:[100,120], t:170, na:{ik:[140,100]}, fa:{ik:[138,104]}, nl:[0,0], fl:[-36,-34,10]}]});
+/* --- Adducteurs --- */
+const svgAdducAll = () => figAnim({label:'adduction allongé sur le côté', dur:2.2, mat:true, pose:[
+  LYS({nl:[-88,-88,-90], fl:[-150,-10,-60]}),
+  LYS({nl:[-106,-106,-90], fl:[-150,-10,-60]})]});
+const svgPontBallon = () => figAnim({label:'pont ballon entre les genoux', dur:2.6, mat:true, balls:[['nl.K', 7.5, '#e2654f']], pose:[
+  SUP([112,193], -90), SUP([106,166], -61, {h:-25})]});
+const svgCopenhague = () => figAnim({label:'gainage Copenhague', dur:3, mat:true, box:[150,172,46,33], pose:[
+  {H:[100,170], t:-82, h:-6, na:[2,-88], fa:[60,170], nl:[50,-30,-40], fl:{ik:[178,167], bend:1}},
+  {H:[100,180], t:-76, h:-6, na:[2,-88], fa:[60,170], nl:[40,-40,-40], fl:{ik:[178,167], bend:1}}]});
+const svgFenteLat = () => figAnim({label:'fente latérale', dur:2.6, pose:[
+  {H:[100,124], t:180, na:[20,60], fa:[-20,-60], nl:{ik:[134,201]}, fl:{ik:[66,201]}},
+  {H:[128,154], t:172, na:[40,80], fa:[10,40], nl:{ik:[146,201]}, fl:{ik:[58,201]}},
+  {H:[100,124], t:180, na:[20,60], fa:[-20,-60], nl:{ik:[134,201]}, fl:{ik:[66,201]}},
+  {H:[72,154], t:188, na:[-10,-40], fa:[-40,-80], nl:{ik:[142,201]}, fl:{ik:[54,201], bend:-1}}]});
+const svgAdducDebout = () => figAnim({label:'adduction debout à l\'élastique', dur:2.2, links:[['fl.A', [8,196], '#d64545']], pose:[
+  {H:[104,120], t:180, na:[40,60], fa:[-30,-50], nl:[2,0], fl:[-24,-24]},
+  {H:[104,120], t:180, na:[40,60], fa:[-30,-50], nl:[2,0], fl:[12,12]}]});
+const svgSquatSumo = () => figAnim({label:'squat sumo', dur:2.6, pose:[
+  {H:[100,120], t:180, na:[8,30], fa:[-8,-30], nl:{ik:[134,201]}, fl:{ik:[66,201], bend:-1}},
+  {H:[100,150], t:180, na:[30,90], fa:[-30,-90], nl:{ik:[138,201]}, fl:{ik:[62,201], bend:-1}}]});
+/* --- Abducteurs --- */
+const svgAbducAll = () => figAnim({label:'élévation latérale de jambe allongé', dur:2.2, mat:true, pose:[
+  LYS({nl:[-90,-90,-90], fl:[-88,-88,-90]}),
+  LYS({nl:[-128,-128,-90], fl:[-88,-88,-90]})]});
+const svgMarcheLat = () => figAnim({label:'marche latérale à l\'élastique', dur:2.4, links:[['nl.A','fl.A','#d64545']], pose:[
+  {H:[98,136], t:176, na:[30,80], fa:[-30,-80], nl:{ik:[118,201]}, fl:{ik:[80,201], bend:-1}},
+  {H:[108,136], t:176, na:[30,80], fa:[-30,-80], nl:{ik:[142,201]}, fl:{ik:[80,201], bend:-1}},
+  {H:[118,136], t:176, na:[30,80], fa:[-30,-80], nl:{ik:[142,201]}, fl:{ik:[100,201], bend:-1}},
+  {H:[108,136], t:176, na:[30,80], fa:[-30,-80], nl:{ik:[142,201]}, fl:{ik:[80,201], bend:-1}}]});
+const svgGainLatJambe = () => figAnim({label:'gainage latéral avec élévation de jambe', dur:2.6, mat:true, pose:[
+  {H:[95,180], t:100, h:6, na:[178,180], fa:{ik:[168,201], bend:1}, nl:{ik:[13,197]}, fl:[-98,-98,-90]},
+  {H:[95,178], t:100, h:6, na:[178,180], fa:{ik:[168,201], bend:1}, nl:{ik:[13,197]}, fl:[-128,-128,-90]}]});
+const svgAbducDebout = () => figAnim({label:'abduction debout', dur:2, wall:158, pose:[
+  {H:[110,120], t:180, na:{ik:[146,100]}, fa:[-20,-30], nl:[0,0], fl:[-4,-4]},
+  {H:[112,120], t:184, na:{ik:[146,100]}, fa:[-20,-30], nl:[0,0], fl:[-36,-36]}]});
+const svgSquatElast = () => figAnim({label:'squat élastique aux genoux', dur:2.6, links:[['nl.K','fl.K','#d64545']], pose:[
+  {H:[100,120], t:180, na:[30,90], fa:[-30,-90], nl:{ik:[122,201]}, fl:{ik:[78,201], bend:-1}},
+  {H:[100,152], t:180, na:[30,90], fa:[-30,-90], nl:{ik:[124,201]}, fl:{ik:[76,201], bend:-1}}]});
+/* --- Abdos / gainage --- */
+const svgCrunch = () => figAnim({label:'crunch', dur:2, mat:true, pose:[
+  SUP([110,193], -90, {na:{rel:[160,-49]}, fa:{rel:[156,-52]}}),
+  SUP([110,193], -122, {h:-10, na:{rel:[160,-49]}, fa:{rel:[156,-52]}})]});
+const svgRelevesJambes = () => figAnim({label:'relevés de jambes', dur:2.6, mat:true, pose:[
+  SUP([110,194], -90, {nl:[84,84,-80], fl:[86,86,-80]}),
+  SUP([110,194], -90, {nl:[168,168,-80], fl:[170,170,-80]})]});
+const svgVeloAbdo = () => figAnim({label:'crunch vélo', dur:1.6, mat:true, pose:[
+  SUP([112,192], -112, {h:-8, na:{rel:[160,-49]}, fa:{rel:[156,-52]}, nl:{ik:[118,160], bend:1, f:-30}, fl:[96,96,-60]}),
+  SUP([112,192], -112, {h:-8, na:{rel:[160,-49]}, fa:{rel:[156,-52]}, nl:[96,96,-60], fl:{ik:[118,160], bend:1, f:-30}})]});
+const svgDeadBug = () => figAnim({label:'dead bug', dur:2.6, mat:true, pose:[
+  SUP([110,194], -90, {na:[180,180], fa:[178,178], nl:[180,90,-60], fl:[178,88,-60]}),
+  SUP([110,194], -90, {na:[-110,-110], fa:[178,178], nl:[180,90,-60], fl:[100,100,-60]}),
+  SUP([110,194], -90, {na:[180,180], fa:[178,178], nl:[180,90,-60], fl:[178,88,-60]}),
+  SUP([110,194], -90, {na:[180,180], fa:[-110,-110], nl:[100,100,-60], fl:[178,88,-60]})]});
+const svgHollow = () => figAnim({label:'planche creuse', dur:2.4, mat:true, pose:[
+  SUP([112,194], -104, {h:-6, na:[-112,-112], fa:[-114,-114], nl:[100,100,-70], fl:[102,102,-70]}),
+  SUP([112,192], -108, {h:-6, na:[-118,-118], fa:[-120,-120], nl:[106,106,-70], fl:[108,108,-70]})]});
+const svgRussian = () => figAnim({label:'russian twist', dur:1.8, mat:true, db:true, pose:[
+  {H:[100,192], t:-152, face:1, h:-10, na:[120,80], fa:[118,78], nl:[140,60,-40], fl:[138,58,-40]},
+  {H:[100,192], t:-150, face:1, h:-10, na:[30,10], fa:[28,8], nl:[140,60,-40], fl:[138,58,-40]},
+  {H:[100,192], t:-152, face:1, h:-10, na:[120,80], fa:[118,78], nl:[140,60,-40], fl:[138,58,-40]},
+  {H:[100,192], t:-154, face:1, h:-10, na:[-40,-60], fa:[-42,-62], nl:[140,60,-40], fl:[138,58,-40]}]});
+const svgBirdDog = () => figAnim({label:'bird dog', dur:2.6, mat:true, pose:[
+  QUAD(), QUAD({na:[96,96], nl:[-92,-92,-60]})]});
+const svgTouchEpaule = () => figAnim({label:'planche touches d\'épaules', dur:1.6, mat:true, pose:[
+  {H:[92,166], t:104, h:6, na:{ik:[140,202]}, fa:{ik:[137,202]}, nl:{ik:[14,191], f:-10}, fl:{ik:[17,191], f:-10}},
+  {H:[92,166], t:104, h:6, na:{ik:[128,158], bend:1}, fa:{ik:[137,202]}, nl:{ik:[14,191], f:-10}, fl:{ik:[17,191], f:-10}},
+  {H:[92,166], t:104, h:6, na:{ik:[140,202]}, fa:{ik:[137,202]}, nl:{ik:[14,191], f:-10}, fl:{ik:[17,191], f:-10}},
+  {H:[92,166], t:104, h:6, na:{ik:[140,202]}, fa:{ik:[126,160], bend:1}, nl:{ik:[14,191], f:-10}, fl:{ik:[17,191], f:-10}}]});
+/* --- Pectoraux --- */
+const svgPompesGenoux = () => figAnim({label:'pompes sur les genoux', dur:2.2, mat:true, pose:[
+  {H:[92,172], t:114, h:6, na:{ik:[140,202], bend:-1}, fa:{ik:[137,202], bend:-1}, nl:[-48,-150,-60], fl:[-48,-150,-60]},
+  {H:[96,188], t:104, h:6, na:{ik:[140,202], bend:-1}, fa:{ik:[137,202], bend:-1}, nl:[-72,-160,-60], fl:[-72,-160,-60]}]});
+const svgPompesInc = () => figAnim({label:'pompes inclinées', dur:2.2, box:[138,163,46,42], pose:[
+  {H:[98,144], t:122, h:6, na:{ik:[151,161], bend:-1}, fa:{ik:[148,161], bend:-1}, nl:{ik:[12,199], f:-20}, fl:{ik:[15,199], f:-20}},
+  {H:[93,160], t:115, h:6, na:{ik:[151,161], bend:-1}, fa:{ik:[148,161], bend:-1}, nl:{ik:[12,199], f:-20}, fl:{ik:[15,199], f:-20}}]});
+const svgPompesDec = () => figAnim({label:'pompes déclinées', dur:2.2, box:[0,170,40,35], pose:[
+  {H:[100,155], t:97, h:6, na:{ik:[150,202], bend:-1}, fa:{ik:[147,202], bend:-1}, nl:{ik:[22,165], f:-10}, fl:{ik:[25,165], f:-10}},
+  {H:[96,173], t:85, h:6, na:{ik:[150,202], bend:-1}, fa:{ik:[147,202], bend:-1}, nl:{ik:[22,165], f:-10}, fl:{ik:[25,165], f:-10}}]});
+const svgDevSol = () => figAnim({label:'développé au sol aux haltères', dur:2.2, mat:true, db:true, pose:[
+  SUP([122,194], -90, {na:[92,180], fa:[90,178]}),
+  SUP([122,194], -90, {na:[180,180], fa:[178,178]})]});
+const svgDips = () => figAnim({label:'dips sur chaise', dur:2.2, box:[40,158,52,47], pose:[
+  {H:[96,148], t:180, na:{ik:[92,157], bend:1}, fa:{ik:[89,157], bend:1}, nl:{ik:[160,201]}, fl:{ik:[156,201]}},
+  {H:[98,172], t:180, na:{ik:[92,157], bend:1}, fa:{ik:[89,157], bend:1}, nl:{ik:[160,201]}, fl:{ik:[156,201]}}]});
+/* --- Dorsaux --- */
+const svgTractions = () => figAnim({label:'tractions', dur:2.4, bar:[40,160,-14], pose:[
+  {H:[100,86], t:180, na:{ik:[104,-12], bend:-1}, fa:{ik:[101,-12], bend:-1}, nl:[4,-14,-30], fl:[2,-16,-30]},
+  {H:[100,52], t:180, na:{ik:[104,-12], bend:-1}, fa:{ik:[101,-12], bend:-1}, nl:[8,-20,-30], fl:[6,-22,-30]}]});
+const svgRowing = () => figAnim({label:'rowing haltère un bras', dur:2.2, db:true, box:[136,160,52,45], pose:[
+  {H:[78,124], t:104, h:-4, na:[0,0], fa:{ik:[152,158], bend:-1}, nl:{ik:[112,201]}, fl:{ik:[52,201]}},
+  {H:[78,124], t:104, h:-4, na:{ik:[110,132], bend:1}, fa:{ik:[152,158], bend:-1}, nl:{ik:[112,201]}, fl:{ik:[52,201]}}]});
+const svgRowInv = () => figAnim({label:'rowing inversé', dur:2.4, bar:[118,188,116], pose:[
+  {H:[103,182], t:102, face:-1, na:{ik:[152,118], bend:1}, fa:{ik:[149,118], bend:1}, nl:{ik:[22,199], f:-80}, fl:{ik:[25,199], f:-80}},
+  {H:[100,158], t:117, face:-1, na:{ik:[152,118], bend:1}, fa:{ik:[149,118], bend:1}, nl:{ik:[22,199], f:-80}, fl:{ik:[25,199], f:-80}}]});
+const svgTirage = () => figAnim({label:'tirage horizontal à l\'élastique', dur:2.2, links:[['na.h',[196,104],'#d64545'],['fa.h',[196,104],'#d64545']], pose:[
+  {H:[90,122], t:178, na:[88,90], fa:[86,88], nl:{ik:[112,201]}, fl:{ik:[72,201]}},
+  {H:[90,122], t:180, na:[-72,96], fa:[-74,94], nl:{ik:[112,201]}, fl:{ik:[72,201]}}]});
+const svgPullOver = () => figAnim({label:'pull-over au sol', dur:2.6, mat:true, db:true, pose:[
+  SUP([130,194], -90, {na:[-96,-96], fa:[-98,-98]}),
+  SUP([130,194], -90, {na:[176,176], fa:[174,174]})]});
+/* --- Épaules --- */
+const svgDevMil = () => figAnim({label:'développé militaire', dur:2.2, db:true, pose:[
+  {H:[100,120], t:180, na:[36,176], fa:[32,172], nl:{ik:[104,201]}, fl:{ik:[96,201]}},
+  {H:[100,120], t:180, na:[176,178], fa:[172,174], nl:{ik:[104,201]}, fl:{ik:[96,201]}}]});
+const svgElevLat = () => figAnim({label:'élévations latérales', dur:2.2, db:true, pose:[
+  {H:[100,120], t:180, na:[14,10], fa:[-14,-10], nl:{ik:[112,201]}, fl:{ik:[88,201], bend:-1}},
+  {H:[100,120], t:180, na:[86,90], fa:[-86,-90], nl:{ik:[112,201]}, fl:{ik:[88,201], bend:-1}}]});
+const svgElevFront = () => figAnim({label:'élévations frontales', dur:2.2, db:true, pose:[
+  {H:[100,120], t:180, na:[6,4], fa:[4,2], nl:{ik:[104,201]}, fl:{ik:[96,201]}},
+  {H:[100,120], t:180, na:[92,92], fa:[90,90], nl:{ik:[104,201]}, fl:{ik:[96,201]}}]});
+const svgPike = () => figAnim({label:'pompes piquées', dur:2.2, mat:true, pose:[
+  {H:[92,126], t:40, h:10, na:{ik:[150,202], bend:-1}, fa:{ik:[147,202], bend:-1}, nl:{ik:[60,199], f:-20}, fl:{ik:[63,199], f:-20}},
+  {H:[96,134], t:30, h:10, na:{ik:[150,202], bend:-1}, fa:{ik:[147,202], bend:-1}, nl:{ik:[60,199], f:-20}, fl:{ik:[63,199], f:-20}}]});
+const svgYRaise = () => figAnim({label:'élévations en Y allongé', dur:2.2, mat:true, pose:[
+  {H:[90,196], t:90, h:0, na:[100,100], fa:[102,102], nl:[-90,-90,-80], fl:[-92,-92,-80]},
+  {H:[90,196], t:94, h:6, na:[126,126], fa:[128,128], nl:[-90,-90,-80], fl:[-92,-92,-80]}]});
+/* --- Full body --- */
+const svgBurpee = () => figAnim({label:'burpee', dur:3, pose:[
+  {H:[100,120], t:180, na:[6,4], fa:[-4,-2], nl:{ik:[104,201]}, fl:{ik:[98,201]}},
+  {H:[94,166], t:120, h:6, na:{ik:[136,201]}, fa:{ik:[132,201]}, nl:{ik:[106,201]}, fl:{ik:[102,201]}},
+  {H:[92,166], t:104, h:6, na:{ik:[140,202]}, fa:{ik:[137,202]}, nl:{ik:[14,191], f:-10}, fl:{ik:[17,191], f:-10}},
+  {H:[94,166], t:120, h:6, na:{ik:[136,201]}, fa:{ik:[132,201]}, nl:{ik:[106,201]}, fl:{ik:[102,201]}},
+  {H:[100,104], t:180, na:[170,176], fa:[166,172], nl:[0,0,-45], fl:[0,0,-45]}]});
+const svgThruster = () => figAnim({label:'thruster', dur:2.6, db:true, pose:[
+  {H:[84,158], t:140, na:[40,176], fa:[36,172], nl:{ik:[104,201]}, fl:{ik:[100,201]}},
+  {H:[100,120], t:180, na:[176,178], fa:[172,174], nl:{ik:[104,201]}, fl:{ik:[100,201]}}]});
+const svgInchworm = () => figAnim({label:'chenille', dur:4, pose:[
+  {H:[90,120], t:180, na:[6,4], fa:[-4,-2], nl:{ik:[92,201]}, fl:{ik:[88,201]}},
+  {H:[86,122], t:10, h:0, na:{ik:[110,201]}, fa:{ik:[107,201]}, nl:{ik:[92,201]}, fl:{ik:[88,201]}},
+  {H:[96,152], t:70, h:6, na:{ik:[150,202]}, fa:{ik:[147,202]}, nl:{ik:[50,199], f:-10}, fl:{ik:[53,199], f:-10}},
+  {H:[84,170], t:100, h:6, na:{ik:[150,202]}, fa:{ik:[147,202]}, nl:{ik:[8,193], f:-10}, fl:{ik:[11,193], f:-10}},
+  {H:[96,152], t:70, h:6, na:{ik:[150,202]}, fa:{ik:[147,202]}, nl:{ik:[50,199], f:-10}, fl:{ik:[53,199], f:-10}},
+  {H:[86,122], t:10, h:0, na:{ik:[110,201]}, fa:{ik:[107,201]}, nl:{ik:[92,201]}, fl:{ik:[88,201]}}]});
+const svgSwing = () => figAnim({label:'swing haltère', dur:1.8, db:true, pose:[
+  {H:[84,136], t:118, h:-4, na:[-30,-34], fa:[-32,-36], nl:{ik:[106,201]}, fl:{ik:[100,201]}},
+  {H:[100,120], t:180, na:[90,92], fa:[88,90], nl:{ik:[104,201]}, fl:{ik:[98,201]}}]});
+const svgOurs = () => figAnim({label:'marche de l\'ours', dur:1.6, mat:true, pose:[
+  {H:[82,150], t:96, h:6, na:{ik:[136,201]}, fa:{ik:[122,201]}, nl:{ik:[48,199], f:-40}, fl:{ik:[64,199], f:-40}},
+  {H:[82,150], t:96, h:6, na:{ik:[122,201]}, fa:{ik:[136,201]}, nl:{ik:[64,199], f:-40}, fl:{ik:[48,199], f:-40}}]});
+/* --- Natation (vue de côté + vue aérienne) --- */
+const zipArm = u => { u = ((u % 1) + 1) % 1;
+  if (u < 0.74) return crawlArm(u);
+  const k = (u - 0.74) / 0.26; return [-90 - 180 * k, -90 + 180 * k]; };
+const svgDosBat = top => figAnim({top, label:'battements sur le dos', scene:'water', dur:1.2, n:30, pose:u => swimPose(u, [[-88,-88], [-90,-90]], flutter(u, 2, 12), {face:-1, h:-8, H:[78,98]})});
+const svgBatBras = top => figAnim({top, label:'battements bras tendus', scene:'water', dur:1.2, n:30, pose:u => swimPose(u, [[92,90], [94,92]], flutter(u, 2, 14), {t:92})});
+const svgPullBuoy = top => figAnim({top, label:'crawl avec pull-buoy', scene:'water', dur:2, n:40, balls:[['nl.Hk', 6.5, '#ffd34d']], pose:u => swimPose(u, [crawlArm(u), crawlArm(u + 0.5)], [[-90,-90,-60],[-91,-91,-60]])});
+const svgGodille = top => figAnim({top, label:'godille avant', scene:'water', dur:1, n:30, pose:u => { const s = Math.sin(2 * Math.PI * u);
+  return swimPose(u, [[84 + 4 * s, 70 + 26 * s], [86 + 4 * s, 72 + 26 * s]], flutter(u, 1, 6), {t:91}); }});
+const svgWaterPolo = top => figAnim({top, label:'crawl tête hors de l\'eau', scene:'water', dur:1.6, n:36, pose:u => swimPose(u, [crawlArm(u), crawlArm(u + 0.5)], flutter(u, 3, 14), {t:100, H:[80,106], look:8})});
+const svgZip = top => figAnim({top, label:'fermeture éclair', scene:'water', dur:2.2, n:44, pose:u => swimPose(u, [zipArm(u), zipArm(u + 0.5)], flutter(u, 3, 10))});
+const svgCote = top => figAnim({top, label:'battements sur le côté', scene:'water', dur:1.2, n:30, pose:u => swimPose(u, [[90,90], [-90,-88]], flutter(u, 2, 12), {look:40})});
+const svgBrasseBras = top => figAnim({top, label:'brasse bras', scene:'water', dur:1.8, pose:[
+  {H:[80,100], t:91, na:[92,90], fa:[94,92], nl:[-90,-90,-70], fl:[-92,-92,-70]},
+  {H:[80,98], t:96, look:30, na:[46,-2], fa:[48,0], nl:[-90,-90,-70], fl:[-92,-92,-70]},
+  {H:[80,96], t:100, look:20, na:[10,120], fa:[12,122], nl:[-90,-90,-70], fl:[-92,-92,-70]}]});
+const svgBrasseComp = top => figAnim({top, label:'brasse complète', scene:'water', dur:2.2, wideKick:true, pose:[
+  {H:[80,100], t:91, na:[92,90], fa:[94,92], nl:[-92,-92,-80], fl:[-94,-94,-80]},
+  {H:[80,98], t:96, look:30, na:[46,-2], fa:[48,0], nl:[-92,-92,-80], fl:[-94,-94,-80]},
+  {H:[82,97], t:100, look:20, na:[10,120], fa:[12,122], nl:{ik:[60,96], bend:1, f:-40}, fl:{ik:[62,98], bend:1, f:-40}},
+  {H:[80,100], t:92, na:[90,88], fa:[92,90], nl:[-100,-104,-20], fl:[-80,-84,-20]}]});
+const svgPapillon = top => figAnim({top, label:'papillon', scene:'water', dur:1.6, n:40, pose:u => { const a = crawlArm(u * 0.58 + 0.42), c = Math.cos(4 * Math.PI * u);
+  return {H:[80, 104 + 4 * c], t:90 - 6 * c, h:3 * c, face:1, na:a, fa:[a[0] + 2, a[1] + 2], nl:[-90 + 12 * c, -90 + 24 * Math.cos(4 * Math.PI * u - 1), -60], fl:[-92 + 12 * c, -92 + 24 * Math.cos(4 * Math.PI * u - 1), -60]}; }});
+const svgBatVert = () => figAnim({label:'battements verticaux', scene:'water', wy:72, dur:1, n:30, pose:u => { const s = Math.sin(2 * Math.PI * u);
+  return {H:[100,132], t:180, h:0, face:1, look:90, na:[64 + 6 * s, 96 + 10 * s], fa:[-64 - 6 * s, -96 - 10 * s], nl:[10 * s, 18 * s, -60], fl:[-10 * s, -18 * s, -60]}; }});
+const svgDos2Bras = top => figAnim({top, label:'dos deux bras', scene:'water', dur:2.4, n:44, pose:u => { const a = crawlArm(u * 0.58 + 0.42);
+  return swimPose(u, [[a[0], a[0]], [a[0] + 2, a[0] + 2]], flutter(u, 3, 9), {face:-1, h:-8, H:[78,98]}); }});
+// respiration tous les 3 temps : la tête tourne (visage vers le côté) pendant le retour du bras
+const svgResp3 = top => figAnim({top, label:'crawl respiration 3 temps', scene:'water', dur:6, n:90, pose:u => { const v = 3 * u, d = v % 1;
+  // respiration côté visible pendant le 1er retour du bras proche ; 3 mouvements de bras plus tard, respiration de l'autre côté
+  const turn = v < 1 && d > 0.7 && d < 0.98 ? Math.sin(Math.PI * (d - 0.7) / 0.28) : 0;
+  return swimPose(u, [crawlArm(v), crawlArm(v + 0.5)], flutter(u, 18, 10), {turn, look:62 - 40 * turn}); }});
+const svgBobbing = () => figAnim({label:'expirations sous l\'eau', scene:'water', wy:72, dur:2.4, n:36, pose:u => { const c = Math.cos(2 * Math.PI * u);
+  return {H:[100, 134 + 16 * c], t:180, face:1, look:110, na:[40 - 30 * c, 20 - 40 * c], fa:[-40 + 30 * c, -20 + 40 * c], nl:{ik:[106, 205 + 16 * c], bend:1}, fl:{ik:[96, 205 + 16 * c], bend:1}}; }});
+const dragArm = u => { u = ((u % 1) + 1) % 1;
+  if (u < 0.74) return crawlArm(u);
+  const k = (u - 0.74) / 0.26; return [-90 - 180 * k, -40 + 130 * k]; };
+const svgDrag = top => figAnim({top, label:'doigts traînants', scene:'water', dur:2.2, n:44, pose:u => swimPose(u, [dragArm(u), dragArm(u + 0.5)], flutter(u, 3, 10))});
+const highArm = u => { u = ((u % 1) + 1) % 1;
+  if (u < 0.74) return crawlArm(u);
+  const k = (u - 0.74) / 0.26, a = -90 - 180 * k; return [a, a + 105 * Math.sin(Math.PI * k)]; };
+const svgCoudeHaut = top => figAnim({top, label:'coude haut au retour', scene:'water', dur:2.2, n:44, pose:u => swimPose(u, [highArm(u), highArm(u + 0.5)], flutter(u, 3, 10))});
+const glideArm = u => { u = ((u % 1) + 1) % 1; return u < 0.6 ? [90, 88] : crawlArm(0.42 + (u - 0.6) / 0.4 * 0.58); };
+const svgGlisse = top => figAnim({top, label:'crawl glisse allongée', scene:'water', dur:3.4, n:60, pose:u => swimPose(u, [glideArm(u), glideArm(u + 0.5)], flutter(u, 6, 9))});
+/* ===== Bibliothèque d'exercices enrichie : fiches ===== */
+const XR = (id, cat, lvl, title, svg, muscles, desc, steps, errors, variants, dose, line) => ({id, sport:'strength', cat, lvl, title, svg, muscles, desc, steps, errors, variants, dose, line: line || {dur:'0:45', int:'I3'}});
+const XN = (id, cat, lvl, title, svg, muscles, desc, steps, errors, variants, dose, line, noTop) => Object.assign({id, sport:'swim', cat, lvl, title, svg, muscles, desc, steps, errors, variants, dose, line: line || {dist:'25', unit:'m', int:'I2'}}, noTop ? {} : {svg2: () => svg(true)});
+// groupes affichés dans les filtres, dans cet ordre
+const EX_GROUPS = {
+  strength: ['Mollets','Quadriceps','Ischios','Fessiers','Adducteurs','Abducteurs','Abdos / gainage','Pectoraux','Dorsaux','Épaules','Full body'],
+  swim: ['Respiration','Alignement','Allonge','Catch et poussée','Retour aérien']};
+const EX_RECAT = {'ex-jj':'Full body', 'ex-climber':'Full body', 'ex-squat':'Quadriceps', 'ex-fente':'Quadriceps', 'ex-chaise':'Quadriceps', 'ex-mollets':'Mollets',
+  'ex-gainage':'Abdos / gainage', 'ex-gainlat':'Abdos / gainage', 'ex-pont':'Fessiers', 'ex-pompes':'Pectoraux', 'ex-superman':'Dorsaux',
+  'ex-giclee':'Catch et poussée', 'ex-poings':'Catch et poussée', 'ex-rattrape':'Allonge', 'ex-unbras':'Allonge',
+  'ex-planche':'Alignement', 'ex-dos':'Alignement', 'ex-brasse':'Alignement', 'ex-ondul':'Alignement'};
+const EX_MORE = [
+  /* ---------- Mollets ---------- */
+  XR('ex-mollet-uni','Mollets','int','Montée sur pointe unipodale', svgMolletUni, 'Mollets (gastrocnémiens, soléaire) · cheville',
+    'Sur un pied, montée lente sur la pointe puis descente contrôlée. Renforce le tendon d\'Achille et la stabilité de la cheville, utile en course à pied.',
+    ['Une main contre un mur pour l\'équilibre','Pied d\'appui à plat, l\'autre jambe pliée derrière','Monter le plus haut possible sur la pointe en 1 s','Redescendre en 2 à 3 s sans s\'effondrer'],
+    ['Cheville qui part vers l\'extérieur','Mouvement trop rapide, sans contrôle'], ['Sur une marche pour plus d\'amplitude','Avec un haltère dans la main du côté travaillé'], '3 × 12 par jambe · récup 30"'),
+  XR('ex-mollet-marche','Mollets','deb','Mollets sur une marche', svgMolletMarche, 'Mollets · tendon d\'Achille',
+    'Avant des pieds sur le bord d\'une marche, talons dans le vide : descente sous le niveau de la marche puis montée complète sur les pointes.',
+    ['Avant des pieds sur la marche, talons dans le vide','Descendre les talons lentement sous le niveau de la marche','Monter au maximum sur les pointes','Se tenir à la rampe'],
+    ['Plier les genoux pour tricher','Rebondir en bas du mouvement'], ['Unipodal','Descente excentrique en 4 s (prévention des tendinopathies)'], '3 × 15 · récup 45"'),
+  XR('ex-pogo','Mollets','int','Sautillements pieds joints', svgPogo, 'Mollets · pied · raideur tendineuse',
+    'Petits sauts rapides sur l\'avant des pieds, genoux presque tendus. Développe la réactivité de la cheville et l\'économie de course.',
+    ['Pieds joints, appuis sur l\'avant du pied','Rebondir vite, contact au sol le plus court possible','Genoux souples mais peu fléchis','Bras relâchés pour l\'équilibre'],
+    ['Atterrir sur les talons','Plier beaucoup les genoux (on fait un squat sauté)'], ['Sur un pied','Avant-arrière ou latéral au-dessus d\'une ligne'], '4 × 20" · récup 40"', {dur:'0:20', int:'I5'}),
+  XR('ex-pointes','Mollets','deb','Marche sur la pointe des pieds', svgPointes, 'Mollets · voûte plantaire · chevilles',
+    'Marche active en restant haut sur les pointes, le corps grand. Simple, idéal en échauffement ou en fin de séance pour les pieds.',
+    ['Rester haut sur les pointes tout le temps','Pas courts, buste droit','Bras qui accompagnent le mouvement'],
+    ['Talons qui retombent','Buste penché en avant'], ['Marche sur les talons en alternance','Pointes de pied en dedans ou en dehors'], '4 × 30 m · récup marche', {dur:'0:30', int:'I2'}),
+  XR('ex-soleaire','Mollets','int','Mollets genoux fléchis', svgSoleaire, 'Soléaire · tendon d\'Achille',
+    'Montées sur pointes en gardant les genoux fléchis : on cible le soléaire, très sollicité en course et souvent oublié.',
+    ['Genoux fléchis à environ 30°, garder cet angle','Monter sur les pointes, redescendre lentement','Poids réparti sur les deux pieds'],
+    ['Tendre les jambes en montant','Mouvement saccadé'], ['Assis avec une charge sur les genoux','Unipodal'], '3 × 15 · récup 45"'),
+  /* ---------- Quadriceps ---------- */
+  XR('ex-squat-saute','Quadriceps','int','Squat sauté', svgSquatSaute, 'Quadriceps, fessiers, mollets · explosivité',
+    'Squat suivi d\'une extension explosive et d\'un saut vertical, réception souple. Pliométrie de base pour la puissance.',
+    ['Descendre en squat, bras en arrière','Pousser fort dans le sol et sauter en lançant les bras','Réception sur l\'avant des pieds, genoux souples','Enchaîner sans pause'],
+    ['Réception jambes tendues','Genoux qui rentrent à la réception'], ['Squat sauté sur une marche','Sans saut pour débuter, avec une montée sur les pointes'], '4 × 8 · récup 1\'', {dur:'0:30', int:'I5'}),
+  XR('ex-bulgare','Quadriceps','av','Fente bulgare', svgBulgare, 'Quadriceps, fessiers · équilibre',
+    'Fente pied arrière posé sur un banc : travail unilatéral intense des cuisses et des fessiers, excellent pour corriger les déséquilibres.',
+    ['Pied arrière posé sur un banc ou une chaise','Pied avant assez loin pour que le genou reste au-dessus de la cheville','Descendre verticalement, buste droit','Remonter en poussant dans le talon avant'],
+    ['Genou avant qui dépasse beaucoup la pointe','Buste qui bascule en avant'], ['Avec haltères','Avec saut'], '3 × 10 par jambe · récup 1\''),
+  XR('ex-stepup','Quadriceps','deb','Montée sur banc', svgStepUp, 'Quadriceps, fessiers',
+    'Monter sur un banc ou une marche haute en poussant sur la jambe avant, puis redescendre en contrôle. Proche du geste de la côte en course.',
+    ['Pied entier posé sur le banc','Pousser sur la jambe du dessus, sans élan de la jambe d\'appui','Se grandir en haut','Redescendre lentement'],
+    ['Pousser avec la jambe restée au sol','Genou qui rentre vers l\'intérieur'], ['Avec haltères','Montée genou haut en fin de mouvement'], '3 × 10 par jambe · récup 45"'),
+  XR('ex-extgenou','Quadriceps','deb','Extension de genou assis', svgExtGenou, 'Quadriceps (vaste interne)',
+    'Assis sur une chaise, tendre la jambe à l\'horizontale puis redescendre. Idéal en reprise ou pour protéger le genou.',
+    ['Assis au fond de la chaise, dos droit','Tendre complètement la jambe, pointe vers soi','Tenir 2 s en haut','Redescendre lentement'],
+    ['Lancer la jambe','Se pencher en arrière'], ['Avec lest à la cheville','Avec élastique'], '3 × 15 par jambe · récup 30"'),
+  /* ---------- Ischios ---------- */
+  XR('ex-pont-uni','Ischios','int','Pont fessier unipodal', svgPontUni, 'Ischios, fessiers · gainage',
+    'Pont sur une seule jambe, l\'autre tendue dans le prolongement de la cuisse. Plus exigeant pour les ischios et le contrôle du bassin.',
+    ['Dos au sol, un pied au sol près des fesses','Tendre l\'autre jambe','Monter le bassin en poussant dans le talon','Garder le bassin horizontal'],
+    ['Bassin qui bascule d\'un côté','Cambrure du bas du dos'], ['Pied sur une marche','Tenu 20 à 30 s en haut'], '3 × 10 par jambe · récup 45"'),
+  XR('ex-rdl','Ischios','int','Soulevé de terre jambes tendues', svgRDL, 'Ischios, fessiers, lombaires',
+    'Bascule du buste vers l\'avant, dos plat, haltères le long des jambes, puis retour debout. Le meilleur exercice pour des ischios solides.',
+    ['Genoux légèrement fléchis, fixes','Pousser les fesses en arrière, dos plat','Haltères au contact des cuisses puis des tibias','Remonter en serrant les fessiers'],
+    ['Dos qui s\'arrondit','Plier les genoux comme un squat'], ['Sur une jambe','Avec bâton le long du dos pour apprendre'], '3 × 10 · récup 1\'30'),
+  XR('ex-goodmorning','Ischios','deb','Good morning', svgGoodMorning, 'Ischios, lombaires',
+    'Mains derrière la tête, bascule du buste vers l\'avant en gardant le dos plat, puis retour. Apprentissage de la charnière de hanche.',
+    ['Mains derrière la tête, coudes ouverts','Genoux légèrement fléchis','Basculer en poussant les fesses en arrière jusqu\'à sentir l\'étirement','Revenir en contractant les fessiers'],
+    ['Arrondir le dos','Descendre trop bas sans contrôle'], ['Avec élastique sous les pieds','Avec barre ou bâton sur les épaules'], '3 × 12 · récup 45"'),
+  XR('ex-nordic','Ischios','av','Nordic curl', svgNordic, 'Ischios (travail excentrique)',
+    'À genoux, pieds bloqués, descente lente du corps vers l\'avant en freinant avec les ischios. Référence pour prévenir les blessures des ischios.',
+    ['À genoux sur un tapis, chevilles tenues par un partenaire ou sous un meuble','Corps droit des genoux aux épaules','Descendre le plus lentement possible','Se rattraper avec les mains puis remonter en s\'aidant'],
+    ['Plier les hanches (fesses en arrière)','Se laisser tomber'], ['Amplitude réduite pour débuter','Avec élastique d\'assistance'], '3 × 5 · récup 1\'30', {dur:'0:30', int:'I4'}),
+  XR('ex-pont-chaise','Ischios','int','Pont talons sur chaise', svgPontChaise, 'Ischios, fessiers',
+    'Pont fessier avec les talons posés sur une chaise : le travail se déplace vers les ischios.',
+    ['Dos au sol, talons sur le bord de la chaise','Monter le bassin jusqu\'à aligner épaules, hanches et genoux','Tenir 2 s, redescendre lentement'],
+    ['Pousser avec la pointe des pieds','Cambrer le bas du dos'], ['Une jambe','Talons sur ballon de gym (curl)'], '3 × 12 · récup 45"'),
+  /* ---------- Fessiers ---------- */
+  XR('ex-kickback','Fessiers','deb','Kickback à quatre pattes', svgKickback, 'Grand fessier · gainage',
+    'À quatre pattes, pousser un pied vers le plafond, genou plié, sans cambrer. Renforce la poussée de hanche du coureur.',
+    ['Mains sous les épaules, genoux sous les hanches','Genou plié à 90°, pousser la plante du pied vers le plafond','Monter jusqu\'à la cuisse horizontale','Dos plat, nombril rentré'],
+    ['Cambrer le bas du dos','Pivoter le bassin'], ['Avec élastique ou lest','Jambe tendue'], '3 × 15 par jambe · récup 30"'),
+  XR('ex-hipthrust','Fessiers','int','Hip thrust sur banc', svgHipThrust, 'Grand fessier, ischios',
+    'Haut du dos appuyé sur un banc, monter le bassin jusqu\'à l\'horizontale. L\'exercice le plus efficace pour les fessiers.',
+    ['Omoplates sur le bord du banc, pieds à plat largeur de hanches','Monter le bassin jusqu\'à aligner genoux, hanches et épaules','Serrer les fessiers 1 s en haut','Menton rentré'],
+    ['Cambrer au lieu de monter avec les fessiers','Pieds trop loin (travail des ischios)'], ['Une jambe','Avec haltère sur le bassin'], '3 × 12 · récup 1\''),
+  XR('ex-fente-arr','Fessiers','deb','Fente arrière', svgFenteArr, 'Fessiers, quadriceps',
+    'Grand pas en arrière et flexion des deux genoux, puis retour. Plus douce pour les genoux que la fente avant.',
+    ['Mains sur les hanches, buste droit','Grand pas en arrière, genou arrière vers le sol','Poids sur la jambe avant','Revenir en poussant dans le talon avant'],
+    ['Buste qui se penche','Pas trop court'], ['Avec haltères','Fente arrière + montée de genou'], '3 × 10 par jambe · récup 45"'),
+  XR('ex-exthanche','Fessiers','deb','Extension de hanche debout', svgExtHanche, 'Grand fessier',
+    'Debout, mains au mur, emmener la jambe tendue vers l\'arrière sans cambrer. Exercice simple d\'activation avant la course.',
+    ['Mains au mur, buste légèrement penché','Jambe tendue vers l\'arrière, pointe vers le sol','Serrer le fessier en fin de mouvement','Ne pas cambrer'],
+    ['Lancer la jambe avec élan','Creuser le dos'], ['Avec élastique aux chevilles','Avec lest'], '3 × 15 par jambe · récup 30"'),
+  /* ---------- Adducteurs ---------- */
+  XR('ex-adduc-all','Adducteurs','deb','Adduction allongé sur le côté', svgAdducAll, 'Adducteurs',
+    'Allongé sur le côté, la jambe du dessus pliée devant, lever la jambe du dessous tendue. Renforce l\'intérieur de la cuisse.',
+    ['Allongé sur le côté, tête sur le bras','Jambe du dessus pliée, pied posé devant','Lever la jambe du dessous tendue','Redescendre sans toucher le sol'],
+    ['Rouler le bassin en arrière','Lancer la jambe'], ['Avec lest à la cheville','Tenu en haut 3 s'], '3 × 15 par côté · récup 30"'),
+  XR('ex-pont-ballon','Adducteurs','deb','Pont ballon entre les genoux', svgPontBallon, 'Adducteurs, fessiers',
+    'Pont fessier en serrant un ballon ou un coussin entre les genoux : adducteurs et fessiers travaillent ensemble.',
+    ['Ballon ou coussin entre les genoux','Serrer le ballon pendant tout l\'exercice','Monter le bassin, tenir 2 s','Redescendre lentement'],
+    ['Relâcher le ballon en montant','Cambrer'], ['Tenu 30 s en haut','Serrages répétés en position haute'], '3 × 12 · récup 45"'),
+  XR('ex-copenhague','Adducteurs','av','Gainage Copenhague', svgCopenhague, 'Adducteurs · gainage latéral',
+    'Gainage latéral avec la jambe du dessus posée sur un banc. Référence pour prévenir les douleurs d\'adducteurs.',
+    ['Sur l\'avant-bras, jambe du dessus posée sur le banc','Monter le bassin pour aligner le corps','Jambe du dessous libre ou en appui pour débuter','Tenir ou faire des montées-descentes'],
+    ['Bassin qui s\'affaisse','Épaule qui remonte vers l\'oreille'], ['Genou posé sur le banc (plus facile)','Jambe du dessous qui monte toucher le banc'], '3 × 20" par côté · récup 40"', {dur:'0:20', int:'I3'}),
+  XR('ex-fente-lat','Adducteurs','int','Fente latérale', svgFenteLat, 'Adducteurs, quadriceps, fessiers',
+    'Grand pas sur le côté, flexion d\'une jambe en gardant l\'autre tendue, puis retour au centre. Mobilité et force des adducteurs.',
+    ['Pieds parallèles, grand pas sur le côté','Fléchir la jambe d\'appui, fesses en arrière','Jambe opposée tendue, pied à plat','Revenir au centre et changer de côté'],
+    ['Genou qui dépasse beaucoup la pointe','Pied de la jambe tendue qui décolle'], ['Avec haltère tenu devant la poitrine','Enchaînement glissé latéral'], '3 × 8 par côté · récup 45"'),
+  XR('ex-adduc-debout','Adducteurs','deb','Adduction debout à l\'élastique', svgAdducDebout, 'Adducteurs',
+    'Debout, élastique attaché à la cheville, ramener la jambe vers l\'intérieur en croisant légèrement devant l\'autre.',
+    ['Élastique attaché à un point fixe sur le côté','Jambe tendue, ramener vers l\'intérieur','Bassin fixe, buste droit','Retour lent'],
+    ['Se pencher sur le côté','Laisser l\'élastique ramener la jambe vite'], ['Allongé sur le côté','Avec lest'], '3 × 15 par jambe · récup 30"'),
+  XR('ex-squat-sumo','Adducteurs','deb','Squat sumo', svgSquatSumo, 'Adducteurs, fessiers, quadriceps',
+    'Squat pieds très écartés, pointes ouvertes, buste droit. Insiste sur l\'intérieur des cuisses.',
+    ['Pieds plus larges que les épaules, pointes ouvertes','Descendre en gardant le buste droit','Genoux dans l\'axe des pieds, poussés vers l\'extérieur','Remonter en serrant les fessiers'],
+    ['Genoux qui rentrent','Buste penché'], ['Avec haltère tenu entre les jambes','Tenu en bas 20 s'], '3 × 15 · récup 45"'),
+  /* ---------- Abducteurs ---------- */
+  XR('ex-abduc-all','Abducteurs','deb','Élévation latérale de jambe allongé', svgAbducAll, 'Moyen fessier (abducteurs)',
+    'Allongé sur le côté, lever la jambe du dessus tendue. Stabilise le bassin à chaque foulée et protège les genoux.',
+    ['Allongé sur le côté, corps aligné','Pointe du pied vers l\'avant, talon légèrement en arrière','Lever la jambe jusqu\'à 45° environ','Redescendre lentement'],
+    ['Pointe vers le plafond (on travaille autre chose)','Rouler le bassin en arrière'], ['Avec élastique aux chevilles','Tenu 3 s en haut'], '3 × 15 par côté · récup 30"'),
+  XR('ex-marche-lat','Abducteurs','deb','Marche latérale à l\'élastique', svgMarcheLat, 'Moyen fessier, fessiers',
+    'Élastique autour des chevilles, pas chassés latéraux en restant fléchi. Excellent en échauffement de course.',
+    ['Élastique aux chevilles ou au-dessus des genoux','Légèrement fléchi, buste droit','Pas latéraux sans que les pieds se touchent','Garder l\'élastique tendu en permanence'],
+    ['Se redresser','Pieds qui se rejoignent'], ['Marche en crabe avant-arrière (monster walk)','Élastique plus résistant'], '3 × 10 pas de chaque côté · récup 30"'),
+  XR('ex-gainlat-jambe','Abducteurs','int','Gainage latéral avec élévation de jambe', svgGainLatJambe, 'Moyen fessier · gainage latéral',
+    'En gainage latéral, lever la jambe du dessus. Combine stabilité du tronc et force des abducteurs.',
+    ['Gainage latéral sur l\'avant-bras','Corps aligné, bassin haut','Lever la jambe du dessus tendue','Redescendre sans perdre l\'alignement'],
+    ['Bassin qui tombe','Jambe qui part vers l\'avant'], ['Genou au sol (plus facile)','Tenu en haut'], '3 × 10 par côté · récup 40"'),
+  XR('ex-abduc-debout','Abducteurs','deb','Abduction debout', svgAbducDebout, 'Moyen fessier',
+    'Debout, une main au mur, écarter la jambe tendue sur le côté sans pencher le buste.',
+    ['Une main au mur, corps droit','Écarter la jambe tendue sur le côté','Pointe vers l\'avant','Retour lent'],
+    ['Pencher le buste du côté opposé','Monter trop haut en compensant'], ['Avec élastique aux chevilles','Sans appui pour l\'équilibre'], '3 × 15 par jambe · récup 30"'),
+  XR('ex-squat-elast','Abducteurs','int','Squat élastique aux genoux', svgSquatElast, 'Moyen fessier, fessiers, quadriceps',
+    'Squat avec un élastique au-dessus des genoux, en poussant les genoux vers l\'extérieur pendant toute la descente.',
+    ['Élastique juste au-dessus des genoux','Pieds largeur de hanches','Descendre en poussant les genoux vers l\'extérieur','Remonter sans laisser les genoux rentrer'],
+    ['Genoux qui rentrent','Talons qui décollent'], ['Tenu en bas','Avec pas latéraux entre les répétitions'], '3 × 12 · récup 45"'),
+  /* ---------- Abdos / gainage ---------- */
+  XR('ex-crunch','Abdos / gainage','deb','Crunch', svgCrunch, 'Grand droit de l\'abdomen',
+    'Allongé, genoux pliés, enrouler le haut du dos pour décoller les omoplates. Le classique des abdominaux.',
+    ['Pieds au sol, mains derrière la tête sans tirer','Enrouler le haut du dos, regard vers les genoux','Expirer en montant','Redescendre lentement'],
+    ['Tirer sur la nuque','Monter avec élan'], ['Bras croisés sur la poitrine','Jambes en l\'air à 90°'], '3 × 20 · récup 30"'),
+  XR('ex-releves','Abdos / gainage','int','Relevés de jambes', svgRelevesJambes, 'Bas des abdominaux, fléchisseurs de hanche',
+    'Allongé, monter les jambes tendues à la verticale puis redescendre sans toucher le sol.',
+    ['Mains sous les fesses ou le long du corps','Bas du dos plaqué au sol','Monter les jambes jusqu\'à la verticale','Redescendre lentement sans toucher'],
+    ['Bas du dos qui se cambre','Mouvement trop rapide'], ['Genoux pliés (plus facile)','Suspendu à une barre'], '3 × 12 · récup 40"'),
+  XR('ex-velo-abdo','Abdos / gainage','int','Crunch vélo', svgVeloAbdo, 'Abdominaux, obliques',
+    'Pédalage en l\'air avec rotation du buste coude vers genou opposé.',
+    ['Épaules décollées, mains derrière la tête','Amener un genou vers la poitrine, tendre l\'autre jambe','Tourner le buste coude vers genou opposé','Alterner sans précipitation'],
+    ['Tirer sur la nuque','Pédaler trop vite'], ['Sans rotation','Lent, 3 s par côté'], '3 × 30" · récup 30"', {dur:'0:30', int:'I3'}),
+  XR('ex-deadbug','Abdos / gainage','deb','Dead bug', svgDeadBug, 'Gainage profond (transverse)',
+    'Sur le dos, bras vers le plafond et jambes à 90°, tendre un bras et la jambe opposée sans décoller le bas du dos.',
+    ['Bas du dos plaqué au sol pendant tout l\'exercice','Bras tendus vers le plafond, genoux à 90°','Tendre un bras en arrière et la jambe opposée','Revenir et changer de côté'],
+    ['Cambrer','Bloquer la respiration'], ['Avec ballon tenu entre mains et genoux','Jambes seules'], '3 × 10 par côté · récup 30"'),
+  XR('ex-hollow','Abdos / gainage','av','Planche creuse', svgHollow, 'Abdominaux · gainage',
+    'Sur le dos, bras et jambes tendus décollés du sol, corps en banane. Le gainage du nageur.',
+    ['Bas du dos plaqué au sol','Décoller épaules et jambes','Bras tendus au-dessus de la tête','Tenir en respirant'],
+    ['Bas du dos qui décolle','Jambes trop hautes (trop facile)'], ['Genoux pliés pour débuter','Bascules avant-arrière'], '4 × 20" · récup 30"', {dur:'0:20', int:'I3'}),
+  XR('ex-russian','Abdos / gainage','int','Russian twist', svgRussian, 'Obliques, abdominaux',
+    'Assis, buste incliné en arrière, pieds décollés, tourner le buste d\'un côté à l\'autre avec un poids.',
+    ['Assis, buste incliné à 45°, dos droit','Pieds décollés (ou au sol pour débuter)','Tourner les épaules d\'un côté puis de l\'autre','Le regard suit les mains'],
+    ['Dos rond','Bouger seulement les bras'], ['Sans poids','Pieds au sol'], '3 × 20 · récup 30"'),
+  XR('ex-birddog','Abdos / gainage','deb','Bird dog', svgBirdDog, 'Lombaires, fessiers, gainage',
+    'À quatre pattes, tendre un bras devant et la jambe opposée derrière, en gardant le dos immobile.',
+    ['Mains sous les épaules, genoux sous les hanches','Tendre un bras et la jambe opposée','Dos plat, comme un plateau','Tenir 2 s, changer de côté'],
+    ['Bassin qui pivote','Lever trop haut la jambe et cambrer'], ['Coude touche genou entre deux extensions','Avec lest'], '3 × 10 par côté · récup 30"'),
+  XR('ex-touchepaule','Abdos / gainage','int','Planche touches d\'épaules', svgTouchEpaule, 'Gainage anti-rotation, épaules',
+    'En planche bras tendus, toucher l\'épaule opposée en alternant, sans que le bassin bouge.',
+    ['Planche sur les mains, pieds écartés','Toucher l\'épaule opposée avec une main','Bassin immobile','Alterner lentement'],
+    ['Bassin qui se balance','Fesses trop hautes'], ['Pieds plus serrés (plus difficile)','Sur les genoux'], '3 × 20 touches · récup 40"'),
+  /* ---------- Pectoraux ---------- */
+  XR('ex-pompes-genoux','Pectoraux','deb','Pompes sur les genoux', svgPompesGenoux, 'Pectoraux, triceps, épaules',
+    'Pompes en appui sur les genoux : la bonne porte d\'entrée pour apprendre le geste.',
+    ['Mains un peu plus larges que les épaules','Corps aligné des genoux à la tête','Descendre la poitrine vers le sol, coudes à 45°','Pousser pour revenir'],
+    ['Fesses en l\'air','Coudes trop écartés'], ['Pompes inclinées','Pompes complètes'], '3 × 12 · récup 45"'),
+  XR('ex-pompes-inc','Pectoraux','deb','Pompes inclinées', svgPompesInc, 'Pectoraux (bas), triceps',
+    'Pompes mains sur un banc ou une table : plus facile que les pompes au sol.',
+    ['Mains sur le bord du banc','Corps droit des talons à la tête','Descendre la poitrine vers le banc','Pousser en expirant'],
+    ['Bassin qui s\'affaisse','Tête en avant'], ['Support plus bas pour progresser','Prise serrée (triceps)'], '3 × 15 · récup 45"'),
+  XR('ex-pompes-dec','Pectoraux','av','Pompes déclinées', svgPompesDec, 'Pectoraux (haut), épaules, triceps',
+    'Pompes pieds surélevés sur un banc : plus difficile, insiste sur le haut des pectoraux et les épaules.',
+    ['Pieds sur le banc, mains au sol','Gainage fort, corps aligné','Descendre jusqu\'à frôler le sol','Remonter sans cambrer'],
+    ['Cambrer le bas du dos','Amplitude réduite'], ['Banc plus haut','Pompes lestées'], '3 × 8 · récup 1\''),
+  XR('ex-devsol','Pectoraux','deb','Développé au sol aux haltères', svgDevSol, 'Pectoraux, triceps',
+    'Allongé au sol, pousser les haltères vers le plafond. Les coudes touchent le sol : protège l\'épaule.',
+    ['Dos au sol, genoux pliés','Coudes au sol, avant-bras verticaux','Pousser les haltères vers le plafond','Redescendre jusqu\'à poser les coudes'],
+    ['Rebondir avec les coudes','Poignets cassés'], ['Un bras à la fois','Sur banc (développé couché)'], '3 × 12 · récup 1\''),
+  XR('ex-dips','Pectoraux','int','Dips sur chaise', svgDips, 'Triceps, pectoraux, épaules',
+    'Mains sur le bord d\'une chaise derrière soi, descendre en pliant les coudes puis remonter.',
+    ['Mains sur le bord de la chaise, doigts vers l\'avant','Fesses près de la chaise','Descendre jusqu\'à 90° aux coudes','Remonter en poussant'],
+    ['Épaules qui remontent vers les oreilles','Coudes qui s\'écartent'], ['Genoux pliés (plus facile)','Pieds surélevés'], '3 × 12 · récup 45"'),
+  /* ---------- Dorsaux ---------- */
+  XR('ex-tractions','Dorsaux','av','Tractions', svgTractions, 'Grand dorsal, biceps',
+    'Suspendu à une barre, monter jusqu\'à passer le menton au-dessus. L\'exercice roi pour le dos du nageur.',
+    ['Prise en pronation, un peu plus large que les épaules','Partir bras tendus','Tirer les coudes vers les hanches','Redescendre en contrôle'],
+    ['Élan des jambes','Demi-amplitude'], ['Avec élastique d\'assistance','Négatives (descente lente seule)'], '4 × 5 à 8 · récup 1\'30'),
+  XR('ex-rowing','Dorsaux','deb','Rowing haltère un bras', svgRowing, 'Grand dorsal, rhomboïdes, biceps',
+    'Une main en appui sur un banc, tirer l\'haltère vers la hanche, coude près du corps.',
+    ['Une main sur le banc, dos plat','Bras tendu vers le sol','Tirer le coude vers le plafond, haltère vers la hanche','Redescendre lentement'],
+    ['Tourner le buste','Tirer avec la main au lieu du coude'], ['Avec élastique','Deux bras, buste penché'], '3 × 12 par bras · récup 45"'),
+  XR('ex-rowinv','Dorsaux','int','Rowing inversé', svgRowInv, 'Dorsaux, arrière d\'épaules, biceps',
+    'Sous une barre basse ou une table solide, corps droit, tirer la poitrine vers la barre.',
+    ['Allongé sous la barre, prise un peu plus large que les épaules','Corps droit, talons au sol','Tirer la poitrine vers la barre','Redescendre bras tendus'],
+    ['Bassin qui s\'affaisse','Tirer avec le menton'], ['Genoux pliés (plus facile)','Pieds surélevés'], '3 × 10 · récup 1\''),
+  XR('ex-tirage','Dorsaux','deb','Tirage horizontal à l\'élastique', svgTirage, 'Dorsaux, rhomboïdes',
+    'Élastique fixé devant soi, tirer les mains vers la poitrine en serrant les omoplates. Simple et parfait pour la posture.',
+    ['Élastique fixé à hauteur de poitrine','Bras tendus devant, épaules basses','Tirer les coudes vers l\'arrière','Serrer les omoplates 1 s'],
+    ['Hausser les épaules','Se pencher en arrière'], ['Un bras à la fois','Tirage haut vers le visage (face pull)'], '3 × 15 · récup 30"'),
+  XR('ex-pullover','Dorsaux','int','Pull-over au sol', svgPullOver, 'Grand dorsal, pectoraux · épaules',
+    'Allongé, ramener un haltère de derrière la tête jusqu\'au-dessus de la poitrine, bras presque tendus. Rappelle la traction en natation.',
+    ['Dos au sol, haltère tenu à deux mains','Bras presque tendus, l\'haltère part au-dessus de la tête','Ramener au-dessus de la poitrine','Bas du dos plaqué'],
+    ['Plier les coudes','Cambrer quand l\'haltère est derrière'], ['Avec élastique fixé derrière','Sur banc'], '3 × 12 · récup 45"'),
+  /* ---------- Épaules ---------- */
+  XR('ex-devmil','Épaules','int','Développé militaire', svgDevMil, 'Deltoïdes, triceps',
+    'Debout, pousser les haltères des épaules vers le plafond, gainage serré.',
+    ['Haltères à hauteur d\'épaules','Gainage, fessiers serrés','Pousser vers le plafond sans cambrer','Redescendre aux épaules'],
+    ['Cambrer le bas du dos','Coudes trop en arrière'], ['Assis','Un bras à la fois'], '3 × 10 · récup 1\''),
+  XR('ex-elevlat','Épaules','deb','Élévations latérales', svgElevLat, 'Deltoïde moyen',
+    'Lever les haltères sur les côtés jusqu\'à l\'horizontale, bras presque tendus.',
+    ['Haltères légers, bras le long du corps','Monter sur les côtés jusqu\'à l\'horizontale','Coudes légèrement fléchis','Redescendre lentement'],
+    ['Hausser les épaules','Monter avec élan'], ['À l\'élastique','Assis'], '3 × 12 · récup 45"'),
+  XR('ex-elevfront','Épaules','deb','Élévations frontales', svgElevFront, 'Deltoïde antérieur',
+    'Lever les haltères devant soi jusqu\'à l\'horizontale.',
+    ['Debout, haltères devant les cuisses','Monter bras tendus jusqu\'à hauteur d\'épaules','Redescendre lentement','Buste immobile'],
+    ['Se pencher en arrière','Monter trop haut'], ['En alterné','Avec disque ou bouteille'], '3 × 12 · récup 45"'),
+  XR('ex-pike','Épaules','int','Pompes piquées', svgPike, 'Épaules, triceps',
+    'En V inversé, fesses hautes, descendre la tête vers le sol en pliant les coudes.',
+    ['Mains au sol, fesses hautes, jambes presque tendues','Descendre la tête entre les mains','Coudes vers l\'arrière','Pousser pour revenir'],
+    ['Fesses qui descendent (on fait une pompe)','Coudes très écartés'], ['Pieds sur un banc','Amplitude réduite'], '3 × 8 · récup 1\''),
+  XR('ex-yraise','Épaules','deb','Élévations en Y allongé', svgYRaise, 'Trapèzes inférieurs, arrière d\'épaules',
+    'Allongé sur le ventre, bras en Y au-dessus de la tête, décoller les bras du sol. Prévention des épaules du nageur.',
+    ['Allongé sur le ventre, front au sol','Bras tendus en Y, pouces vers le plafond','Décoller les bras en abaissant les épaules','Tenir 2 s'],
+    ['Lever la tête','Hausser les épaules'], ['En T puis en W','Avec petites charges'], '3 × 12 · récup 30"'),
+  /* ---------- Full body ---------- */
+  XR('ex-burpee','Full body','int','Burpee', svgBurpee, 'Corps entier · cardio',
+    'Squat, mains au sol, planche, retour et saut. Exercice complet et intense.',
+    ['Debout, descendre en squat mains au sol','Sauter les pieds en arrière en planche','Ramener les pieds','Saut vertical bras en l\'air'],
+    ['Dos qui s\'affaisse en planche','Réception jambes tendues'], ['Sans saut ni pompe pour débuter','Avec pompe en planche'], '4 × 30" · récup 30"', {dur:'0:30', int:'I5'}),
+  XR('ex-thruster','Full body','int','Thruster', svgThruster, 'Jambes, épaules · cardio',
+    'Squat haltères aux épaules enchaîné avec une poussée au-dessus de la tête.',
+    ['Haltères aux épaules','Descendre en squat','Remonter en poussant les haltères au-dessus de la tête','Enchaîner sans pause'],
+    ['Cambrer en haut','Talons qui décollent'], ['Avec un seul haltère','Sans charge'], '3 × 12 · récup 1\''),
+  XR('ex-inchworm','Full body','deb','Chenille', svgInchworm, 'Ischios, épaules, gainage',
+    'Debout, poser les mains au sol, avancer les mains jusqu\'à la planche puis revenir. Échauffement complet.',
+    ['Jambes tendues, poser les mains au sol','Avancer les mains jusqu\'à la planche','Revenir en marchant avec les mains','Se redresser'],
+    ['Bassin qui tombe en planche','Plier beaucoup les genoux'], ['Avec pompe en planche','Avancer de quelques mètres'], '3 × 6 · récup 30"'),
+  XR('ex-swing','Full body','int','Swing haltère', svgSwing, 'Fessiers, ischios, lombaires · cardio',
+    'Balancer un haltère entre les jambes puis jusqu\'à hauteur d\'épaules par une extension explosive des hanches.',
+    ['Haltère tenu à deux mains, pieds écartés','Bascule des hanches, haltère entre les jambes','Extension explosive des hanches','Les bras guident, ils ne tirent pas'],
+    ['Faire un squat au lieu d\'une bascule','Tirer avec les bras'], ['Kettlebell','Un bras'], '4 × 15 · récup 45"'),
+  XR('ex-ours','Full body','int','Marche de l\'ours', svgOurs, 'Épaules, gainage, quadriceps',
+    'À quatre pattes, genoux décollés de quelques centimètres, avancer bras et jambe opposés.',
+    ['Mains sous les épaules, genoux sous les hanches','Décoller les genoux de 5 cm','Avancer main et pied opposés','Dos plat, petits pas'],
+    ['Fesses trop hautes','Dos rond'], ['Sur place (tapotements)','Marche arrière ou latérale'], '4 × 20" · récup 30"', {dur:'0:20', int:'I4'}),
+  /* ---------- Natation : respiration ---------- */
+  XN('ex-resp3','Respiration','int','Crawl respiration 3 temps', svgResp3, 'Respiration bilatérale · rythme',
+    'Crawl en respirant tous les 3 mouvements de bras, une fois à droite, une fois à gauche. Équilibre la nage et apprend à expirer sous l\'eau.',
+    ['Expirer sous l\'eau en continu, par le nez et la bouche','Tourner la tête avec le roulis du corps pendant le retour du bras','Une lunette reste dans l\'eau','Ramener la tête vers le fond avant l\'entrée de la main'],
+    ['Lever la tête vers l\'avant pour respirer','Bloquer l\'air puis tout expirer d\'un coup'], ['Respiration 5 temps','2 respirations à droite, 2 à gauche'], '8 × 50 m · récup 20"', {dist:'50', unit:'m', int:'I2'}),
+  XN('ex-cote','Respiration','deb','Battements sur le côté', svgCote, 'Respiration latérale · équilibre · jambes',
+    'Sur le côté, un bras allongé devant, l\'autre le long du corps, battements de jambes. La tête tourne pour respirer puis revient vers le fond.',
+    ['Bras du dessous allongé devant, épaule sous le menton','Bras du dessus le long du corps','Battements fins depuis la hanche','Respirer en tournant la tête, sans la lever'],
+    ['Se retrouver sur le ventre','Lever la tête'], ['6 battements puis 1 mouvement de bras (6-1-6)','Avec palmes'], '8 × 25 m · récup 20"'),
+  XN('ex-bobbing','Respiration','deb','Expirations sous l\'eau', svgBobbing, 'Expiration · aisance aquatique',
+    'Debout dans l\'eau, s\'immerger en expirant toutes les bulles, remonter et inspirer par la bouche. Base de la respiration en crawl.',
+    ['Inspirer par la bouche hors de l\'eau','S\'immerger et souffler fort par le nez et la bouche','Remonter quand les poumons sont vides','Rythme régulier, sans précipitation'],
+    ['Retenir sa respiration sous l\'eau','Inspirer par le nez'], ['En petit bain, mains au bord','En avançant (sauts de grenouille)'], '3 × 10 expirations · récup 30"', {dur:'1:00', int:'I1'}, true),
+  XN('ex-brasse-comp','Respiration','deb','Brasse complète', svgBrasseComp, 'Coordination · respiration · jambes',
+    'Brasse complète : tirer avec les bras et respirer, puis donner le coup de jambes et glisser bras tendus.',
+    ['Traction des bras : la tête sort pour inspirer','Retour des mains sous le menton, talons vers les fesses','Coup de jambes en fouet, bras qui s\'allongent','Glisser 1 s, visage dans l\'eau, en expirant'],
+    ['Respirer pendant le coup de jambes','Pas de glisse'], ['2 coups de jambes pour 1 traction','Brasse coulée longue'], '8 × 25 m · récup 20"'),
+  /* ---------- Natation : alignement ---------- */
+  XN('ex-dos-bat','Alignement','deb','Battements sur le dos', svgDosBat, 'Alignement · gainage · jambes',
+    'Sur le dos, bras le long du corps, battements de jambes en gardant le bassin haut et la tête immobile.',
+    ['Tête posée dans l\'eau, regard vers le plafond','Bassin haut, ventre gainé','Battements depuis la hanche, genoux sous la surface','Pieds souples, petits remous en surface'],
+    ['Bassin qui coule (position assise)','Pédaler avec les genoux qui sortent'], ['Bras tendus derrière la tête','Avec palmes'], '6 × 25 m · récup 20"'),
+  XN('ex-bat-bras','Alignement','deb','Battements bras tendus', svgBatBras, 'Alignement · gainage · jambes',
+    'Battements sur le ventre, bras tendus devant, visage dans l\'eau, sans planche. Apprend la position « fusée ».',
+    ['Bras tendus devant, mains l\'une sur l\'autre','Tête entre les bras, regard vers le fond','Corps aligné, fesses à la surface','Battements rapides et fins'],
+    ['Tête qui se lève','Genoux qui plient trop'], ['Avec respiration latérale','Avec palmes'], '6 × 25 m · récup 20"'),
+  XN('ex-bat-vert','Alignement','int','Battements verticaux', svgBatVert, 'Jambes · gainage · alignement',
+    'En grande profondeur, rester vertical en battant des jambes, tête hors de l\'eau, bras qui godillent.',
+    ['Corps vertical, tête hors de l\'eau','Battements depuis la hanche','Mains qui godillent à la surface','Gainage du ventre'],
+    ['Pédaler genoux pliés','Pencher le buste en avant'], ['Bras croisés sur la poitrine','Bras tendus au-dessus de la tête'], '6 × 20" · récup 20"', {dur:'0:20', int:'I3'}, true),
+  /* ---------- Natation : allonge ---------- */
+  XN('ex-glisse','Allonge','deb','Crawl glisse allongée', svgGlisse, 'Allonge · glisse · amplitude',
+    'Crawl en gardant le bras devant allongé jusqu\'à ce que l\'autre main revienne presque à sa hauteur. Diminue le nombre de mouvements par longueur.',
+    ['Allonger le bras devant après l\'entrée, épaule vers l\'avant','Attendre que l\'autre main arrive avant de tirer','Compter ses mouvements par longueur','Garder des battements réguliers'],
+    ['Bras qui s\'effondre vers le bas pendant la glisse','Arrêt complet de la nage'], ['Rattrapé complet','Objectif : 2 mouvements de moins par longueur'], '8 × 25 m · récup 20"'),
+  XN('ex-pullbuoy','Allonge','int','Crawl avec pull-buoy', svgPullBuoy, 'Bras · allonge · alignement',
+    'Crawl bras seuls avec un pull-buoy entre les cuisses : on se concentre sur l\'allonge et la traction.',
+    ['Pull-buoy serré entre les cuisses','Jambes immobiles et gainées','Allonger chaque bras devant avant de tirer','Roulis des épaules'],
+    ['Battre des jambes','Bassin qui ondule'], ['Avec plaquettes','Avec élastique aux chevilles'], '4 × 100 m · récup 20"', {dist:'100', unit:'m', int:'I2'}),
+  XN('ex-dos2bras','Allonge','int','Dos deux bras', svgDos2Bras, 'Allonge · traction · alignement',
+    'Sur le dos, les deux bras font le même mouvement en même temps. Travaille l\'allonge et la traction du dos.',
+    ['Bras qui entrent ensemble derrière la tête, largeur des épaules','Tirer ensemble jusqu\'aux cuisses','Retour aérien bras tendus','Battements continus'],
+    ['Entrer les mains trop larges','Bassin qui s\'enfonce'], ['Avec palmes','Avec pull-buoy'], '6 × 25 m · récup 20"'),
+  /* ---------- Natation : catch et poussée ---------- */
+  XN('ex-godille','Catch et poussée','int','Godille avant', svgGodille, 'Prise d\'eau (catch) · sensations',
+    'Bras devant, petits mouvements de godille des mains en « 8 », sans tirer. Développe la sensation d\'appui sur l\'eau.',
+    ['Bras devant, coudes légèrement fléchis','Mains qui s\'écartent puis se rapprochent, paumes orientées','Garder la pression sur l\'eau','Petits battements ou pull-buoy'],
+    ['Tirer vers l\'arrière','Mains crispées'], ['Godille au niveau des épaules','Godille aux hanches (sur le dos)'], '6 × 25 m · récup 20"'),
+  XN('ex-brasse-bras','Catch et poussée','deb','Brasse bras', svgBrasseBras, 'Traction · prise d\'eau',
+    'Brasse bras seuls avec pull-buoy : mains qui s\'écartent, coudes hauts, puis se rejoignent sous le menton.',
+    ['Mains qui s\'écartent, coudes hauts','Ramener les mains sous le menton en accélérant','Inspirer pendant la traction','Allonger les bras et glisser'],
+    ['Tirer jusqu\'aux cuisses','Coudes qui tombent'], ['Avec battements de crawl','Avec plaquettes'], '6 × 25 m · récup 20"'),
+  XN('ex-papillon','Catch et poussée','av','Papillon', svgPapillon, 'Traction · poussée · ondulation',
+    'Les deux bras tirent ensemble avec une ondulation du corps. Excellent pour la puissance de la traction et de la poussée.',
+    ['Entrée des mains largeur d\'épaules','Traction en sablier jusqu\'aux cuisses','Retour aérien bras relâchés','Deux ondulations par cycle de bras'],
+    ['Bras qui rentrent trop tôt','Pas d\'ondulation'], ['Papillon un bras','Avec palmes'], '8 × 15 m · récup 30"', {dist:'15', unit:'m', int:'I4'}),
+  /* ---------- Natation : retour aérien ---------- */
+  XN('ex-zip','Retour aérien','int','Fermeture éclair', svgZip, 'Retour aérien coude haut · relâchement',
+    'Pendant le retour, le pouce remonte le long du corps comme une fermeture éclair, de la cuisse jusqu\'à l\'aisselle.',
+    ['Sortie de la main à la cuisse','Remonter le pouce le long du flanc','Coude haut, avant-bras relâché','Entrée de la main devant l\'épaule'],
+    ['Retour bras tendu sur le côté','Main qui passe loin du corps'], ['Doigts traînants','Arrêt de 1 s sous l\'aisselle'], '8 × 25 m · récup 20"'),
+  XN('ex-drag','Retour aérien','int','Doigts traînants', svgDrag, 'Retour aérien · relâchement · coude haut',
+    'Pendant le retour, le bout des doigts frôle la surface de l\'eau : coude haut et avant-bras relâché.',
+    ['Coude qui sort le premier','Bout des doigts qui glisse sur la surface','Avant-bras relâché, épaule souple','Entrée de la main devant l\'épaule'],
+    ['Main qui sort de l\'eau loin du corps','Coude qui tombe'], ['Fermeture éclair','Doigts traînants avec respiration 3 temps'], '8 × 25 m · récup 20"'),
+  XN('ex-coudehaut','Retour aérien','av','Coude haut au retour', svgCoudeHaut, 'Retour aérien · roulis des épaules',
+    'Crawl en insistant sur un coude haut pendant le retour aérien, l\'avant-bras pendant vers l\'eau.',
+    ['Rouler les épaules pour sortir le coude','Coude au point le plus haut','Main proche de la surface','Entrée souple, doigts en premier'],
+    ['Bras tendu qui balaie sur le côté','Pas de roulis'], ['Doigts traînants','Crawl un bras'], '8 × 25 m · récup 20"'),
+  XN('ex-waterpolo','Retour aérien','int','Crawl tête hors de l\'eau', svgWaterPolo, 'Retour aérien · orientation · jambes',
+    'Crawl la tête hors de l\'eau, regard vers l\'avant, comme en eau libre pour s\'orienter. Oblige un retour coude haut et une fréquence élevée.',
+    ['Tête hors de l\'eau, regard devant','Battements énergiques','Retour aérien rapide, coude haut','Entrées de mains écartées'],
+    ['Bassin qui coule','Bras tendus au retour'], ['Alterner 6 mouvements tête haute et 6 normaux','Repérage tous les 6 mouvements (eau libre)'], '6 × 25 m · récup 30"', {dist:'25', unit:'m', int:'I3'})
+];
+EXERCISES.forEach(e => { if (EX_RECAT[e.id]) e.cat = EX_RECAT[e.id]; });
+EXERCISES.push(...EX_MORE);
 const EX_BY = Object.fromEntries(EXERCISES.map(e => [e.id, e]));
-const exFor = txt => { const t = noAcc(txt || ''); return t ? EXERCISES.find(e => t.includes(noAcc(e.title))) : null; };
+// le titre d'exercice le plus long contenu dans le texte (« Squat sauté » plutôt que « Squat »)
+const exFor = txt => { const t = noAcc(txt || ''); return t ? EXERCISES.filter(e => t.includes(noAcc(e.title))).sort((a, b) => b.title.length - a.title.length)[0] || null : null; };
 function exCardHTML(e, withAdd){
   return `<div class="excard">
     <div class="exanim">${e.svg()}${e.svg2 ? '<div style="height:6px"></div>' + e.svg2() : ''}<button class="pp" data-a="expause" title="Pause / lecture">❚❚</button></div>
@@ -3523,14 +4244,16 @@ function exCardHTML(e, withAdd){
   </div>`;
 }
 function exercisesView(){
-  ui.xf = ui.xf || {sport:'all', q:''};
-  const q = noAcc(ui.xf.q || '');
-  const list = EXERCISES.filter(e => (ui.xf.sport === 'all' || e.sport === ui.xf.sport) && (!q || noAcc(e.title + ' ' + e.cat + ' ' + e.desc).includes(q)));
+  ui.xf = ui.xf || {sport:'strength', q:'', cat:'all'};
+  const q = noAcc(ui.xf.q || ''), groups = EX_GROUPS[ui.xf.sport] || [], cat = groups.includes(ui.xf.cat) ? ui.xf.cat : 'all';
+  const list = EXERCISES.filter(e => (ui.xf.sport === 'all' || e.sport === ui.xf.sport) && (cat === 'all' || e.cat === cat) && (!q || noAcc(e.title + ' ' + e.cat + ' ' + e.desc + ' ' + e.muscles).includes(q)));
+  const nOf = g => EXERCISES.filter(e => e.sport === ui.xf.sport && e.cat === g).length;
   const s = ui.sessionId ? getSession(ui.sessionId) : null;
   return `<div class="lfilt" style="margin-top:4px">
       <div class="filt">${[['all','Tous'],['strength','Renfo'],['swim','Natation'],['run','CAP'],['bike','Vélo']].map(([k,l]) => `<button class="${ui.xf.sport===k?'on':''}" data-a="exsport" data-v="${k}">${k==='all'?'':icon(k,12)}${l}</button>`).join('')}</div>
       <span class="cnt">${list.length} exercice${list.length>1?'s':''} · ${s ? `ajout dans « ${esc(s.title || SPORTS[s.sport].label)} »` : 'ouvrez une séance dans l\'onglet Semaine pour y ajouter un exercice'}</span>
     </div>
+    ${groups.length ? `<div class="filt exgrp"><button class="${cat === 'all' ? 'on' : ''}" data-a="excat" data-v="all">Tous les groupes</button>${groups.map(g => `<button class="${cat === g ? 'on' : ''}" data-a="excat" data-v="${esc(g)}">${esc(g)} <small>${nOf(g)}</small></button>`).join('')}</div>` : ''}
     <div class="exgrid">${list.map(e => exCardHTML(e, true)).join('') || '<div class="empty">Aucun exercice pour ce filtre (catalogue en construction).</div>'}</div>
     <div class="hint">Les exercices ajoutés à une séance affichent un bouton 🎬 qui rejoue l'animation.</div>`;
 }
@@ -3936,25 +4659,31 @@ function libPlansView(aid){
       if (!isDevUser() && !catalogVisible(pk)) return `<td><span class="pmxna">—</span></td>`;
       return `<td><button class="${on ? 'on' : ''} ${ok ? '' : 'plock'} ${isDevUser() ? 'mod-' + (mst || 'pend') : ''}" data-a="preset" data-t="${D}" data-o="${obj}" data-l="${lv}"><b>${ok ? '' : '🔒 '}${P.w[i]} sem.</b><span class="pper" title="${P.per[i]} séances par semaine">${P.per[i]}×/sem.</span><span class="pload" title="Charge moyenne par semaine">⌀ ${fmtC(planLoad({type:D, obj, level:lv, weeks:P.w[i], per:P.per[i]}).avg)}</span></button></td>`; }).join('')}</tr>`).join('')}
   </tbody></table>`;
-  const plans = state.library.plans.map(p => {
+  const K = ui.pkind === 'perso' ? 'perso' : 'ia';
+  const plans = state.library.plans.filter(p => K === 'tous' || (K === 'perso') === isUserPlan(p)).map(p => {
     const items = planItems(p.weeks[0]), n = p.weeks.length ? Math.round(p.weeks.reduce((a, w) => a + planItems(w).length, 0) / p.weeks.length) : 0;
     const dots = [0,1,2,3,4,5,6].map(d => { const it = items.find(x => x.day === d); return `<span title="${DAYS[d]}${it ? ' : ' + esc(it.title) : ''}" style="${it ? 'background:' + SPORTS[it.sport].color : ''}"></span>`; }).join('');
-    return `<div class="pcard"><b>${esc(p.title)}</b>${isUserPlan(p) ? '<span class="tag">perso</span>' : ''}
+    return `<div class="pcard"><b>${esc(p.title)}</b>${isUserPlan(p) ? '<span class="tag">perso</span>' : '<span class="tag iatag" title="Plan généré par IA : peut contenir des erreurs">🤖 IA</span>'}
       <div class="d">${p.weeks.length} sem. · ~${n} séances/sem. · <b class="pload2" title="Charge moyenne par semaine (semaine la plus chargée : ${fmtC(savedPlanLoad(p).max)})">⌀ ${fmtC(savedPlanLoad(p).avg)} / sem.</b>${p.desc ? ' — ' + esc(p.desc) : ''}</div>
       <div class="dots">${dots}</div>
       <div class="act dense"><span class="ztxt">Début</span><input type="date" id="libd-${p.id}" value="${nextMonday()}"><button class="btn sm primary" data-a="applyplan" data-id="${p.id}">Appliquer</button>
         ${isUserPlan(p) && (!p.ownerId || p.ownerId === me.id) ? `<button class="ib red" title="Supprimer ce plan" data-a="plandel" data-id="${p.id}">✕</button>` : ''}</div>
     </div>`; }).join('');
-  return `<section class="zone zweek"><div class="zhead"><span class="ztitle">Plans types</span></div><div class="zbody">
+  const iaWarn = '<div class="iawarn">🤖 <b>Plans IA</b> : ils sont générés par IA et peuvent contenir des erreurs. Vérifiez-les et adaptez-les à votre niveau avant de les appliquer.</div>';
+  const kindBar = `<div class="pkind"><div class="seg">${[['ia','🤖 Plans IA'],['perso','👤 Plans persos']].map(([k, l]) => `<button class="${K === k ? 'on' : ''}" data-a="pkind" data-v="${k}">${l}</button>`).join('')}</div>${K !== 'perso' ? iaWarn : ''}</div>`;
+  const persoZone = `<section class="zone zrecap"><div class="zhead"><span class="ztitle">${K === 'perso' ? 'Mes plans persos' : K === 'ia' ? 'Plans IA prêts à l\'emploi' : 'Plans enregistrés'}</span></div><div class="zbody">
+      <div class="ztxt" style="margin:2px 0 4px">${K === 'perso' ? 'Plans que vous avez créés depuis un agenda (le vôtre ou, pour un coach, celui d\'un adhérent). Ils sont rattachés à votre compte : un coach les retrouve quel que soit l\'adhérent sélectionné et peut les appliquer à chacun.' : K === 'ia' ? 'Plans types proposés par l\'application.' : 'Plans types proposés par l\'application (🤖 IA) et vos propres plans (👤 perso), copiés depuis l\'agenda. Vos plans persos ne sont visibles que par vous.'}</div>
+      <div class="pcards">${plans || `<div class="empty">${K === 'perso' ? 'Aucun plan perso enregistré.' : 'Aucun plan.'}</div>`}</div>
+      ${K !== 'ia' ? `<div class="hint">Pour créer un plan perso : onglet Semaine → « ★ Enregistrer comme plan type »${me.role === 'developpeur' ? ' (depuis l\'agenda d\'un athlète)' : ''}.</div>` : ''}
+    </div></section>`;
+  if (K === 'perso') return kindBar + persoZone;
+  return `${kindBar}<section class="zone zweek"><div class="zhead"><span class="ztitle">🤖 Plans IA sur mesure</span></div><div class="zbody">
       <div class="ztxt" style="margin:2px 0 4px">${nAll} plans : choisissez la discipline, puis la distance et le niveau.</div>
       ${isDevUser() ? `<div class="modbar"><b>Modération des plans</b><span class="modleg"><i class="mod-valide"></i>validé <i class="mod-pend"></i>à valider <i class="mod-supprime"></i>supprimé</span>
         <button class="btn sm" data-a="modbulkplans" data-d="${D}">✓ Valider tous les plans « ${esc(PLAN_DISC.find(x => x[0] === D)[1])} » à valider</button><span class="ztxt">Ouvrez un plan pour le valider ou le supprimer.</span></div>` : ''}
       ${tabs}${matrix}
     </div></section>
-    <section class="zone zrecap"><div class="zhead"><span class="ztitle">Enregistrés</span></div><div class="zbody">
-      <div class="pcards">${plans || '<div class="empty">Aucun plan.</div>'}</div>
-      ${me.role === 'developpeur' ? '<div class="hint">Pour créer un plan type à partir de l\'agenda d\'un athlète : onglet Semaine → « ★ Enregistrer comme plan type ».</div>' : ''}
-    </div></section>
+    ${persoZone}
     ${planAllowed(g.type) ? `<section class="zone zsess"><div class="zhead"><span class="ztitle">Plan sélectionné</span></div><div class="zbody">
       <div class="ztxt" style="margin:2px 0 4px">Ajustez les semaines, les séances et la date de début, puis appliquez.</div>
       ${generatorHTML()}
@@ -4569,7 +5298,7 @@ document.addEventListener('click', e => {
     case 'statnext': ui.statEnd = addDays(ui.statEnd || mondayOf(todayStr()), 7); render(); break;
     case 'expick0': {
       ui.exTarget = {bi:+el.dataset.b, si: el.dataset.s === undefined ? null : +el.dataset.s};
-      const list = EXERCISES.slice().sort((x, y) => (y.sport === s.sport) - (x.sport === s.sport));
+      const same = EXERCISES.filter(e => e.sport === s.sport), list = (same.length ? same : EXERCISES).slice().sort((x, y) => ((EX_GROUPS[x.sport] || []).indexOf(x.cat) - (EX_GROUPS[y.sport] || []).indexOf(y.cat)));
       openModal(`<h3>Choisir un exercice</h3><div class="expk">${list.map(e => `<button data-a="expick" data-id="${e.id}">${e.svg()}<span><b>${esc(e.title)}</b><span class="ztxt">${esc(e.cat)} · ${SPORTS[e.sport].label}</span><br><span class="ztxt">${esc(e.dose)}</span></span></button>`).join('')}</div>
         <div class="row" style="justify-content:space-between;margin-top:10px"><span class="ztxt">Catalogue d'exercices en construction.</span><button class="btn" data-a="mclose">Annuler</button></div>`, true);
       break; }
@@ -4585,7 +5314,9 @@ document.addEventListener('click', e => {
         if (!stepSec(st, s.sport, ctxUser(s))){ if (ex.line.dist){ st.mode = 'dist'; st.dist = ex.line.dist; st.unit = ex.line.unit; } else st.dur = ex.line.dur; }
       }
       save(); closeModal(); render(); toast(`« ${ex.title} » ajouté`); break; }
-    case 'exsport': ui.xf.sport = el.dataset.v; render(); break;
+    case 'pkind': ui.pkind = el.dataset.v; render(); break;
+    case 'exsport': ui.xf.sport = el.dataset.v; ui.xf.cat = 'all'; render(); break;
+    case 'excat': ui.xf.cat = el.dataset.v; render(); break;
     case 'expause': { const svgs = el.closest('.exanim').querySelectorAll('svg'), paused = svgs[0].animationsPaused();
       svgs.forEach(s => paused ? s.unpauseAnimations() : s.pauseAnimations()); el.textContent = paused ? '❚❚' : '▶'; break; }
     case 'exshow': { const ex = EX_BY[el.dataset.id]; if (ex) openModal(exCardHTML(ex, false) + '<div class="row" style="justify-content:flex-end;margin-top:10px"><button class="btn" data-a="mclose">Fermer</button></div>', true); break; }
