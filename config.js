@@ -15,8 +15,12 @@ window.SUIVITRI_CONFIG = {
   // Bouton « Se connecter avec Strava » sur la page de connexion (masqué tant que ce n'est pas true)
   stravaLogin: false,
 
+  // RGPD : nom du responsable du traitement et adresse de contact affichés dans la politique de confidentialité
+  organisation: 'l\'association CC2S',
+  contactRgpd: 'cc2spourtous@gmail.com',
+
   // Adresse du site (laisser vide : détectée automatiquement)
-  siteUrl: 'https://cc2spourtous.github.io/kit-triathlon',
+  siteUrl: 'https://cc2spourtous.github.io/kit-triathlon/',
 
   // Paiement en ligne (facultatif) : liens Stripe (https://buy.stripe.com/…)
   // Vides : l'utilisateur est invité à contacter son coach, qui active l'accès dans l'écran Comptes.

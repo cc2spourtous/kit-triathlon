@@ -2,6 +2,8 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net 'sha256-v1TaZONnO2UCBCBQqiBxW4V/sy+4IO1oEAOFeyGUFuw='; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: blob:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://cdn.jsdelivr.net; media-src 'self' blob:; worker-src 'self'; manifest-src 'self'; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>CC2S Kit Triathlon — suivi coach & athlètes</title>
 <meta name="theme-color" content="#16202b">
@@ -14,9 +16,11 @@
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="config.js"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+@font-face{font-family:Inter;font-weight:400;font-display:swap;src:url(fonts/inter-Regular.woff) format('woff')}
+@font-face{font-family:Inter;font-weight:500;font-display:swap;src:url(fonts/inter-Medium.woff) format('woff')}
+@font-face{font-family:Inter;font-weight:600;font-display:swap;src:url(fonts/inter-SemiBold.woff) format('woff')}
+@font-face{font-family:Inter;font-weight:700;font-display:swap;src:url(fonts/inter-Bold.woff) format('woff')}
 :root{
   --ink:#16202b; --muted:#5d6b7a; --line:#dfe5eb; --bg:#f4f6f8; --card:#fff; --accent:#0f5c8c;
   --swim:#1f7fbf; --swim-bg:#e3f1fb; --bike:#d9822b; --bike-bg:#fdf0e2;
@@ -25,7 +29,7 @@
 }
 *{box-sizing:border-box}
 body{margin:0;font-family:Inter,system-ui,sans-serif;color:var(--ink);background:var(--bg);font-size:15px}
-h1,h2,h3,.brand{font-family:"Barlow Semi Condensed",Inter,sans-serif;letter-spacing:.2px}
+h1,h2,h3,.brand{font-family:Inter,system-ui,sans-serif;letter-spacing:.2px}
 h2{font-size:1.5rem;margin:0}
 h3{font-size:1.15rem;margin:0 0 .5rem}
 button{font:inherit;cursor:pointer}
@@ -54,14 +58,14 @@ input,select,textarea{font:inherit;color:inherit}
 .weeknav .label{font-weight:600;min-width:220px;text-align:center}
 .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
 .crumb{display:flex;align-items:center;gap:8px;margin-top:6px;color:var(--muted)}
-.crumb b{color:var(--ink);font-size:1.25rem;font-family:"Barlow Semi Condensed"}
+.crumb b{color:var(--ink);font-size:1.25rem;font-family:Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums}
 
 /* Agenda */
 .agenda{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
 .day{background:#fff;border:1px solid var(--line);border-radius:var(--radius);min-height:220px;display:flex;flex-direction:column}
 .day.today{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
 .dayhead{padding:8px 10px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:baseline}
-.dayhead b{font-family:"Barlow Semi Condensed";font-size:1.05rem}
+.dayhead b{font-family:Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums;font-size:1.05rem}
 .dayhead small{color:var(--muted)}
 .daybody{padding:8px;display:flex;flex-direction:column;gap:6px;flex:1}
 .sess{border:0;text-align:left;border-radius:8px;padding:8px 9px;border-left:5px solid;width:100%}
@@ -89,7 +93,7 @@ table.grid td.tot{font-weight:600;background:#f7f9fa}
 .kpis{display:flex;gap:12px;margin-top:14px;flex-wrap:wrap}
 .kpi{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:14px 18px;min-width:180px}
 .kpi small{color:var(--muted);display:block;margin-bottom:2px}
-.kpi b{font-family:"Barlow Semi Condensed";font-size:1.9rem}
+.kpi b{font-family:Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums;font-size:1.9rem}
 /* Vue synthétique */
 .synth{display:grid;grid-template-columns:minmax(0,560px) minmax(200px,260px);gap:12px;align-items:start}
 table.cmp{border-collapse:separate;border-spacing:2px;width:100%;font-size:.85rem;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:6px}
@@ -102,7 +106,7 @@ table.cmp tfoot th{text-align:left;font-size:.75rem;color:var(--muted);font-weig
 .side{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:10px 14px}
 .side .l{display:flex;justify-content:space-between;align-items:baseline;padding:6px 0;border-bottom:1px solid #eef2f5;font-size:.85rem;color:var(--muted)}
 .side .l:last-child{border-bottom:0}
-.side .l b{color:var(--ink);font-family:"Barlow Semi Condensed";font-size:1.25rem}
+.side .l b{color:var(--ink);font-family:Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums;font-size:1.25rem}
 .side .l.big b{font-size:1.6rem}
 .wk{display:grid;grid-template-columns:105px 1fr 58px 44px;gap:8px;align-items:center;font-size:.82rem;padding:3px 0}
 .wk .bar{display:flex;height:14px;border-radius:4px;overflow:hidden;background:#eef2f5}
@@ -122,7 +126,7 @@ table.cmp tfoot th{text-align:left;font-size:.75rem;color:var(--muted);font-weig
 .field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:7px;padding:8px 9px;background:#fff}
 .block{background:#fff;border:1px solid var(--line);border-radius:var(--radius);margin-bottom:12px;overflow:hidden}
 .bhead{display:flex;gap:10px;align-items:center;padding:10px 12px;background:#f7f9fa;border-bottom:1px solid var(--line);flex-wrap:wrap}
-.bnum{font-family:"Barlow Semi Condensed";font-weight:700;color:var(--muted)}
+.bnum{font-family:Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums;font-weight:700;color:var(--muted)}
 .bhead input.bt{flex:1;min-width:160px;border:1px solid var(--line);border-radius:7px;padding:7px 9px;font-weight:600}
 .reps{display:flex;align-items:center;gap:5px}
 .reps input{width:62px;border:1px solid var(--line);border-radius:7px;padding:7px;text-align:center;font-weight:600}
@@ -134,7 +138,7 @@ table.steps input,table.steps select{width:100%;border:1px solid var(--line);bor
 table.steps tr td:first-child{padding-left:10px}
 .bfoot{padding:6px 10px 10px}
 .summary{display:flex;gap:16px;align-items:center;flex-wrap:wrap;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:12px 14px;margin-bottom:14px}
-.summary .big{font-family:"Barlow Semi Condensed";font-size:1.6rem;font-weight:700}
+.summary .big{font-family:Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums;font-size:1.6rem;font-weight:700}
 .zbar{display:flex;height:10px;border-radius:5px;overflow:hidden;min-width:200px;flex:1;background:#eef2f5}
 .zbar div{height:100%}
 .ztxt{font-size:.85rem;color:var(--muted)}
@@ -294,7 +298,7 @@ table.bz tfoot td{font-size:.8rem;font-weight:700;padding:3px 2px}
 .wkb table.cmp{font-size:.74rem;padding:3px;border-spacing:1px}
 .wkb table.cmp th,.wkb table.cmp td{padding:2px 5px}
 .wkb .kp{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:6px 10px;display:flex;flex-wrap:wrap;gap:4px 18px;align-content:center;font-size:.78rem;color:var(--muted)}
-.wkb .kp b{color:var(--ink);font-family:"Barlow Semi Condensed";font-size:1.15rem;margin-left:3px}
+.wkb .kp b{color:var(--ink);font-family:Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums;font-size:1.15rem;margin-left:3px}
 .wkb .kp .sp{display:flex;gap:10px;flex-wrap:wrap;width:100%;font-size:.74rem}
 @media (max-width:900px){.wkb{grid-template-columns:1fr}}
 /* Durée ou distance, graphique, icônes */
@@ -367,12 +371,12 @@ table.stt tfoot td{font-weight:700;background:#f7f9fa}
 .pmx td button{width:100%;border:1px solid var(--line);background:#fff;border-radius:7px;padding:3px 7px;cursor:pointer;font-size:.74rem;line-height:1.25;display:flex;align-items:baseline;gap:6px;white-space:nowrap}
 .pmx td button b{font-size:.78rem}
 .pmx td button .pper{color:var(--muted)}
-.pmx td button .pload{margin-left:auto;font-weight:700;color:#1d5f99;font-family:"Barlow Semi Condensed";font-size:.84rem}
+.pmx td button .pload{margin-left:auto;font-weight:700;color:#1d5f99;font-family:Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums;font-size:.84rem}
 .pmx td{padding:0}
 .pmx th.pmxo{white-space:nowrap;font-size:.68rem;padding:0 6px 0 2px;color:#3d4650}
 .pmx th.pmxo small{display:block;text-transform:none;font-weight:400;color:var(--muted);font-size:.64rem;letter-spacing:0}
 .pload2{color:#1d5f99;font-weight:700}
-.gload{display:inline-flex;gap:10px;flex-wrap:wrap;margin:4px 0 2px;font-size:.8rem}.gload b{font-family:"Barlow Semi Condensed";font-size:1rem;color:#1d5f99}
+.gload{display:inline-flex;gap:10px;flex-wrap:wrap;margin:4px 0 2px;font-size:.8rem}.gload b{font-family:Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums;font-size:1rem;color:#1d5f99}
 .pmx td button:hover{border-color:var(--accent);background:#f4f8fb}
 .pmx td button.on{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent) inset}
 .frm .field{margin-bottom:8px}
@@ -521,7 +525,7 @@ table.it td.na{color:#c3ccd5}
 .ntxt{flex:1;font-size:.84rem}.nbody{display:block;color:#3a4a58;margin-top:2px;font-size:.8rem}
 .ngo{color:#1f6fa8;font-weight:600;font-size:.8rem;white-space:nowrap}
 .kstrip{display:flex;flex-wrap:wrap;gap:4px 16px;align-items:baseline;font-size:.78rem;color:var(--muted);background:#fff;border:1px solid var(--line);border-radius:10px;padding:4px 10px;margin:6px 0}
-.kstrip b{color:var(--ink);font-family:"Barlow Semi Condensed";font-size:1.05rem;margin-left:3px}
+.kstrip b{color:var(--ink);font-family:Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums;font-size:1.05rem;margin-left:3px}
 .mtop .kstrip{margin:0}
 .stdet{margin-top:4px}.stdet summary{cursor:pointer;font-size:.78rem;color:var(--muted);font-weight:600}
 .stdet table.stt th,.stdet table.stt td{padding:2px 7px}
@@ -539,7 +543,7 @@ table.it td.na{color:#c3ccd5}
 .rview{padding:8px 12px}
 .rhead{display:flex;align-items:center;gap:10px;margin-bottom:4px}
 .rtt{flex:1;min-width:0;display:flex;flex-direction:column}.rtt b{font-size:1.02rem}
-.rtot{font-family:"Barlow Semi Condensed";font-weight:700;font-size:1.25rem}
+.rtot{font-family:Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums;font-weight:700;font-size:1.25rem}
 .rb{display:grid;grid-template-columns:130px 1fr 52px;gap:8px;align-items:baseline;padding:4px 0;border-top:1px solid #eef2f5;font-size:.82rem}
 .rbt{font-weight:600;color:#3a4a58}.rdu{text-align:right;color:var(--muted);font-size:.76rem}
 .rs{display:inline;line-height:1.7}.rd{font-weight:700;margin-right:4px}.rs .ilab{margin-right:2px}
@@ -554,7 +558,7 @@ table.it td.na{color:#c3ccd5}
 .astile{border:1px solid var(--line);border-top:3px solid var(--c);border-radius:10px;padding:6px 9px;background:#fff;min-width:0}
 .astile.none{opacity:.6}
 .astk{font-size:.74rem;font-weight:600;color:#3d4650;display:flex;align-items:center;gap:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.astv{font-family:"Barlow Semi Condensed";font-size:1.55rem;font-weight:700;color:var(--ink);line-height:1.15}.astv small{font-size:.8rem;font-weight:400;color:var(--muted)}
+.astv{font-family:Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums;font-size:1.55rem;font-weight:700;color:var(--ink);line-height:1.15}.astv small{font-size:.8rem;font-weight:400;color:var(--muted)}
 .asts{font-size:.7rem;color:var(--muted)}
 .asspark{display:block;margin-top:3px;max-width:100%}
 .asst{margin-top:8px}.asdet{margin-top:6px;font-size:.76rem}.asdet summary{cursor:pointer;color:#1d5f99}
@@ -580,7 +584,7 @@ table.it td.na{color:#c3ccd5}
 .wcmp th,.wcmp td{padding:2px 5px;text-align:right;white-space:nowrap}
 .wcmp th:first-child{text-align:left;font-weight:500;color:var(--muted);display:flex;align-items:center;gap:3px}
 .wcmp thead th{font-size:.64rem;text-transform:uppercase;letter-spacing:.04em;font-weight:700;color:var(--muted);border-bottom:1px solid var(--line)}
-.wcmp td{font-family:"Barlow Semi Condensed";font-size:.98rem;color:var(--ink)}
+.wcmp td{font-family:Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums;font-size:.98rem;color:var(--ink)}
 .wcmp td.wr{font-weight:700}
 .wcmp td.wp{color:#6b7785}
 .wcmp tr.wtot td{font-size:1.2rem}
@@ -595,7 +599,7 @@ table.it td.na{color:#c3ccd5}
 .wsh{font-size:.66rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:700;margin-bottom:2px}
 .wsl{display:flex;justify-content:space-between;align-items:baseline;gap:6px}
 .wsl span{color:var(--muted);display:inline-flex;align-items:center;gap:3px}
-.wsl b{font-family:"Barlow Semi Condensed";font-size:1rem;color:var(--ink)}
+.wsl b{font-family:Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums;font-size:1rem;color:var(--ink)}
 .wsl.big b{font-size:1.3rem}
 .wsl small{color:var(--muted);font-weight:400;font-size:.72rem}
 .wsl.sp span{color:inherit}
@@ -709,6 +713,146 @@ input,select,textarea{border-radius:9px}
   .side{display:none}
 }
 @media (max-width:760px){.wside{flex-direction:column!important;align-items:stretch!important}.wcmp{max-width:420px}}
+/* Smartphone : la semaine sur 2 lignes (lun-jeu / ven-dim) pour tout voir sans faire défiler */
+@media (max-width:760px){
+  .ag{grid-template-columns:repeat(4,minmax(0,1fr))!important;overflow-x:visible!important;gap:3px}
+  .ag > div{min-width:0}
+  .ag .h{font-size:.68rem;padding:2px 3px}
+  .ag .h button{width:20px;height:20px;font-size:.85rem}
+  .ag .c2{font-size:.66rem;padding:3px 4px;min-width:0}
+  .ag .c2 .t{white-space:normal!important;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;word-break:break-word;padding-right:16px}
+  .ag .c2 .t .ico{display:none}
+  .ag .c2 .m{flex-wrap:wrap;font-size:.62rem}
+}
+
+/* ===== Fenêtres : jamais coupées en haut, en-tête fixe avec bouton fermer ===== */
+.modal-bg{align-items:flex-start;overflow-y:auto;padding:24px 12px}
+.modal{max-height:none;margin:auto 0;box-shadow:0 12px 40px rgba(12,40,64,.25);border-radius:16px}
+.mhead{display:flex;align-items:center;gap:8px;position:sticky;top:-20px;background:#fff;margin:-20px -20px 8px;padding:14px 16px 10px;border-bottom:1px solid var(--line);border-radius:16px 16px 0 0;z-index:2}
+.mhead h3{margin:0;flex:1;font-size:1.1rem}
+.mx{border:0;background:#eef2f6;width:34px;height:34px;border-radius:50%;font-size:1rem;cursor:pointer;color:#334}
+.mx:hover{background:#dde5ec}
+.mdate{display:inline-block;background:#eef6fd;border:1px solid #bcd9f2;color:#1d5f99;border-radius:20px;padding:3px 12px;font-weight:600;font-size:.85rem}
+.mfoot{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}
+.sportpick{margin:6px 0 4px}
+.sportpick button{display:flex;align-items:center;gap:8px;font-size:.95rem}
+/* 4 grands choix */
+.bigopts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:6px}
+.bo{display:flex;flex-direction:column;align-items:flex-start;gap:2px;border:2px solid;border-radius:14px;padding:14px 14px 12px;text-align:left;cursor:pointer;font-size:1rem;transition:transform .1s,box-shadow .15s;min-height:96px}
+.bo:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(20,50,80,.12)}
+.bo:active{transform:translateY(0)}
+.bo .boi{font-size:1.6rem;line-height:1;margin-bottom:4px}
+.bo b{font-size:1.02rem}
+.bo small{font-size:.78rem;color:#4b5866;font-weight:400}
+.bo-simple{border-color:#2f9461;background:#eefaf3;color:#1d6b43}
+.bo-detail{border-color:#1769aa;background:#eef6fd;color:#105a93}
+.bo-lib{border-color:#7a4bb3;background:#f5effc;color:#5b3394}
+.bo-file{border-color:#d9822b;background:#fff5ea;color:#a35a12}
+.bo.bo-lock{opacity:.6;border-style:dashed}
+/* ===== Lisibilité générale : boutons bien visibles, blocs encadrés de couleur ===== */
+.btn{border:1.5px solid #c3d0dc;font-weight:600;color:#1f2d3a;box-shadow:0 1px 2px rgba(20,50,80,.06)}
+.btn:hover{border-color:var(--accent);color:var(--accent);background:#f3f8fd}
+.btn.primary{color:#fff;border-color:var(--accent);box-shadow:0 2px 6px rgba(23,105,170,.25)}
+.btn.primary:hover{color:#fff}
+.btn.sm{padding:5px 11px}
+.pane{border:1.5px solid #cfdeea;background:#fbfdff;border-radius:14px;padding:10px 12px}
+.pane h4{color:#1d5f99;font-size:.74rem}
+.bilanpane{border-color:#9fd3b6!important;background:#f6fcf8!important}
+.sect{color:#1d5f99}
+.lockbox{border-width:1.5px}
+input,select,textarea{border:1.5px solid #c9d5df}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(23,105,170,.15)}
+.subnav,.seg{border:1.5px solid #cfdeea;background:#f5f9fc}
+@media (max-width:760px){
+  .modal-bg{padding:0}
+  .modal,.modal.wide{max-width:none;min-height:100vh;border-radius:0;padding:16px}
+  .mhead{top:-16px;margin:-16px -16px 8px;border-radius:0}
+  .bigopts{gap:8px}
+  .bo{min-height:88px;padding:12px}
+  .mfoot .btn{flex:1;padding:12px}
+}
+.planpane{border:2px solid var(--spc)!important;border-radius:14px!important;background:linear-gradient(180deg,var(--spb) 0,#fff 110px)!important;box-shadow:0 3px 12px rgba(20,50,80,.08)}
+.planpane>.pph{margin:-2px 0 8px!important;font-size:.95rem!important;text-transform:none!important;letter-spacing:0!important;color:var(--spc)!important;display:flex;align-items:center;gap:6px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.bilanwait{border:2px dashed #b9c7d4!important;background:#f7f9fb!important;border-radius:14px!important}
+.bilanwait>h4{font-size:.95rem!important;text-transform:none!important;letter-spacing:0!important;color:#5b6573!important}
+.bilanwait p{margin:4px 0 10px;color:#4b5866;font-size:.88rem}
+.pnote{border:1.5px solid #f1d998;background:#fffbef;border-radius:10px;padding:6px 9px;margin:8px 0}
+.pnote .pnl{font-size:.74rem;font-weight:700;color:#8a6100;margin-bottom:3px}
+.pnote textarea{width:100%;background:#fff;border-color:#ecd9a6;resize:vertical;min-height:44px}
+.pnote .pnt{font-size:.86rem;line-height:1.4;color:#3d4650}
+.bi7{width:100%;border-collapse:collapse;font-size:.8rem;margin:2px 0 6px}
+.bi7 th{font-size:.66rem;text-transform:uppercase;letter-spacing:.03em;color:var(--muted);text-align:left;padding:2px 4px;border-bottom:1px solid var(--line)}
+.bi7 th small{text-transform:none}
+.bi7 td{padding:3px 4px;border-bottom:1px solid #edf1f5;vertical-align:middle}
+.bi7 tr:not(.on) td{opacity:.5}
+.bi7 tr:not(.on):focus-within td{opacity:1}
+.bi7 td:first-child{min-width:150px}
+.bi7 .ilab{display:inline-block;font-size:.72rem;font-weight:700;border-radius:6px;padding:1px 6px}
+.bi7 .bipl{font-size:.68rem;color:#5b6573;margin-top:2px;line-height:1.3}
+.bi7 .bipv{color:#1d5f99;font-weight:700}
+.bi7 input{width:100%;min-width:0;background:#fff;padding:4px 6px}
+.bi7 td:not(:first-child){width:21%}
+.bi7 tfoot td{border-bottom:0;padding-top:5px;font-size:.85rem}
+@media (max-width:760px){.bi7 td:first-child{min-width:0;width:40%}.bi7 .bipl{font-size:.62rem}.bi7 input{padding:5px 4px;font-size:.8rem}}
+.donebtn{display:block;clear:both;width:100%;margin-top:12px;border:0;border-radius:12px;padding:12px;font-size:1rem;font-weight:700;color:#fff;background:#2f9461;box-shadow:0 3px 10px rgba(47,148,97,.3);cursor:pointer}
+.donebtn:hover{background:#277d52}
+.donebar{clear:both;display:flex;align-items:center;justify-content:space-between;margin-top:12px;border:1.5px solid #9fd3b6;background:#eefaf3;color:#1d6b43;border-radius:12px;padding:8px 12px;font-weight:700}
+.pred{border:2px solid #7a4bb3;background:#faf6fe;border-radius:14px;padding:10px 12px;margin-top:10px}
+.predh{font-weight:700;color:#5b3394;margin-bottom:6px}.predh span{font-weight:400;font-size:.76rem;color:var(--muted);margin-left:6px}
+.predt{width:100%;border-collapse:collapse;font-size:.84rem}
+.predt th,.predt td{padding:5px 6px;border-bottom:1px solid #e9e1f3;text-align:left}
+.predt thead th{font-size:.66rem;text-transform:uppercase;letter-spacing:.03em;color:var(--muted)}
+.predt td b{font-family:Inter,system-ui,sans-serif;font-variant-numeric:tabular-nums;font-size:1.1rem}
+.predn{font-size:.72rem;margin-top:6px}
+.statwk{border:2px solid #1769aa;background:#f3f8fd;border-radius:14px;padding:10px 12px;margin-top:10px}
+.statwkh{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap}.statwkh span{display:flex;gap:6px;align-items:center}
+.statwkb{display:grid;grid-template-columns:220px minmax(0,1fr);gap:12px}
+.statwk .wside{background:#fff;border:1px solid var(--line);border-radius:10px;padding:6px}
+.statwkl{display:flex;flex-direction:column;gap:4px}
+.swl{display:grid;grid-template-columns:60px minmax(0,1fr) auto;gap:8px;align-items:center;background:#fff;border:1px solid var(--line);border-left:4px solid;border-radius:8px;padding:5px 8px;font-size:.82rem}
+.swl b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#statchart rect.hit:hover{fill:rgba(23,105,170,.06)}#statchart rect.hit.sel{fill:rgba(23,105,170,.12)}
+@media (max-width:760px){.statwkb{grid-template-columns:1fr}.predt{font-size:.78rem}.predt td.ztxt{font-size:.68rem}}
+.privacy{font-size:.88rem;line-height:1.5;color:#2b3a48}.privacy p{margin:0 0 9px}
+.chk2{display:flex;gap:8px;align-items:flex-start;font-size:.86rem;line-height:1.4;margin:8px 0;text-align:left}.chk2 input{margin-top:3px;flex:0 0 auto;width:auto!important}
+.consentcard p{text-align:left}
+.mydata{border-color:#c9b6e4!important;background:#fbf8ff!important}
+.rgpdadm{border-color:#c9b6e4!important;background:#fbf8ff!important}.purgebox{margin-top:8px;padding:8px 10px;border:1.5px solid #f1c4c0;background:#fff6f5;border-radius:10px}
+.modb{display:inline-block;font-size:.64rem;font-weight:700;border-radius:8px;padding:1px 6px;margin-left:4px;vertical-align:middle}
+.modb.ok{background:#e3f5ea;color:#1d6b43}.modb.pend{background:#fff3d6;color:#8a6100}.modb.del{background:#fdecea;color:#b42318}
+.modbtns{display:inline-flex;gap:2px;margin-left:4px;vertical-align:middle}.modbtns .ib{width:24px;height:22px;font-size:.75rem}.ib.okb{color:#1d6b43;border-color:#9fd3b6}
+.modbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;border:1.5px dashed #c9b6e4;background:#fbf8ff;border-radius:10px;padding:6px 10px;margin:6px 0}
+.modbar select{width:auto!important}
+.lrow.moddel{opacity:.5}.lrow.moddel .tt{text-decoration:line-through}
+.pmx td button.mod-valide{border-color:#2f9461;box-shadow:inset 3px 0 0 #2f9461}.pmx td button.mod-pend{border-style:dashed}.pmx td button.mod-supprime{opacity:.45;text-decoration:line-through}
+.modleg{display:inline-flex;gap:8px;font-size:.72rem;align-items:center}.modleg i{display:inline-block;width:14px;height:10px;border:1.5px solid #c3d0dc;border-radius:3px;margin-right:2px}
+.modleg i.mod-valide{border-color:#2f9461;background:#e3f5ea}.modleg i.mod-pend{border-style:dashed}.modleg i.mod-supprime{background:#eee;opacity:.6}
+.pmxna{color:#b8c2cc;padding:3px 7px;display:block}
+.wchk{border-radius:12px;padding:8px 12px;margin:8px 0 2px;font-size:.84rem;line-height:1.4}
+.wchk.ok{border:1.5px solid #9fd3b6;background:#eefaf3;color:#1d6b43;font-weight:600}
+.wchk.warn{border:1.5px solid #f1c27a;background:#fff7ea;color:#7a4a05}
+.wchk ul{margin:4px 0 0;padding-left:18px}.wchk li{margin:2px 0}
+.wchk summary{cursor:pointer}.wchkw{margin-top:6px}
+.rlctl input{width:56px!important;padding:2px 4px!important}.rlctl select{width:auto!important}
+.terrain{border:1.5px solid #f3c99a;background:#fff8f0;border-radius:10px;padding:6px 9px;margin:8px 0;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.terrain .pnl{font-size:.74rem;font-weight:700;color:#a35a12;margin-right:4px}
+.terx{display:flex;flex-wrap:wrap;gap:6px;align-items:center;width:100%;font-size:.8rem}
+.terx select{width:auto!important}.terx label input{width:70px!important}.terx .ternote{flex:1 1 220px}
+.terro{border:1.5px solid #f3c99a;background:#fff8f0;border-radius:10px;padding:5px 9px;margin:6px 0;font-size:.85rem;color:#7a4a05;font-weight:600}
+.tag.ter{background:#fff1e0;color:#a35a12}
+.wcmp tr.wtss th,.wcmp tr.wtss td{color:#5b3394}.wcmp tr.wtss abbr{text-decoration:none;cursor:help}
+.tssb{margin-left:8px;color:#5b3394;font-weight:700}
+.kstrip .ktss b{color:#5b3394}
+.tsschart{margin-top:8px}
+.pmc{border:1.5px solid #cfdeea;background:#fff;border-radius:14px;padding:10px 12px;margin-top:10px}
+.pmch{font-weight:700;color:#1d5f99;margin-bottom:8px}
+.pmct{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:8px}
+.pmcc{border:1px solid var(--line);border-top:3px solid var(--c);border-radius:10px;padding:6px 10px}
+.pmcc span{display:block;font-size:.72rem;font-weight:600;color:#3d4650}.pmcc b{font-size:1.5rem;color:var(--c);font-variant-numeric:tabular-nums}.pmcc small{display:block;font-size:.7rem;color:var(--muted)}
+.pmc .lg{display:flex;gap:12px;flex-wrap:wrap;font-size:.74rem;margin-bottom:4px}.pmc .lg i{display:inline-block;width:12px;height:3px;border-radius:2px;margin-right:4px;vertical-align:middle}
+.wtsb{margin-top:6px;border-top:1px solid var(--line);padding-top:5px;font-size:.74rem;display:grid;grid-template-columns:1fr auto;gap:0 6px;align-items:baseline}
+.wtsb span{color:var(--muted)}.wtsb b{font-size:1.05rem}.wtsb small{grid-column:1/3;color:var(--muted);font-size:.66rem}
+@media (max-width:760px){.pmct{grid-template-columns:1fr 1fr 1fr;gap:4px}.pmcc{padding:5px 6px}.pmcc b{font-size:1.15rem}}
 </style>
 </head>
 <body>
@@ -1059,6 +1203,32 @@ function builtinLibrary(){
   let xn = 0;
   const X = (sport, cat, lvl, title, desc, blocks) => list.push(T(`x-${sport}-${++xn}`, sport, cat, lvl, title, desc, blocks));
   const r = rec, one = (t, st) => k(t, 1, [st]);
+
+  // ---------- Vélo : home trainer ou extérieur avec parcours précis
+  const HT = {lieu:'ht'}, EXT = (type, extra) => Object.assign({lieu:'ext', type}, extra || {});
+  const V = (tp, terrain) => { tp.terrain = terrain; return tp; };
+  list.push(
+    V(T('ht-sweet','bike','seuil','int','Home trainer — Sweet spot 3 × 12\'','Sur home trainer : puissance stable, ventilateur, hydratation. Idéal en hiver ou par mauvais temps.',
+      [k('Échauffement',1,[s('15:00','I2','progressif, 90 tr/min')]),k('Sweet spot',3,[s('12:00','I4','88-93 % FTP, cadence 85-90'),rec('4:00','souple')]),k('Retour au calme',1,[s('10:00','I1')])]), HT),
+    V(T('ht-force','bike','cotes','int','Home trainer — Force 6 × 4\' à 50-60 tr/min','Grosse résistance, buste immobile, pousser et tirer : renforce la force spécifique.',
+      [k('Échauffement',1,[s('15:00','I2','90 tr/min')]),k('Force',6,[s('4:00','I3','50-60 tr/min, gros braquet'),rec('3:00','90 tr/min souple')]),k('Retour au calme',1,[s('10:00','I1')])]), HT),
+    V(T('ht-pma','bike','vma','av','Home trainer — PMA 5 × 3\'','Intervalles courts à PMA, récupération égale.',
+      [k('Échauffement',1,[s('15:00','I2'),s('3:00','I4','montée progressive')]),k('PMA',5,[s('3:00','I5','100-110 % PMA'),rec('3:00')]),k('Retour au calme',1,[s('10:00','I1')])]), HT),
+    V(T('ht-velocite','bike','technique','deb','Home trainer — Vélocité et coup de pédale','Travail de cadence élevée sans résistance et de pédalage à une jambe.',
+      [k('Échauffement',1,[s('10:00','I2')]),k('Vélocité',6,[s('1:00','I3','110-120 tr/min, bassin stable'),rec('1:00','90 tr/min')]),k('Une jambe',4,[s('0:30','I2','jambe droite'),s('0:30','I2','jambe gauche'),rec('1:00','deux jambes')]),k('Retour au calme',1,[s('10:00','I1')])]), HT),
+    V(T('ext-cote6','bike','cotes','int','Extérieur — Côte de 6 % : 6 × 1 km','Choisir une bosse régulière de 5 à 7 % d\'environ 1 km. Montée assis, descente en récupération.',
+      [k('Échauffement',1,[s('20:00','I2','sur le plat')]),k('Montées',6,[s('4:00','I4','bosse 6 % sur 1 km, assis, 70-80 tr/min'),rec('4:00','descente prudente + plat')]),k('Retour au calme',1,[s('15:00','I1')])]), EXT('bosse', {pente:'6', dist:'1 km'})),
+    V(T('ext-cote-longue','bike','seuil','av','Extérieur — Col ou longue montée 3 × 15\'','Une montée longue de 4 à 6 % (col, longue côte). Tenir l\'effort au seuil sans se mettre dans le rouge.',
+      [k('Échauffement',1,[s('25:00','I2')]),k('Montée',3,[s('15:00','I4','pente 4-6 %, régulier'),rec('8:00','descente / plat')]),k('Retour au calme',1,[s('15:00','I1')])]), EXT('bosse', {pente:'5', dist:'5 km'})),
+    V(T('ext-vent','bike','seuil','int','Extérieur — Face au vent 4 × 8\' en ligne droite','Ligne droite exposée, face au vent : position aéro, cadence régulière. Retour vent dans le dos en récupération.',
+      [k('Échauffement',1,[s('20:00','I2')]),k('Face au vent',4,[s('8:00','I4','position basse, 85-90 tr/min'),rec('5:00','demi-tour, vent dans le dos')]),k('Retour au calme',1,[s('10:00','I1')])]), EXT('vent', {dist:'5 km'})),
+    V(T('ext-sprint','bike','vma','int','Extérieur — Sprints en ligne droite 8 × 15"','Ligne droite plate et sûre, sans circulation. Départ lancé, en danseuse puis assis.',
+      [k('Échauffement',1,[s('20:00','I2'),s('5:00','I3')]),k('Sprints',8,[s('0:15','I7','sprint lancé, ligne droite'),rec('3:45','récupération complète')]),k('Retour au calme',1,[s('15:00','I1')])]), EXT('ligne', {dist:'300 m'})),
+    V(T('ext-circuit','bike','tempo','int','Extérieur — Circuit de 5 km : 6 tours','Boucle courte et sûre d\'environ 5 km. Allure tempo, travail des relances en sortie de virage.',
+      [k('Échauffement',1,[s('15:00','I2')]),k('Tours de circuit',6,[s('8:00','I3','tempo, relance en sortie de virage'),rec('2:00','souple')]),k('Retour au calme',1,[s('10:00','I1')])]), EXT('circuit', {dist:'5 km'})),
+    V(T('ext-vallonne','bike','long','int','Extérieur — Sortie vallonnée 2 h 30','Parcours vallonné : monter les bosses sans dépasser le seuil, s\'alimenter toutes les 45 min.',
+      [k('Sortie',1,[s('2:30:00','I2','bosses en I3 maximum')])]), EXT('vallonne', {dist:'70 km'}))
+  );
   // ---------- Tests (évaluer VMA, vitesse critique, PMA, puissances critiques, FTP, CSS)
   list.push(
     T('test-run-vma','run','test','all','Test VMA — 6 minutes (demi-Cooper)','Courir la plus grande distance possible en 6 minutes sur piste ou terrain plat. VMA (km/h) ≈ distance (m) ÷ 100 : 1 500 m = 15 km/h. Reportez la VMA dans votre profil.',
@@ -1255,10 +1425,36 @@ const tplLvl = t => t.lvl === 'conf' ? 'av' : (t.lvl || 'all');
 // intensité d'une séance type = intensité la plus haute de ses lignes
 const tplInt = t => 'I' + Math.max(1, ...t.blocks.flatMap(b => b.steps.map(st => +(st.int || 'I2')[1] || 1)));
 const tplSports = t => t.parts ? [...new Set(t.parts.map(p => p.sport))] : [t.sport];
+
+/* ----- Modération du catalogue (séances types et plans proposés par l'application) -----
+   Le développeur valide ou supprime chaque élément. Les utilisateurs ne voient jamais les éléments supprimés ;
+   avec la règle « catalogue_mode » = valides, ils ne voient que les éléments validés. */
+const isDevUser = () => !!me && me.role === 'developpeur';
+const modOf = key => (state && state.moder && state.moder[key]) || '';
+function catalogVisible(key){
+  const st = modOf(key); if (st === 'supprime') return false;
+  return rule('catalogue_mode').mode === 'valides' ? st === 'valide' : true;
+}
+const tplKey = t => 'tpl:' + t.id, planKey = (d, o, l) => 'plan:' + d + '|' + o + '|' + l;
+function modBadge(key){ const st = modOf(key); return st === 'valide' ? '<span class="modb ok" title="Validé par le développeur">✓ validé</span>' : st === 'supprime' ? '<span class="modb del">supprimé</span>' : '<span class="modb pend">à valider</span>'; }
+function modButtons(key){
+  const st = modOf(key);
+  return `<span class="modbtns">${st !== 'valide' ? `<button class="ib okb" title="Valider" data-a="modset" data-k="${esc(key)}" data-v="valide">✓</button>` : ''}${st !== 'supprime' ? `<button class="ib red" title="Supprimer du catalogue" data-a="modset" data-k="${esc(key)}" data-v="supprime">🗑</button>` : ''}${st ? `<button class="ib" title="Remettre « à valider »" data-a="modset" data-k="${esc(key)}" data-v="">↺</button>` : ''}</span>`;
+}
+function setMods(pairs){
+  state.moder = state.moder || {};
+  pairs.forEach(([k, v]) => { if (v) state.moder[k] = v; else delete state.moder[k]; });
+  const del = pairs.filter(p => !p[1]).map(p => p[0]), up = pairs.filter(p => p[1]).map(([cle, statut]) => ({cle, statut, par:me.id, updated_at:new Date().toISOString()}));
+  Promise.all([up.length ? sb.from('catalogue_moderation').upsert(up) : Promise.resolve({}), del.length ? sb.from('catalogue_moderation').delete().in('cle', del) : Promise.resolve({})])
+    .then(rs => { const e = rs.find(r => r && r.error); if (e) toast('Échec : ' + e.error.message); });
+}
 function filterTpls(f){
   const q = noAcc(f.q || '');
   return state.library.sessions.filter(t => {
     if (!has('library') && t.builtin && !FREE_TPL.has(t.id)) return false;
+    if (t.builtin && !isDevUser() && !catalogVisible(tplKey(t))) return false;
+    if (t.builtin && isDevUser() && f === ui.lf && ui.modf && ui.modf !== 'all' && (modOf(tplKey(t)) || 'pend') !== ui.modf) return false;
+    if (t.builtin && isDevUser() && f !== ui.lf && modOf(tplKey(t)) === 'supprime') return false;
     if (f.sport === 'mixte'){ if (!t.parts) return false; }
     else if (f.sport && f.sport !== 'all' && (t.parts || t.sport !== f.sport)) return false;
     if (f.int && f.int !== 'all' && tplInt(t) !== f.int) return false;
@@ -1282,7 +1478,7 @@ function filtersHTML(f, prefix, count){
     <span class="cnt">${count} séance${count > 1 ? 's' : ''}</span>
   </div>`;
 }
-const tplTags = t => `<span class="tag" style="background:${(INT_BY[tplInt(t)] || {}).c || '#eee'};${tplInt(t) >= 'I6' ? 'color:#fff' : ''}">${tplInt(t)}</span><span class="tag">${CAT_LABEL[tplCat(t)] || ''}</span>${tplLvl(t) !== 'all' ? `<span class="tag">${LVL_LABEL[tplLvl(t)]}</span>` : ''}${t.builtin ? '' : '<span class="tag">perso</span>'}`;
+const tplTags = t => (t.terrain ? `<span class="tag ter">${t.terrain.lieu === 'ht' ? '🏠 home trainer' : '🌄 extérieur'}</span>` : '') + `<span class="tag" style="background:${(INT_BY[tplInt(t)] || {}).c || '#eee'};${tplInt(t) >= 'I6' ? 'color:#fff' : ''}">${tplInt(t)}</span><span class="tag">${CAT_LABEL[tplCat(t)] || ''}</span>${tplLvl(t) !== 'all' ? `<span class="tag">${LVL_LABEL[tplLvl(t)]}</span>` : ''}${t.builtin ? '' : '<span class="tag">perso</span>'}`;
 
 function defaultLibrary(){
   const T = (id, sport, title, desc, blocks) => ({id, sport, title, desc, blocks});
@@ -1321,10 +1517,10 @@ const SITE_URL = (CFG.siteUrl || (location.origin + location.pathname)).replace(
 let snap = {sessions:new Map(), users:new Map(), libS:new Map(), libP:new Map()};
 const J = o => JSON.stringify(o);
 
-const userFrom = r => ({id:r.id, name:r.name || 'Sans nom', role:r.role, approved:r.approved, strava:!!r.strava_id, hr:{z1:r.hr_z1, z2:r.hr_z2}, params:r.params || {}, lastSync:r.last_sync, license:r.license || 'basique', licenseUntil:r.license_until || null, trialUntil:r.trial_until || null, developer:r.role === 'developpeur', login:r.login || ''});
+const userFrom = r => ({id:r.id, name:r.name || 'Sans nom', role:r.role, approved:r.approved, strava:!!r.strava_id, hr:{z1:r.hr_z1, z2:r.hr_z2}, params:r.params || {}, lastSync:r.last_sync, license:r.license || 'basique', licenseUntil:r.license_until || null, trialUntil:r.trial_until || null, developer:r.role === 'developpeur', login:r.login || '', consentAt:r.consent_at || null, consentVersion:r.consent_version || null, pwTemp:!!r.pw_temp});
 const userTo = u => ({id:u.id, name:u.name, approved:u.approved, hr_z1:u.hr.z1, hr_z2:u.hr.z2, params:u.params || {}, license:u.license || 'basique', license_until:u.licenseUntil || null, trial_until:u.trialUntil || null});
-const sessFrom = r => ({id:r.id, athleteId:r.athlete_id, date:r.date, sport:r.sport, title:r.title, blocks:r.blocks || [], bilan:(r.bilan && r.bilan.zones) ? r.bilan : emptyBilan(), stravaId:r.strava_activity_id, optional:!!(r.opts && r.opts.optional), chain:!!(r.opts && r.opts.chain), ord:(r.opts && r.opts.ord != null) ? r.opts.ord : undefined});
-const sessTo = s => ({id:s.id, athlete_id:s.athleteId, date:s.date, sport:s.sport, title:s.title, blocks:s.blocks, bilan:s.bilan, opts:{optional:!!s.optional, chain:!!s.chain, ord:s.ord ?? null}});
+const sessFrom = r => ({id:r.id, athleteId:r.athlete_id, date:r.date, sport:r.sport, title:r.title, blocks:r.blocks || [], bilan:(r.bilan && r.bilan.zones) ? r.bilan : emptyBilan(), stravaId:r.strava_activity_id, optional:!!(r.opts && r.opts.optional), chain:!!(r.opts && r.opts.chain), note:(r.opts && r.opts.note) || '', terrain:(r.opts && r.opts.terrain) || null, ord:(r.opts && r.opts.ord != null) ? r.opts.ord : undefined});
+const sessTo = s => ({id:s.id, athlete_id:s.athleteId, date:s.date, sport:s.sport, title:s.title, blocks:s.blocks, bilan:s.bilan, opts:{optional:!!s.optional, chain:!!s.chain, ord:s.ord ?? null, note:s.note || '', terrain:s.terrain || null}});
 const libSFrom = r => ({ownerId:r.owner_id, id:r.id, sport:r.sport, title:r.title, desc:r.descr, blocks:r.blocks, custom:r.custom, cat:r.cat || undefined, lvl:r.lvl || undefined});
 const libSTo = t => ({id:t.id, sport:t.sport, title:t.title, descr:t.desc || '', blocks:t.blocks, custom:!!t.custom, cat:t.cat || null, lvl:t.lvl || null});
 const libPFrom = r => ({ownerId:r.owner_id, id:r.id, title:r.title, desc:r.descr, weeks:r.weeks});
@@ -1344,6 +1540,8 @@ async function loadAll(){
     sb.from('library_plans').select('*').order('id')]);
   const err = p.error || s.error || ls.error || lp.error; if (err) throw err;
   state = {users:p.data.map(userFrom), sessions:s.data.map(sessFrom), library:{sessions:ls.data.map(libSFrom), plans:lp.data.map(libPFrom)}};
+  try { const md = await sb.from('catalogue_moderation').select('cle,statut'); state.moder = md.error ? {} : Object.fromEntries((md.data || []).map(r => [r.cle, r.statut])); } catch(e){ state.moder = {}; }
+  try { const rl = await sb.from('regles_metier').select('*'); state.rules = rl.error ? null : rl.data; } catch(e){ state.rules = null; }
   try { const tp = await sb.from('tips').select('*').order('id'); state.tips = tp.error ? null : tp.data; } catch(e){ state.tips = null; }
   try { const inf = await sb.from('infos').select('*').eq('id', 'main').maybeSingle(); state.info = inf.error ? null : inf.data; } catch(e){ state.info = null; }
   try { const mg = await sb.from('messages').select('*'); state.messages = mg.error ? [] : (mg.data || []).map(msgFrom); } catch(e){ state.messages = []; }
@@ -1476,11 +1674,60 @@ function ensurePrefill(s){
   if (b.validated === true) return false;
   if (!(bilanEmpty(b) || (b.prefilled && !b.edited))) return false;
   if (b.validated === undefined && !b.prefilled && !bilanEmpty(b)) return false;
-  const nz = plannedBilanZones(s);
-  if (JSON.stringify(nz) === JSON.stringify(b.zones) && b.prefilled) return false;
+  const ni = plannedBilanInts(s);
+  if (JSON.stringify(ni) === JSON.stringify(b.ints) && b.prefilled) return false;
   if (!s.blocks.length) return false;
-  b.zones = nz; b.prefilled = true; b.edited = false; b.validated = false;
+  b.ints = ni; b.zones = zonesFromInts(ni); b.prefilled = true; b.edited = false; b.validated = false;
   return true;
+}
+
+/* ----- Bilan par intensité (I1 à I7) : durée, allure moyenne (ou PN à vélo), FC moyenne -----
+   Les zones Z1/Z2/Z3 restent calculées en arrière-plan (statistiques, totaux). */
+const midPct = pr => !pr ? 0 : !pr[0] ? pr[1] * 0.92 : pr[1] == null ? pr[0] * 1.05 : (pr[0] + pr[1]) / 2;
+function intTarget(s, k){
+  const it = INT_BY[k], u = ctxUser(s), ref = refOf(u, s.sport), f = fcSeuil(u, s.sport), out = {pace:'', fc:''};
+  if (s.sport !== 'strength' && ref && it[s.sport]){ const p = midPct(it[s.sport]);
+    out.pace = s.sport === 'bike' ? String(Math.round(ref * p / 100)) : s.sport === 'run' ? mmss(3600 / (ref * p / 100)) : mmss(ref / (p / 100)); }
+  if (f && it.hr){ const h = midPct(it.hr); out.fc = String(Math.round(Math.min(f.v * h / 100, f.max || 999))); }
+  return out;
+}
+function intRangeTxt(s, k){
+  const it = INT_BY[k], u = ctxUser(s), ref = refOf(u, s.sport), f = fcSeuil(u, s.sport), parts = [];
+  if (s.sport !== 'strength' && it[s.sport]){ parts.push(pctTxt(it[s.sport]).replace(/\s*%$/, ' %') + ' ' + (PCT_LAB[s.sport] || '').replace(/^%\s*/, ''));
+    const r = rangeTxt(s.sport, ref, it[s.sport]); if (r) parts.push(r); }
+  const h = hrTxt(f, it.hr); if (h) parts.push('FC ' + h);
+  return parts.join(' · ');
+}
+const emptyInts = () => Object.fromEntries(INTS.map(it => [it.k, {time:'', pace:'', fc:''}]));
+// Anciennes données (Z1/Z2/Z3 ou import de fichier) : affichées sur I2 / I4 / I5
+function intsView(b){
+  if (b.ints) return b.ints;
+  const o = emptyInts(), map = {Z1:'I2', Z2:'I4', Z3:'I5'};
+  ZONES.forEach(z => { const v = b.zones && b.zones[z]; if (v && (v.time || v.fc || v.pw)) o[map[z]] = {time:v.time || '', pace:String(v.pw || '').replace(/\s*(W|\/km|\/100 m)$/, ''), fc:v.fc || ''}; });
+  return o;
+}
+function zonesFromInts(ints){
+  const z = {}; ZONES.forEach(k => z[k] = {time:'', fc:'', pw:''});
+  ZONES.forEach(k => {
+    const ks = INTS.filter(it => it.z === k).map(it => it.k), secs = ks.map(i => parseHM(ints[i].time)), tot = secs.reduce((a, x) => a + x, 0);
+    if (!tot) return;
+    let w = 0, wf = 0; ks.forEach((i, j) => { const fc = numv(ints[i].fc); if (fc > 0){ w += fc * secs[j]; wf += secs[j]; } });
+    const dom = ks[secs.indexOf(Math.max(...secs))];
+    z[k] = {time:hmStr(tot), fc:wf ? String(Math.round(w / wf)) : '', pw:ints[dom].pace || ''};
+  });
+  return z;
+}
+function plannedBilanInts(s){
+  const t = intTimes(s), o = emptyInts();
+  INTS.forEach(it => { if (!(t[it.k] > 0)) return; const tg = intTarget(s, it.k); o[it.k] = {time:hmStr(t[it.k]), pace:tg.pace, fc:tg.fc}; });
+  return o;
+}
+// Allures moyennes des statistiques : saisies d'avant (bilan.as) + course à pied par intensité
+const AS_FROM_INT = {I6:'VMA', I5:'AS10', I4:'AS21', I3:'AS42'};
+function asRows(s){
+  const r = Array.isArray(s.bilan.as) ? s.bilan.as.slice() : [];
+  if (s.sport === 'run' && s.bilan.ints && isDone(s)) Object.entries(AS_FROM_INT).forEach(([k, t]) => { const v = s.bilan.ints[k]; if (v && v.pace && parseHM(v.time)) r.push({t, dur:mmss(parseHM(v.time)), pace:v.pace}); });
+  return r;
 }
 function setValidated(s, v){
   if (v) ensurePrefill(s);
@@ -1518,6 +1765,9 @@ function render(){
   if (!me){ $app.innerHTML = loginView(); return; }
   if (!state){ $app.innerHTML = '<div class="loading">Chargement…</div>'; return; }
   if (me.role !== 'developpeur' && !me.approved){ $app.innerHTML = pendingView(); return; }
+  if (me.pwTemp){ $app.innerHTML = pwTempView(); return; }
+  if (needsConsent()){ $app.innerHTML = consentView(); return; }
+  armIdle();
   let body = '';
   if (me.role === 'developpeur' && ui.view === 'home') body = coachHome();
   else if (me.role === 'developpeur' && ui.view === 'accounts') body = accountsView();
@@ -1545,13 +1795,14 @@ function loginView(){
   const f = m === 'signup' ? `
       <div class="field"><label for="su-name">Prénom et nom</label><input id="su-name" required></div>
       <div class="field"><label for="lg">E-mail</label><input id="lg" type="email" autocomplete="email" required></div>
-      <div class="field"><label for="pw">Mot de passe (8 caractères minimum)</label><input id="pw" type="password" minlength="8" autocomplete="new-password" required></div>
+      <div class="field"><label for="pw">Mot de passe (10 caractères minimum, lettres et chiffres)</label><input id="pw" type="password" minlength="10" autocomplete="new-password" required></div>
+      <label class="chk2"><input type="checkbox" id="su-cgu" required> J'accepte la <a href="#" data-a="privacy">politique de confidentialité</a> et le traitement de mes données, y compris de santé (fréquence cardiaque, ressenti), pour le suivi de mon entraînement.</label>
       <button class="btn primary" style="width:100%;padding:10px">Créer mon compte</button>`
     : m === 'reset' ? `
       <div class="field"><label for="lg">E-mail du compte</label><input id="lg" type="email" required></div>
       <button class="btn primary" style="width:100%;padding:10px">Recevoir un lien de réinitialisation</button>`
     : m === 'newpw' ? `
-      <div class="field"><label for="pw">Nouveau mot de passe</label><input id="pw" type="password" minlength="8" autocomplete="new-password" required></div>
+      <div class="field"><label for="pw">Nouveau mot de passe</label><input id="pw" type="password" minlength="10" autocomplete="new-password" required></div>
       <button class="btn primary" style="width:100%;padding:10px">Enregistrer le mot de passe</button>`
     : `
       <div class="field"><label for="lg">E-mail ou identifiant</label><input id="lg" type="text" autocomplete="username" autocapitalize="none" required></div>
@@ -1567,7 +1818,7 @@ function loginView(){
     ${f}
     <div class="err" id="err" style="margin-top:8px">${esc(ui.authErr || '')}</div>
     <div class="msg" id="msg">${esc(ui.authMsg || '')}</div>
-    <div class="pwrd">Compatible avec Strava</div>
+    <div class="pwrd"><a href="#" data-a="privacy">Confidentialité et données personnelles</a></div>
     ${isStandalone() ? '' : '<a href="#" class="instlink" data-a="installinfo">📲 Installer l\'application sur votre smartphone</a>'}
   </form></div>`;
 }
@@ -1999,7 +2250,7 @@ function tipsView(){
 function refreshTipList(){ const l = document.getElementById('tiplist'); if (l) l.innerHTML = tipCardsHTML();
   document.querySelectorAll('.tchip').forEach(b => b.classList.toggle('on', b.dataset.id === (ui.tipDisc || ''))); }
 document.addEventListener('input', e => { if (e.target.id === 'tip-q'){ ui.tipQ = e.target.value; refreshTipList(); } });
-document.addEventListener('change', e => { if (e.target.id === 'tip-disc'){ ui.tipDisc = e.target.value; refreshTipList(); } });
+document.addEventListener('change', e => { if (e.target.id === 'modf'){ ui.modf = e.target.value; render(); return; } if (e.target.id === 'tip-disc'){ ui.tipDisc = e.target.value; refreshTipList(); } });
 // Comptes (administrateur) : publier une info à l'honneur
 function infoAdminHTML(){
   const i = (state && state.info) || {};
@@ -2029,7 +2280,7 @@ function athleteView(){
     body = subNav('bsub', [['seances','Séances types'],['plans','Plans'],['exercices','Exercices'],['astuces','Astuces']]) +
       (ui.bsub === 'astuces' ? tipsView() : ui.bsub === 'plans' ? (has('plans') ? libPlansView(aid) : lockBox('plans')) : ui.bsub === 'exercices' ? (has('exercises') ? exercisesView() : lockBox('exercises')) : (has('library') ? '' : lockBox('library', true)) + libSessionsView(aid));
   } else if (ui.tab === 'param'){
-    body = subNav('psub', [['profil','Profil & zones'],['strava','Strava'],['abo','Abonnement'],['partage','Partage'],['compte','Mon compte']]) + (ui.psub === 'partage' ? (aid === me.id ? shareView() : '<div class="pane dense"><p class="ztxt" style="margin:0">Le partage se règle depuis le compte de la personne.</p></div>') : (ui.psub === 'compte' ? (aid === me.id ? pwFormHTML() + installHTML() : '<div class="pane dense"><p class="ztxt" style="margin:0">Le mot de passe se change depuis le compte de la personne.</p></div>') : ui.psub === 'strava' ? (has('stravaAuto') ? stravaView(aid) : lockBox('stravaAuto')) : ui.psub === 'abo' ? aboView(aid) : profileView(aid)));
+    body = subNav('psub', [['profil','Profil & zones'],['strava','Strava'],['abo','Abonnement'],['partage','Partage'],['compte','Mon compte']]) + (ui.psub === 'partage' ? (aid === me.id ? shareView() : '<div class="pane dense"><p class="ztxt" style="margin:0">Le partage se règle depuis le compte de la personne.</p></div>') : (ui.psub === 'compte' ? (aid === me.id ? pwFormHTML() + myDataHTML() + installHTML() : '<div class="pane dense"><p class="ztxt" style="margin:0">Le mot de passe se change depuis le compte de la personne.</p></div>') : ui.psub === 'strava' ? (has('stravaAuto') ? stravaView(aid) : lockBox('stravaAuto')) : ui.psub === 'abo' ? aboView(aid) : profileView(aid)));
   } else body = weekPage(aid);
   return `${head}
     ${body}
@@ -2096,7 +2347,7 @@ function monthBilanView(aid){
           <span class="n">${fmtC(tot)}</span><span class="o">${w.r.off} j</span></div>`; }).join('')}
       </div>
     </div>
-    ${asStatsHTML(aid, start, end)}`;
+    ${predictionsHTML(aid)}`;
 }
 
 /* ---------- Séance obligatoire / facultative, enchaînements ---------- */
@@ -2113,6 +2364,27 @@ function seancesTxt(list){
   const ob = list.filter(s => !s.optional), fac = list.filter(s => s.optional);
   const fd = fac.filter(isDone).length;
   return `${ob.filter(isDone).length}/${ob.length}${fac.length ? ` <small class="facn">+${fd}/${fac.length} fac.</small>` : ''}`;
+}
+
+/* ----- Vélo : lieu et parcours (home trainer ou extérieur) ----- */
+const TER_TYPES = [['plat','Plat'],['ligne','Ligne droite'],['circuit','Circuit'],['bosse','Bosse / côte'],['vent','Face au vent'],['vallonne','Vallonné']];
+function terrainTxt(tr){
+  if (!tr || !tr.lieu) return '';
+  if (tr.lieu === 'ht') return '🏠 Home trainer' + (tr.note ? ' · ' + tr.note : '');
+  const ty = (TER_TYPES.find(x => x[0] === tr.type) || [, ''])[1];
+  return ['🌄 Extérieur', ty, tr.pente ? tr.pente + ' %' : '', tr.dist ? tr.dist : '', tr.note || ''].filter(Boolean).join(' · ');
+}
+function terrainHTML(s, ro){
+  if (s.sport !== 'bike') return '';
+  const tr = s.terrain || {}, ext = tr.lieu === 'ext';
+  return `<div class="terrain"><span class="pnl">🚴 Lieu et parcours</span>
+    <div class="seg"><button class="${!tr.lieu ? 'on' : ''}" data-a="terlieu" data-v="" ${ro}>Non précisé</button><button class="${tr.lieu === 'ht' ? 'on' : ''}" data-a="terlieu" data-v="ht" ${ro}>🏠 Home trainer</button><button class="${ext ? 'on' : ''}" data-a="terlieu" data-v="ext" ${ro}>🌄 Extérieur</button></div>
+    ${ext ? `<div class="terx"><select data-f="ter" data-k="type" ${ro}>${TER_TYPES.map(([k, l]) => `<option value="${k}" ${tr.type === k ? 'selected' : ''}>${l}</option>`).join('')}</select>
+      ${['bosse','vallonne'].includes(tr.type) ? `<label>pente <input data-f="ter" data-k="pente" inputmode="decimal" value="${esc(tr.pente || '')}" placeholder="6" ${ro}> %</label>` : ''}
+      <label>distance <input data-f="ter" data-k="dist" value="${esc(tr.dist || '')}" placeholder="1 km" ${ro}></label>
+      <input data-f="ter" data-k="note" class="ternote" value="${esc(tr.note || '')}" placeholder="précisions : nom de la côte, sens du vent, sécurité…" ${ro}></div>` : ''}
+    ${tr.lieu === 'ht' ? `<div class="terx"><input data-f="ter" data-k="note" class="ternote" value="${esc(tr.note || '')}" placeholder="précisions : application, ventilateur, résistance…" ${ro}></div>` : ''}
+  </div>`;
 }
 function sessOptsHTML(s, ro){
   const nx = nextInDay(s), pv = prevInDay(s), sib = dayList(s.athleteId, s.date).length > 1;
@@ -2141,10 +2413,13 @@ function weekSide(aid){
     <table class="wcmp"><thead><tr><th></th><th class="wr">Réalisé</th><th class="wp">Prévu</th></tr></thead><tbody>
       ${row('Total', fmtC(R), fmtC(P), 'wtot')}
       ${sports.map(sp => row(`${icon(sp, 12)} ${SPORTS[sp].label}`, fmtC(spT(real.t, sp)), fmtC(spT(plan.t, sp)), 'wsp', `color:${SPORTS[sp].color}`)).join('')}
+      ${row('<abbr title="Training Stress Score : charge d\'entraînement">TSS</abbr>', weekTSS(aid, ui.week, 'realise'), weekTSS(aid, ui.week, 'prevu'), 'wtss')}
       ${row('Séances', ob.filter(isDone).length, ob.length, 'wsep')}
       ${fac.length ? row('Facultatives', fac.filter(isDone).length, fac.length) : ''}
       ${row('Jours off', real.off, '', '')}
     </tbody></table>
+    ${(() => { const day = ui.week <= todayStr() && todayStr() <= addDays(ui.week, 6) ? todayStr() : addDays(ui.week, 6), p = pmcNow(aid, day), lb = tsbLabel(p.tsb);
+      return p.ctl || p.atl ? `<div class="wtsb" title="Forme ${p.ctl} · fatigue ${p.atl}"><span>Fraîcheur (TSB)</span><b style="color:${lb[1]}">${p.tsb > 0 ? '+' : ''}${p.tsb}</b><small>${lb[0]}</small></div>` : ''; })()}
     ${P ? `<div class="wbar" title="${pct} % du volume prévu"><i style="width:${Math.min(pct, 100)}%"></i></div><div class="wpct">${pct} % du prévu réalisé</div>` : ''}`;
 }
 function weekMini(aid){
@@ -2177,6 +2452,7 @@ function weekPage(aid){
   return `${infoBarHTML()}<section class="zone zweek"><div class="zhead"><span class="ztitle">Semaine</span></div><div class="zbody">
       ${weekNav()}
       <div class="agrow"><div class="ag">${cols}</div><aside class="wside" id="wkbilan">${weekSide(aid)}</aside></div>
+      <div id="wkcheck">${weekCheckHTML(aid, ui.week)}</div>
       <div class="hint">Glissez une séance sur un autre jour pour la déplacer (Ctrl ou Alt enfoncé pour la copier).</div>
     </div></section>
     <section class="zone zsess"><div class="zhead"><span class="ztitle">Séance</span></div><div class="zbody">
@@ -2224,7 +2500,7 @@ function summaryHTML(s){
   const t = intTimes(s), tot = Object.values(t).reduce((a, x) => a + x, 0);
   return `Prévu <b>${fmtC(tot)}</b><span class="ichips">${INTS.filter(it => t[it.k] > 0).map(it => `<span style="background:${it.c};${it.k >= 'I6' ? 'color:#fff' : ''}" title="${it.n}">${it.k} ${fmtC(t[it.k])}</span>`).join('')}</span>`;
 }
-function bilanTotals(s){ return `<td>Total</td><td colspan="2">${fmtC(sum(realZones(s)))}</td>`; }
+function bilanTotals(s){ return `<td>Total</td><td colspan="3"><b>${fmtC(sum(realZones(s)))}</b>${sum(plannedZones(s)) ? ` <span class="ztxt">· prévu ${fmtC(sum(plannedZones(s)))}</span>` : ''} <span class="tssb">TSS ${isDone(s) ? sessTSS(s, 'realise') : '–'}${sessTSS(s, 'prevu') ? ` <span class="ztxt">(prévu ${sessTSS(s, 'prevu')})</span>` : ''}</span></td>`; }
 
 /* ---------- Séance en mode lecture ---------- */
 // Adhérent : lecture par défaut, crayon pour modifier. Coach : édition par défaut, œil pour la lecture.
@@ -2255,14 +2531,17 @@ function readPlanHTML(s){
     return `<div class="rb"><span class="rbt">${esc(b.title || 'Bloc ' + (bi+1))}</span>
       <span class="rbs">${n > 1 ? `<b class="rx">${n} ×</b> ( ${steps.join('<span class="rplus">+</span>')} )` : steps.join('<br>')}</span>
       <span class="rdu">${fmtC(blockDur(b, s))}</span></div>`; }).join('');
-  return `<div class="pane rview" style="border-top:3px solid ${sp.color}">
+  return `<div class="pane rview planpane" style="--spc:${sp.color};--spb:${sp.bg}">
+    <h4 class="pph">📋 Séance prévue</h4>
     <div class="rhead"><span style="color:${sp.color}">${icon(s.sport, 22)}</span>
       <div class="rtt"><b>${esc(s.title || sp.label)}</b><span class="ztxt">${longDate(s.date)} · ${s.optional ? '<span class="fac">☆</span> facultative' : '<span class="obl">★</span> obligatoire'}${s.chain && nx ? ' · ⛓ enchaînée avec ' + esc(nx.title || SPORTS[nx.sport].label) : ''}${pv && pv.chain ? ' · ⛓ après ' + esc(pv.title || SPORTS[pv.sport].label) : ''}</span></div>
       <span class="rtot">${fmtC(sum(plannedZones(s)))}</span>
       <button class="ib" title="Exporter vers montre GPS (.fit)" data-a="exportfit">⌚</button>
       ${canEdit(s) ? '<button class="btn sm" data-a="editmode" title="Passer en mode édition">✏️ Modifier</button>' : ''}</div>
     <div class="sgraph">${sessionGraph(s, 34, true)}</div>
-    ${rows || '<div class="empty">Aucun contenu prévu.</div>'}
+    ${s.sport === 'bike' && s.terrain && s.terrain.lieu ? `<div class="terro">${esc(terrainTxt(s.terrain))}</div>` : ''}
+    ${s.note ? `<div class="pnote ro"><div class="pnl">💬 Commentaire / consignes</div><div class="pnt">${esc(s.note).replace(/\n/g, '<br>')}</div></div>` : ''}${rows || '<div class="empty">Aucun contenu prévu.</div>'}
+    ${doneBtnHTML(s)}
   </div>`;
 }
 /* ---------- Bilan : séance à allure spécifique (VMA, AS10, AS21, AS42) ---------- */
@@ -2332,7 +2611,8 @@ function detailHTML(s){
     </div>`).join('');
   const bl = s.bilan, rd = isReadMode(s);
   return `<div class="detail dense">
-    ${rd ? readPlanHTML(s) : `<div class="pane" style="border-top:3px solid ${sp.color}">
+    ${rd ? readPlanHTML(s) : `<div class="pane planpane" style="--spc:${sp.color};--spb:${sp.bg}">
+      <h4 class="pph">📋 Séance prévue</h4>
       <div class="shrow">
         <span style="color:${sp.color}">${icon(s.sport, 20)}</span><select data-f="sport" style="color:${sp.color}" ${ro}>${SPORT_KEYS.map(k=>`<option value="${k}" ${k===s.sport?'selected':''}>${SPORTS[k].label}</option>`).join('')}</select>
         <input class="ti" placeholder="Titre de la séance" data-f="title" value="${esc(s.title)}" ${ro}>
@@ -2340,24 +2620,28 @@ function detailHTML(s){
         ${ro ? '' : `<button class="ib" title="Déplacer au jour précédent" data-a="mvday" data-v="-1">◀</button><button class="ib" title="Déplacer au jour suivant" data-a="mvday" data-v="1">▶</button><button class="ib" title="Charger une séance type" data-a="loadtpl">📂</button><button class="ib" title="Dupliquer au lendemain" data-a="dupsess">⧉</button><button class="ib" title="Mode lecture" data-a="editmode">👁</button><button class="ib" title="Exporter vers montre GPS (.fit)" data-a="exportfit">⌚</button><button class="ib" title="Enregistrer comme séance type" data-a="savetpl">★</button><button class="ib red" title="Supprimer la séance" data-a="delsess">🗑</button>`}
       </div>
       ${sessOptsHTML(s, ro)}
+      ${terrainHTML(s, ro)}
+      <div class="pnote"><div class="pnl">💬 Commentaire / consignes</div><textarea rows="2" data-f="note" placeholder="Objectif de la séance, consignes, points d'attention…" ${ro}>${esc(s.note || '')}</textarea></div>
       <div class="sline" id="summary">${summaryHTML(s)}</div>
       <div class="sgraph" id="sgraph">${sessionGraph(s, 46, true)}</div>
       ${isSimple(s) ? simpleEditorHTML(s, ro) : `${blocks || '<div class="empty">Aucun bloc.</div>'}
       ${ro ? '' : `<button class="lk" data-a="badd">+ bloc</button>`}`}
       <datalist id="blk-titles">${['Échauffement','Éducatifs','Gammes','Corps de séance','Fractionné','Série','Récupération','Retour au calme'].map(t=>`<option value="${t}">`).join('')}</datalist>
       <span class="ztxt" style="font-size:.68rem;float:right;margin-top:3px">45 = 45 min · 3:30 = 3 min 30 s · 1:30:00 = 1 h 30</span>
+      ${doneBtnHTML(s)}
     </div>`}
-    <div class="pane bilanpane ${isDone(s) ? 'ok' : ''}">
+    ${!isDone(s) ? bilanWaitHTML(s, ro) : `<div class="pane bilanpane ok">
       <h4>📝 Bilan de la séance ${isDone(s) ? '<span class="done">✓ validée</span>' : ''}</h4>
       ${!isDone(s) && bl.prefilled && !bl.edited ? '<div class="pre">Prérempli avec le prévu : modifiez si besoin, puis validez.</div>' : ''}
-      <table class="bz">
-        <thead><tr><th></th><th>Temps</th><th>FC</th></tr></thead>
-        <tbody>${ZONES.map(z=>`<tr><td><span class="zchip z${z}">${z}</span></td>
-          <td><input placeholder="h:mm" data-f="bz" data-z="${z}" data-k="time" value="${esc(bl.zones[z].time)}" ${ro}></td>
-          <td><input placeholder="bpm" data-f="bz" data-z="${z}" data-k="fc" value="${esc(bl.zones[z].fc)}" ${ro}></td></tr>`).join('')}</tbody>
-        <tfoot><tr id="bztot">${bilanTotals(s)}</tr></tfoot>
-      </table>
-      ${asHTML(s, ro)}
+      ${(() => { const v = intsView(bl), pt = intTimes(s), pl = s.sport === 'bike' ? 'PN' : 'Allure moy.', pu = s.sport === 'bike' ? 'W' : s.sport === 'run' ? '/km' : '/100 m';
+        return `<table class="bi7"><thead><tr><th>Intensité · plage</th><th>Durée</th>${s.sport === 'strength' ? '' : `<th>${pl} <small>${pu}</small></th>`}<th>FC moy.</th></tr></thead>
+        <tbody>${INTS.map(it => { const x = v[it.k], on = parseHM(x.time) > 0 || pt[it.k] > 0;
+          return `<tr class="${on ? 'on' : ''}"><td><span class="ilab" style="background:${it.c};${it.k >= 'I6' ? 'color:#fff' : ''}">${it.k} · ${INT_SHORT[it.k]}</span>
+            <div class="bipl">${esc(intRangeTxt(s, it.k)) || '<span class="ztxt">plages : renseignez votre profil</span>'}${pt[it.k] > 0 ? ` <b class="bipv">prévu ${fmtC(pt[it.k])}</b>` : ''}</div></td>
+          <td><input placeholder="h:mm" data-f="bi" data-i="${it.k}" data-k="time" value="${esc(x.time)}" ${ro}></td>
+          ${s.sport === 'strength' ? '' : `<td><input placeholder="${s.sport === 'bike' ? 'watts' : 'm:ss'}" data-f="bi" data-i="${it.k}" data-k="pace" value="${esc(x.pace)}" ${ro}></td>`}
+          <td><input placeholder="bpm" data-f="bi" data-i="${it.k}" data-k="fc" value="${esc(x.fc)}" ${ro}></td></tr>`; }).join('')}</tbody>
+        <tfoot><tr id="bztot">${bilanTotals(s)}</tr></tfoot></table>`; })()}
       ${ro ? '' : `<button class="lk" data-a="prefill">Recharger les données prévues</button>
         <label class="lk" style="cursor:pointer;display:inline-block" title="Remplit ce bilan à partir d'un fichier de montre ou de Strava">📂 Importer un fichier GPX / TCX<input type="file" id="bilanfile" accept=".gpx,.tcx" style="display:none"></label>`}
       <div class="lab">RPE</div>
@@ -2369,21 +2653,323 @@ function detailHTML(s){
       ${ro ? '' : isDone(s)
         ? `<div class="vok"><span>✓ Séance réalisée${bl.validatedAt ? ' · validée le ' + new Date(bl.validatedAt).toLocaleDateString('fr-FR') : ''}</span><button data-a="validate" data-id="${s.id}">Annuler</button></div>`
         : `<button class="vbtn" data-a="validate" data-id="${s.id}">✓ Valider la séance réalisée</button>`}
-    </div>
+    </div>`}
   </div>`;
+}
+// Bouton « Séance faite » sous la séance prévue : ouvre le bilan (même effet que la case de l'agenda)
+function doneBtnHTML(s){
+  if (!canEdit(s)) return '';
+  return isDone(s)
+    ? `<div class="donebar on"><span>✓ Séance faite</span><button class="lk" data-a="validate" data-id="${s.id}">annuler</button></div>`
+    : `<button class="donebtn" data-a="validate" data-id="${s.id}">✓ Séance faite</button>`;
+}
+// Tant que la séance n'est pas cochée comme réalisée : pas de bilan, seulement l'invitation à la cocher (et les messages)
+function bilanWaitHTML(s, ro){
+  return `<div class="pane bilanwait">
+    <h4>📝 Bilan de la séance</h4>
+    <p>Le bilan s'ouvre quand vous cliquez sur <b>« ✓ Séance faite »</b> sous la séance prévue (ou en cochant la séance dans l'agenda).</p>
+    ${ro ? '' : `<label class="lk" style="cursor:pointer;display:inline-block;margin-top:2px">📂 ou importer le fichier de la montre (GPX / TCX)<input type="file" id="bimport" accept=".gpx,.tcx" style="display:none"></label>`}
+    ${s.bilan.msgs && s.bilan.msgs.length || (typeof msgsOf === 'function' && msgsOf(s).length) ? threadHTML(s) : ''}
+  </div>`;
+}
+
+
+
+/* ===================== RGPD et sécurité ===================== */
+const PRIVACY_VERSION = '2026-11';
+// Mot de passe : 10 caractères minimum, avec au moins une lettre et un chiffre
+function pwProblem(p){
+  if (!p || p.length < 10) return '10 caractères minimum';
+  if (!/[A-Za-zÀ-ÿ]/.test(p) || !/\d/.test(p)) return 'au moins une lettre et un chiffre';
+  return '';
+}
+function privacyHTML(){
+  const org = CFG.organisation || 'l\'association CC2S', mail = CFG.contactRgpd || 'cc2spourtous@gmail.com';
+  return `<div class="mhead"><h3>🔒 Confidentialité et données personnelles</h3><button class="mx" data-a="mclose" title="Fermer">✕</button></div>
+  <div class="privacy">
+    <p><b>Responsable du traitement</b> : ${esc(org)} · contact : <a href="mailto:${esc(mail)}">${esc(mail)}</a>.</p>
+    <p><b>Finalité</b> : suivi de l'entraînement sportif (agenda, séances, bilans, statistiques) et échanges avec le coach choisi par l'utilisateur.</p>
+    <p><b>Données traitées</b> : nom, e-mail ou identifiant, séances, bilans (durées, allures, puissance, <b>fréquence cardiaque</b>, ressenti, nutrition), commentaires et messages, abonnement. Si vous reliez Strava : vos activités importées.</p>
+    <p><b>Base légale</b> : votre consentement, recueilli à l'inscription. La fréquence cardiaque et le ressenti peuvent être des données de santé : ils ne sont traités qu'avec votre <b>consentement explicite</b>, que vous pouvez retirer en supprimant votre compte.</p>
+    <p><b>Qui y a accès</b> : vous ; la personne abonnée Coach avec qui <b>vous</b> choisissez de partager votre entraînement (partage retirable à tout moment) ; le responsable technique de l'application, uniquement pour l'administration. Aucune donnée n'est vendue ni utilisée à des fins publicitaires.</p>
+    <p><b>Hébergement et sous-traitants</b> : base de données Supabase (serveurs dans l'Union européenne) ; site hébergé par GitHub Pages ou Vercel ; bibliothèque technique chargée depuis jsDelivr ; Strava et Stripe seulement si vous utilisez ces services.</p>
+    <p><b>Durée de conservation</b> : tant que le compte est actif ; un compte inactif depuis ${rule('rgpd_conservation').annees || 3} ans est supprimé avec toutes ses données.</p>
+    <p><b>Cookies</b> : aucun cookie publicitaire ni de mesure d'audience. Le navigateur garde uniquement votre session de connexion, indispensable au service.</p>
+    <p><b>Vos droits</b> : accès, rectification, effacement, portabilité, limitation et opposition. Dans <b>Paramétrage › Mon compte</b>, vous pouvez télécharger toutes vos données et supprimer votre compte. Pour toute demande : ${esc(mail)}. Vous pouvez aussi saisir la CNIL (cnil.fr).</p>
+    <p class="ztxt">Version ${PRIVACY_VERSION}.</p>
+  </div><div class="mfoot"><button class="btn primary" data-a="mclose">Fermer</button></div>`;
+}
+const needsConsent = () => me && me.role !== 'developpeur' && me.consentVersion !== PRIVACY_VERSION;
+function consentView(){
+  return `<div class="login"><div class="card consentcard">
+    <h1>Avant de commencer</h1>
+    <p>Pour suivre votre entraînement, CC2S Kit Triathlon enregistre vos séances et vos bilans, dont la <b>fréquence cardiaque</b> et votre ressenti, qui peuvent être des données de santé.</p>
+    <label class="chk2"><input type="checkbox" id="cs1"> J'ai lu la <a href="#" data-a="privacy">politique de confidentialité</a> et j'accepte le traitement de mes données.</label>
+    <label class="chk2"><input type="checkbox" id="cs2"> Je consens explicitement au traitement de mes données de santé (fréquence cardiaque, ressenti) pour le suivi de mon entraînement.</label>
+    <div class="row" style="margin-top:14px"><button class="btn primary" data-a="consentok">Continuer</button><button class="btn" data-a="logout">Refuser et me déconnecter</button></div>
+  </div></div>`;
+}
+function pwTempView(){
+  return `<div class="login"><div class="card">
+    <h1>Choisissez votre mot de passe</h1>
+    <p>Votre compte a été créé avec un mot de passe provisoire. Choisissez maintenant votre mot de passe personnel (10 caractères minimum, avec au moins une lettre et un chiffre).</p>
+    <div class="field"><label>Nouveau mot de passe</label><input type="password" id="tp1" autocomplete="new-password"></div>
+    <div class="field"><label>Confirmer</label><input type="password" id="tp2" autocomplete="new-password"></div>
+    <div class="row" style="margin-top:10px"><button class="btn primary" data-a="pwtempok">Enregistrer</button><button class="btn" data-a="logout">Déconnexion</button></div>
+  </div></div>`;
+}
+function myDataHTML(){
+  return `<div class="pane dense mydata"><h4>🔒 Mes données personnelles</h4>
+    <p class="ztxt" style="margin:0 0 8px">Conformément au RGPD, vous pouvez télécharger toutes vos données ou supprimer votre compte. <a href="#" data-a="privacy">Politique de confidentialité</a></p>
+    <div class="row" style="gap:8px;flex-wrap:wrap"><button class="btn sm" data-a="exportdata">⬇ Télécharger mes données</button><button class="btn sm danger-ghost" data-a="deleteme">Supprimer mon compte</button></div></div>`;
+}
+function exportMyData(){
+  const mine = state.sessions.filter(s => s.athleteId === me.id);
+  const data = {exporte_le:new Date().toISOString(), application:'CC2S Kit Triathlon',
+    profil:{nom:me.name, identifiant:me.login || null, abonnement:me.license, parametres:me.params, consentement:me.consentAt || null},
+    seances:mine, partages:(state.shares || []).filter(x => x.ownerId === me.id || x.viewerId === me.id),
+    messages:(state.messages || []).filter(m => m.fromId === me.id || m.toId === me.id || mine.some(s => s.id === m.sessionId))};
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], {type:'application/json'}));
+  a.download = 'mes-donnees-cc2s-' + todayStr() + '.json'; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
+}
+// Déconnexion automatique après inactivité (règle métier « securite_inactivite »)
+let _idleT = null;
+function armIdle(){
+  clearTimeout(_idleT); if (!me) return;
+  const min = rule('securite_inactivite').minutes || 60;
+  _idleT = setTimeout(() => { if (me){ toast('Déconnexion automatique après ' + min + ' min d\'inactivité'); document.querySelector('[data-a="logout"]') ? document.querySelector('[data-a="logout"]').click() : location.reload(); } }, min * 60000);
+}
+['click','keydown','touchstart','scroll'].forEach(ev => document.addEventListener(ev, () => armIdle(), {passive:true}));
+
+/* ===================== Règles métier (modifiables par le développeur) =====================
+   Prédictions d'allure : une valeur saisie dans le bilan n'est retenue que si le temps de travail
+   à l'intensité correspondante, dans la séance, atteint le minimum indiqué. */
+const RULES_BUILTIN = [
+  {cle:'prediction_vma',      libelle:'Prédiction VMA',          valeur:{intensite:'I6', min_minutes:10, pct_vma:100}},
+  {cle:'prediction_10k',      libelle:'Prédiction 10 km',        valeur:{intensite:'I5', min_minutes:20, pct_vma:90, distance_km:10}},
+  {cle:'prediction_semi',     libelle:'Prédiction semi-marathon', valeur:{intensite:'I4', min_minutes:30, pct_vma:85, distance_km:21.0975}},
+  {cle:'prediction_marathon', libelle:'Prédiction marathon',     valeur:{intensite:'I3', min_minutes:45, pct_vma:80, distance_km:42.195}},
+  {cle:'prediction_periode',  libelle:'Période prise en compte', valeur:{jours:90}},
+  {cle:'securite_inactivite', libelle:'Déconnexion après inactivité', valeur:{minutes:60}},
+  {cle:'rgpd_conservation',   libelle:'Suppression des comptes inactifs', valeur:{annees:3}},
+  {cle:'catalogue_mode',      libelle:'Catalogue visible par les utilisateurs', valeur:{mode:'tous'}},
+  {cle:'controle_charge',        libelle:'Contrôle : hausse de la charge de la semaine', valeur:{pct_max:10}},
+  {cle:'controle_sortie_longue', libelle:'Contrôle : hausse de la sortie longue',       valeur:{pct_max:10}},
+  {cle:'controle_seances',       libelle:'Contrôle : hausse du nombre de séances par discipline', valeur:{max_plus:1}},
+  {cle:'controle_polarise',      libelle:'Contrôle : entraînement polarisé',              valeur:{min_pct_basse:75}},
+  {cle:'controle_repos',         libelle:'Contrôle : jours de repos',                     valeur:{min_jours:1}},
+  {cle:'controle_intensite',     libelle:'Contrôle : séances avec bloc d\'intensité',     valeur:{max_seances:3, intensite_min:'I4', min_minutes:5}},
+  {cle:'controle_reference',     libelle:'Contrôle : semaines de comparaison',            valeur:{semaines:3}},
+  {cle:'tss_if',                 libelle:'TSS : facteur d\'intensité par zone',           valeur:{I1:0.55, I2:0.70, I3:0.83, I4:0.95, I5:1.05, I6:1.15, I7:1.30}},
+  {cle:'tss_charge',             libelle:'Forme / fatigue / fraîcheur (CTL, ATL, TSB)',   valeur:{ctl_jours:42, atl_jours:7, tsb_frais:5, tsb_surcharge:-30}}
+];
+function rule(cle){
+  const db = state && Array.isArray(state.rules) ? state.rules.find(r => r.cle === cle) : null, b = RULES_BUILTIN.find(r => r.cle === cle);
+  return Object.assign({}, b ? b.valeur : {}, db && db.valeur ? db.valeur : {});
+}
+const PRED_TYPES = [['VMA','prediction_vma','VMA'], ['10k','prediction_10k','10 km'], ['semi','prediction_semi','Semi-marathon'], ['mara','prediction_marathon','Marathon']];
+const hms = sec => { sec = Math.round(sec); const h = Math.floor(sec / 3600), m = Math.floor(sec % 3600 / 60), s2 = sec % 60; return h ? `${h} h ${String(m).padStart(2,'0')}` : `${m}' ${String(s2).padStart(2,'0')}"`; };
+function predictions(aid){
+  const per = rule('prediction_periode').jours || 90, from = addDays(todayStr(), -per), to = todayStr();
+  const runs = state.sessions.filter(s => s.athleteId === aid && s.sport === 'run' && s.date >= from && s.date <= to && isDone(s) && s.bilan.ints)
+    .sort((a, b) => b.date.localeCompare(a.date));
+  const meas = {};
+  PRED_TYPES.forEach(([k, rk]) => { const r = rule(rk);
+    for (const s of runs){ const v = s.bilan.ints[r.intensite]; if (!v) continue;
+      const sec = parseHM(v.time), pace = parseMS(v.pace);
+      if (pace > 0 && sec >= (r.min_minutes || 0) * 60){ meas[k] = {pace, date:s.date, sec, int:r.intensite}; break; } } });
+  // vitesse VMA équivalente : mesure la plus fiable disponible (VMA, puis 10 km, semi, marathon), sinon profil
+  let vma = null, src = null;
+  for (const [k, rk, l] of PRED_TYPES){ if (meas[k]){ vma = (3600 / meas[k].pace) / ((rule(rk).pct_vma || 100) / 100); src = l; break; } }
+  if (!vma){ const pv = refOf(getUser(aid), 'run'); if (pv){ vma = pv; src = 'profil'; } }
+  return PRED_TYPES.map(([k, rk, l]) => { const r = rule(rk), m = meas[k];
+    const pace = m ? m.pace : vma ? 3600 / (vma * (r.pct_vma || 100) / 100) : 0;
+    return {k, l, r, pace, m, from: m ? null : src, time: pace && r.distance_km ? pace * r.distance_km : 0, speed: pace ? 3600 / pace : 0}; });
+}
+function predictionsHTML(aid){
+  const P = predictions(aid), per = rule('prediction_periode').jours || 90;
+  return `<div class="pred"><div class="predh">🎯 Prédictions <span>allures calculées à partir des derniers bilans de course (${per} derniers jours)</span></div>
+    <table class="predt"><thead><tr><th></th><th>Allure prévisionnelle</th><th>Temps / vitesse</th><th>Source</th></tr></thead><tbody>
+    ${P.map(p => `<tr><th>${p.l}</th><td><b>${p.pace ? mmss(p.pace) + '/km' : '—'}</b></td>
+      <td>${!p.pace ? '—' : p.k === 'VMA' ? (p.speed).toFixed(1).replace('.', ',') + ' km/h' : hms(p.time)}</td>
+      <td class="ztxt">${p.m ? `mesurée le ${frDate(p.m.date)} · ${fmtC(p.m.sec)} en ${p.m.int}` : p.from ? (p.from === 'profil' ? 'estimée depuis la VMA du profil' : 'estimée depuis ' + p.from) : `pas encore de donnée (${p.r.min_minutes}' en ${p.r.intensite} minimum)`}</td></tr>`).join('')}
+    </tbody></table>
+    <div class="ztxt predn">Une valeur n'est retenue que si le temps de travail est suffisant : ${PRED_TYPES.map(([k, rk, l]) => `${l} ≥ ${rule(rk).min_minutes}' en ${rule(rk).intensite}`).join(' · ')}.</div></div>`;
+}
+
+/* ----- Contrôle du plan prévisionnel : règles métier « controle_* » -----
+   Une semaine = liste d'éléments {sport, day, secs, ints:{I1..I7}} ; comparaison avec les semaines précédentes. */
+const LONG_SP = ['run','bike','swim'];
+function weekItemsFromSessions(list){ return list.map(s => ({sport:s.sport, day:s.date, secs:sum(plannedZones(s)), ints:intTimes(s)})); }
+function weekCheck(cur, prevs){
+  const out = [], tot = l => l.reduce((a, x) => a + x.secs, 0), pc = (a, b) => Math.round((a / b - 1) * 100);
+  const ref = prevs.filter(w => w.length), C = tot(cur);
+  if (!cur.length) return null;
+  // 1. charge globale
+  const rc = rule('controle_charge'), refTot = ref.length ? Math.max(...ref.map(tot)) : 0;
+  if (refTot > 0 && C > refTot * (1 + rc.pct_max / 100)) out.push(`Charge de la semaine : <b>${fmtC(C)}</b> contre ${fmtC(refTot)} (<b>+${pc(C, refTot)} %</b>, ${rc.pct_max} % maximum conseillé).`);
+  // 2. sortie longue par discipline
+  const rl = rule('controle_sortie_longue'), longOf = (l, sp) => Math.max(0, ...l.filter(x => x.sport === sp).map(x => x.secs));
+  LONG_SP.forEach(sp => { const a = longOf(cur, sp), b = ref.length ? Math.max(...ref.map(w => longOf(w, sp))) : 0;
+    if (b > 0 && a > b * (1 + rl.pct_max / 100)) out.push(`Sortie longue ${SPORTS[sp].label} : <b>${fmtC(a)}</b> contre ${fmtC(b)} (<b>+${pc(a, b)} %</b>, ${rl.pct_max} % maximum).`); });
+  // 3. nombre de séances par discipline (comparé à la semaine précédente)
+  const rs = rule('controle_seances'), last = ref.length ? prevs[0] : null;
+  if (last && last.length) SPORT_KEYS.forEach(sp => { const a = cur.filter(x => x.sport === sp).length, b = last.filter(x => x.sport === sp).length;
+    if (b > 0 && a - b > rs.max_plus) out.push(`${SPORTS[sp].label} : <b>${a} séances</b> contre ${b} la semaine précédente (+${a - b}, +${rs.max_plus} maximum).`); });
+  // 4. entraînement polarisé (temps en I1-I2)
+  const rp = rule('controle_polarise'), I = k => cur.reduce((a, x) => a + (x.ints[k] || 0), 0), T = INTS.reduce((a, it) => a + I(it.k), 0);
+  if (T > 0){ const low = Math.round((I('I1') + I('I2')) / T * 100);
+    if (low < rp.min_pct_basse) out.push(`Entraînement polarisé : <b>${low} %</b> du temps en endurance (I1-I2), au moins ${rp.min_pct_basse} % conseillé.`); }
+  // 5. jours de repos
+  const rr = rule('controle_repos'), days = new Set(cur.map(x => x.day)).size, rest = 7 - days;
+  if (rest < rr.min_jours) out.push(rest <= 0 ? `<b>Aucun jour de repos</b> dans la semaine (${rr.min_jours} minimum conseillé).` : `<b>${rest} jour de repos</b> seulement (${rr.min_jours} minimum conseillé).`);
+  // 6. séances avec bloc d'intensité
+  const ri = rule('controle_intensite'), hi = INTS.filter(it => it.k >= (ri.intensite_min || 'I4')).map(it => it.k);
+  const nHi = cur.filter(x => hi.reduce((a, k) => a + (x.ints[k] || 0), 0) >= (ri.min_minutes || 0) * 60).length;
+  if (nHi > ri.max_seances) out.push(`<b>${nHi} séances avec un bloc d'intensité</b> (${ri.intensite_min} ou plus), ${ri.max_seances} maximum conseillé.`);
+  return out;
+}
+function weekCheckHTML(aid, ws){
+  const n = Math.max(1, rule('controle_reference').semaines || 3), prevs = [];
+  for (let i = 1; i <= n; i++) prevs.push(weekItemsFromSessions(sessionsOf(aid, addDays(ws, -7 * i))));
+  const w = weekCheck(weekItemsFromSessions(sessionsOf(aid, ws)), prevs);
+  if (w === null) return '';
+  return w.length
+    ? `<div class="wchk warn"><b>⚠ Points d'attention sur le plan de la semaine</b><ul>${w.map(x => `<li>${x}</li>`).join('')}</ul></div>`
+    : `<div class="wchk ok">✓ Plan de la semaine conforme aux règles d'entraînement (progression, sortie longue, polarisation, repos, intensité).</div>`;
+}
+function planCheckHTML(plan, aid){
+  const weeks = plan.map(wk => wk.sessions.map(x => ({sport:x.sport, day:x.day, secs:weekSecs([x]), ints:intTimes({sport:x.sport, blocks:x.blocks, athleteId:aid})})));
+  const n = Math.max(1, rule('controle_reference').semaines || 3), bad = [];
+  weeks.forEach((w, i) => { const prevs = []; for (let j = 1; j <= n; j++) prevs.push(i - j >= 0 ? weeks[i - j] : []); const r = weekCheck(w, prevs); if (r && r.length) bad.push([i + 1, r]); });
+  return bad.length
+    ? `<details class="wchk warn"><summary><b>⚠ ${bad.length} semaine(s) avec des points d'attention</b> — voir le détail</summary>${bad.map(([i, r]) => `<div class="wchkw"><b>Semaine ${i}</b><ul>${r.map(x => `<li>${x}</li>`).join('')}</ul></div>`).join('')}</details>`
+    : `<div class="wchk ok">✓ Plan conforme aux règles d'entraînement sur toutes les semaines.</div>`;
+}
+// Bilan d'une semaine, ouvert en cliquant sur le graphique
+function statWeekHTML(aid){
+  const ws = ui.statWeek; if (!ws) return '';
+  const w0 = ui.week; ui.week = ws; const side = weekSide(aid); ui.week = w0;
+  const list = sessionsOf(aid, ws), dt = parseYmd(ws);
+  return `<div class="statwk"><div class="statwkh"><b>📅 Bilan de la semaine du ${dt.getDate()} ${MONTHS[dt.getMonth()]}</b>
+      <span><button class="btn sm" data-a="statgoweek">Ouvrir dans l'agenda</button><button class="mx" data-a="statweekclose" title="Fermer">✕</button></span></div>
+    <div class="statwkb"><div class="wside">${side}</div>
+      <div class="statwkl">${list.length ? list.map(s => `<div class="swl" style="border-left-color:${SPORTS[s.sport].color}"><span>${DAYS[(parseYmd(s.date).getDay() + 6) % 7]} ${parseYmd(s.date).getDate()}</span><b>${esc(s.title || SPORTS[s.sport].label)}</b><span>${fmtC(sum(plannedZones(s)))}${isDone(s) ? ' · ✓ ' + fmtC(sum(realZones(s))) : ''}</span></div>`).join('') : '<span class="ztxt">Aucune séance cette semaine.</span>'}</div></div></div>`;
+}
+function rgpdAdminHTML(){
+  if (!me || me.role !== 'developpeur') return '';
+  const j = ui.journal || [];
+  return `<div class="pane dense rgpdadm"><h4>🔒 RGPD et sécurité</h4>
+    <div class="row" style="gap:8px;flex-wrap:wrap"><button class="btn sm" data-a="purgecheck">Comptes inactifs depuis ${rule('rgpd_conservation').annees} ans : vérifier</button>
+      <button class="btn sm" data-a="journalload">Afficher le journal des actions</button><button class="btn sm" data-a="privacy">Politique de confidentialité</button></div>
+    ${ui.purgeN != null ? `<div class="purgebox">${ui.purgeN ? `<b>${ui.purgeN}</b> compte(s) à supprimer. <button class="btn sm danger-ghost" data-a="purgedo">Supprimer ces comptes et leurs données</button>` : 'Aucun compte inactif à supprimer.'}</div>` : ''}
+    ${j.length ? `<table class="predt" style="margin-top:8px"><thead><tr><th>Date</th><th>Action</th><th>Compte</th><th>Détails</th></tr></thead><tbody>${j.map(r => `<tr><td>${new Date(r.at).toLocaleString('fr-FR')}</td><td>${esc(r.action)}</td><td>${esc((getUser(r.cible) || {}).name || (r.details && r.details.nom) || '—')}</td><td class="ztxt">${esc(JSON.stringify(r.details))}</td></tr>`).join('')}</tbody></table>` : ''}
+  </div>`;
+}
+function rulesAdminHTML(){
+  if (!me || me.role !== 'developpeur') return '';
+  return `<div class="pane dense rulesadm"><h4>⚙️ Règles métier — prédictions, contrôle du plan, catalogue, sécurité, RGPD</h4>
+    <table class="predt"><thead><tr><th>Prédiction</th><th>Intensité</th><th>Temps mini</th><th>% VMA</th></tr></thead><tbody>
+    ${PRED_TYPES.map(([k, rk, l]) => { const r = rule(rk); return `<tr><th>${l}</th>
+      <td><select id="rl-${rk}-int">${INTS.map(it => `<option ${it.k === r.intensite ? 'selected' : ''}>${it.k}</option>`).join('')}</select></td>
+      <td><input id="rl-${rk}-min" type="number" min="0" value="${r.min_minutes}" style="width:70px"> min</td>
+      <td><input id="rl-${rk}-pct" type="number" min="50" max="120" value="${r.pct_vma}" style="width:70px"> %</td></tr>`; }).join('')}
+    <tr><th>Période</th><td colspan="3"><input id="rl-periode" type="number" min="7" value="${rule('prediction_periode').jours}" style="width:70px"> derniers jours</td></tr>
+    <tr><th>Sécurité</th><td colspan="3">Déconnexion après <input id="rl-idle" type="number" min="5" max="720" value="${rule('securite_inactivite').minutes}" style="width:70px"> min d'inactivité</td></tr>
+    <tr><th>Catalogue</th><td colspan="3">Les utilisateurs voient <select id="rl-cat"><option value="tous" ${rule('catalogue_mode').mode !== 'valides' ? 'selected' : ''}>toutes les séances et plans, sauf ceux supprimés</option><option value="valides" ${rule('catalogue_mode').mode === 'valides' ? 'selected' : ''}>uniquement les séances et plans validés</option></select></td></tr>
+    <tr><th>Contrôle du plan</th><td colspan="3" class="rlctl">
+      Charge semaine : +<input id="rl-c1" type="number" min="1" value="${rule('controle_charge').pct_max}"> % max ·
+      Sortie longue : +<input id="rl-c2" type="number" min="1" value="${rule('controle_sortie_longue').pct_max}"> % max ·
+      Séances par discipline : +<input id="rl-c3" type="number" min="0" value="${rule('controle_seances').max_plus}"> max<br>
+      Polarisé : au moins <input id="rl-c4" type="number" min="0" max="100" value="${rule('controle_polarise').min_pct_basse}"> % en I1-I2 ·
+      Repos : <input id="rl-c5" type="number" min="0" max="7" value="${rule('controle_repos').min_jours}"> jour(s) mini<br>
+      Intensité : <input id="rl-c6" type="number" min="0" value="${rule('controle_intensite').max_seances}"> séances max avec ≥ <input id="rl-c7" type="number" min="0" value="${rule('controle_intensite').min_minutes}"> min en
+      <select id="rl-c8">${INTS.map(it => `<option ${it.k === rule('controle_intensite').intensite_min ? 'selected' : ''}>${it.k}</option>`).join('')}</select> ou plus ·
+      Comparaison avec <input id="rl-c9" type="number" min="1" max="6" value="${rule('controle_reference').semaines}"> semaine(s) précédente(s)</td></tr>
+    <tr><th>TSS</th><td colspan="3" class="rlctl">Facteur d'intensité (IF) par zone : ${INTS.map(it => `${it.k} <input id="rl-if-${it.k}" type="number" step="0.01" min="0.3" max="2" value="${rule('tss_if')[it.k]}">`).join(' ')}<br><span class="ztxt">TSS = durée (h) × IF² × 100</span></td></tr>
+    <tr><th>Forme / fraîcheur</th><td colspan="3" class="rlctl">CTL sur <input id="rl-ctl" type="number" min="7" max="90" value="${rule('tss_charge').ctl_jours}"> jours · ATL sur <input id="rl-atl" type="number" min="3" max="21" value="${rule('tss_charge').atl_jours}"> jours ·
+      frais au-dessus de <input id="rl-tf" type="number" value="${rule('tss_charge').tsb_frais}"> · surcharge en dessous de <input id="rl-ts" type="number" value="${rule('tss_charge').tsb_surcharge}"> (TSB)</td></tr>
+    <tr><th>RGPD</th><td colspan="3">Supprimer les comptes inactifs depuis <input id="rl-ret" type="number" min="1" max="10" value="${rule('rgpd_conservation').annees}" style="width:60px"> ans</td></tr>
+    </tbody></table><div style="margin-top:6px"><button class="btn sm primary" data-a="rulessave">Enregistrer les règles</button></div></div>`;
 }
 
 /* ===================== Statistiques ===================== */
 const STACK = ['run','swim','bike','strength'];          // ordre d'empilement validé pour la lisibilité (daltonisme)
 const LONG3 = ['run','bike','swim'];
 const LINE_C = {run:'#1f6b45', bike:'#a35a14', swim:'#155d8c'};  // teinte plus foncée du sport pour la ligne « plus longue »
+// TSS (Training Stress Score) = heures × IF² × 100, IF par intensité (règle métier « tss_if »)
+function tssFromInts(times){ const IF = rule('tss_if'); return Math.round(INTS.reduce((a, it) => a + (times[it.k] || 0) / 3600 * Math.pow(+IF[it.k] || 0, 2) * 100, 0)); }
+function sessTSS(s, mode){
+  if (mode === 'prevu') return tssFromInts(intTimes(s));
+  if (!isDone(s)) return 0;
+  const v = intsView(s.bilan), tm = Object.fromEntries(INTS.map(it => [it.k, parseHM(v[it.k].time)]));
+  return tssFromInts(tm);
+}
+
+/* ----- Forme (CTL), fatigue (ATL), fraîcheur (TSB) à partir du TSS quotidien -----
+   CTL et ATL : moyennes exponentielles du TSS (42 et 7 jours par défaut, règle « tss_charge »).
+   TSB du jour = CTL de la veille − ATL de la veille. Au-delà d'aujourd'hui : projection avec le TSS prévu. */
+function pmcSeries(aid, from, to){
+  const rc = rule('tss_charge'), kc = 1 / (rc.ctl_jours || 42), ka = 1 / (rc.atl_jours || 7), today = todayStr();
+  const mine = state.sessions.filter(s => s.athleteId === aid);
+  if (!mine.length) return [];
+  const first = mine.reduce((m, s) => s.date < m ? s.date : m, from), start = addDays(first < from ? first : from, -1);
+  const daily = {}; mine.forEach(s => { const v = s.date <= today ? sessTSS(s, 'realise') : sessTSS(s, 'prevu'); if (v) daily[s.date] = (daily[s.date] || 0) + v; });
+  let ctl = 0, atl = 0; const out = [];
+  for (let d = start; d <= to; d = addDays(d, 1)){
+    const tsb = ctl - atl, tss = daily[d] || 0;
+    ctl += (tss - ctl) * kc; atl += (tss - atl) * ka;
+    if (d >= from) out.push({d, tss, ctl, atl, tsb, proj: d > today});
+  }
+  return out;
+}
+function tsbLabel(v){
+  const rc = rule('tss_charge');
+  return v > (rc.tsb_frais ?? 5) ? ['frais, prêt pour une compétition', '#2f9461'] : v >= -10 ? ['équilibré', '#1769aa'] : v >= (rc.tsb_surcharge ?? -30) ? ['charge productive', '#c08a00'] : ['risque de surcharge : prévoir de la récupération', '#b42318'];
+}
+function pmcNow(aid, day){
+  const s = pmcSeries(aid, addDays(day, -1), day); const p = s[s.length - 1];
+  return p ? {ctl:Math.round(p.ctl), atl:Math.round(p.atl), tsb:Math.round(p.tsb)} : {ctl:0, atl:0, tsb:0};
+}
+function pmcHTML(aid, from, to){
+  const S = pmcSeries(aid, from, to);
+  if (!S.length || !S.some(p => p.ctl > 0.5 || p.atl > 0.5)) return `<div class="pmc"><div class="pmch">📈 Forme, fatigue et fraîcheur</div><p class="ztxt">Pas encore assez de séances réalisées pour calculer la forme (CTL), la fatigue (ATL) et la fraîcheur (TSB).</p></div>`;
+  const today = todayStr(), cur = S.filter(p => !p.proj).pop() || S[0], lab = tsbLabel(cur.tsb);
+  const W = 1000, H1 = 150, H2 = 80, L = 44, R = 10, T = 12, n = S.length, x = i => L + (W - L - R) * i / Math.max(1, n - 1);
+  const mx = Math.max(20, ...S.map(p => Math.max(p.ctl, p.atl))), st = mx > 120 ? 40 : mx > 60 ? 20 : 10, ym = Math.ceil(mx * 1.1 / st) * st;
+  const y1 = v => T + (H1 - T - 16) * (1 - v / ym);
+  const li = S.reduce((m, p, i) => p.proj ? m : i, 0);
+  const path = (k, proj) => S.map((p, i) => [p, i]).filter(([p, i]) => proj ? i >= li && (p.proj || i === li) : !p.proj).map(([p, i], j) => (j ? 'L' : 'M') + x(i).toFixed(1) + ',' + y1(p[k]).toFixed(1)).join('');
+  let g = '';
+  for (let v = 0; v <= ym; v += st) g += `<line x1="${L}" x2="${W - R}" y1="${y1(v)}" y2="${y1(v)}" stroke="#e6ebf0"/><text x="${L - 6}" y="${y1(v) + 3}" text-anchor="end" font-size="10" fill="#7a8896">${v}</text>`;
+  const ti = S.findIndex(p => p.d === today);
+  if (ti >= 0) g += `<line x1="${x(ti)}" x2="${x(ti)}" y1="${T}" y2="${H1 - 16}" stroke="#9aa7b4" stroke-dasharray="3 3"/><text x="${x(ti) + 4}" y="${T + 8}" font-size="10" fill="#7a8896">aujourd'hui</text>`;
+  g += `<path d="${path('ctl', false)}" fill="none" stroke="#1769aa" stroke-width="2.5"/><path d="${path('atl', false)}" fill="none" stroke="#e2654f" stroke-width="2"/>`;
+  g += `<path d="${path('ctl', true)}" fill="none" stroke="#1769aa" stroke-width="2" stroke-dasharray="5 4"/><path d="${path('atl', true)}" fill="none" stroke="#e2654f" stroke-width="1.6" stroke-dasharray="5 4"/>`;
+  // mois en abscisse
+  S.forEach((p, i) => { if (p.d.slice(8) === '01') g += `<text x="${x(i)}" y="${H1 - 3}" font-size="10" fill="#7a8896" text-anchor="middle">${MONTHS[+p.d.slice(5, 7) - 1]}</text>`; });
+  // panneau TSB (axe séparé)
+  const tm = Math.max(10, ...S.map(p => Math.abs(p.tsb))), ts = Math.ceil(tm / 10) * 10, y2 = v => H1 + 6 + (H2 - 12) * (1 - (v + ts) / (2 * ts)), bw = Math.max(1, (W - L - R) / n - 1);
+  g += `<line x1="${L}" x2="${W - R}" y1="${y2(0)}" y2="${y2(0)}" stroke="#9aa7b4"/><text x="${L - 6}" y="${y2(ts) + 8}" text-anchor="end" font-size="10" fill="#7a8896">+${ts}</text><text x="${L - 6}" y="${y2(0) + 3}" text-anchor="end" font-size="10" fill="#7a8896">0</text><text x="${L - 6}" y="${y2(-ts)}" text-anchor="end" font-size="10" fill="#7a8896">−${ts}</text>`;
+  S.forEach((p, i) => { const c = tsbLabel(p.tsb)[1], y0 = y2(0), yv = y2(p.tsb);
+    g += `<rect x="${(x(i) - bw / 2).toFixed(1)}" y="${Math.min(y0, yv).toFixed(1)}" width="${bw.toFixed(1)}" height="${Math.max(0.5, Math.abs(yv - y0)).toFixed(1)}" fill="${c}" opacity="${p.proj ? .35 : .8}"><title>${frDate(p.d)} : TSB ${Math.round(p.tsb)} · CTL ${Math.round(p.ctl)} · ATL ${Math.round(p.atl)}${p.proj ? ' (projection)' : ''}</title></rect>`; });
+  return `<div class="pmc"><div class="pmch">📈 Forme, fatigue et fraîcheur</div>
+    <div class="pmct">
+      <div class="pmcc" style="--c:#1769aa"><span>Forme (CTL)</span><b>${Math.round(cur.ctl)}</b><small>charge moyenne sur ${rule('tss_charge').ctl_jours} j</small></div>
+      <div class="pmcc" style="--c:#e2654f"><span>Fatigue (ATL)</span><b>${Math.round(cur.atl)}</b><small>charge moyenne sur ${rule('tss_charge').atl_jours} j</small></div>
+      <div class="pmcc" style="--c:${lab[1]}"><span>Fraîcheur (TSB)</span><b>${Math.round(cur.tsb) > 0 ? '+' : ''}${Math.round(cur.tsb)}</b><small>${lab[0]}</small></div>
+    </div>
+    <div class="lg"><span><i style="background:#1769aa"></i>Forme (CTL)</span><span><i style="background:#e2654f"></i>Fatigue (ATL)</span><span class="ztxt">pointillés : projection avec les séances prévues · barres : fraîcheur (TSB)</span></div>
+    <svg viewBox="0 0 ${W} ${H1 + H2}" width="100%" preserveAspectRatio="none" style="display:block;height:${H1 + H2}px">${g}</svg></div>`;
+}
+const weekTSS = (aid, ws, mode) => sessionsOf(aid, ws).reduce((a, s) => a + sessTSS(s, mode), 0);
 function sessDur(s, mode){ return mode === 'prevu' ? sum(plannedZones(s)) : (isDone(s) ? sum(realZones(s)) : 0); }
 // Allures spécifiques saisies dans les bilans, sur une période
 const asPace = sec => { if (!sec) return '–'; const r = Math.round(sec); return `${Math.floor(r/60)}:${String(r%60).padStart(2,'0')}`; };
 function asStats(aid, from, to){
   const out = Object.fromEntries(AS_TYPES.map(([k]) => [k, {sec:0, n:0, w:0, best:0, last:'', lastPace:0}]));
-  state.sessions.filter(s => s.athleteId === aid && s.date >= from && s.date <= to && s.bilan && Array.isArray(s.bilan.as))
-    .sort((a, b) => a.date.localeCompare(b.date)).forEach(s => s.bilan.as.forEach(r => {
+  state.sessions.filter(s => s.athleteId === aid && s.date >= from && s.date <= to && s.bilan && asRows(s).length)
+    .sort((a, b) => a.date.localeCompare(b.date)).forEach(s => asRows(s).forEach(r => {
       const o = out[r.t]; if (!o) return; const d = parseMS(r.dur), pc = parseMS(r.pace);
       if (!d && !pc) return; o.n++; o.sec += d;
       if (pc){ o.w += pc * (d || 1); o.wd = (o.wd || 0) + (d || 1); o.best = o.best ? Math.min(o.best, pc) : pc; o.last = s.date; o.lastPace = pc; }
@@ -2394,7 +2980,7 @@ function asStats(aid, from, to){
 function asWeekly(aid, from, to){
   // allure moyenne pondérée par la durée, semaine par semaine, pour chaque type
   const out = Object.fromEntries(AS_TYPES.map(([k]) => [k, {}]));
-  state.sessions.filter(s => s.athleteId === aid && s.date >= from && s.date <= to && s.bilan && Array.isArray(s.bilan.as)).forEach(s => s.bilan.as.forEach(r => {
+  state.sessions.filter(s => s.athleteId === aid && s.date >= from && s.date <= to && s.bilan && asRows(s).length).forEach(s => asRows(s).forEach(r => {
     const pc = parseMS(r.pace); if (!out[r.t] || !pc) return; const d = parseMS(r.dur) || 1, w = mondayOf(s.date), o = out[r.t][w] || (out[r.t][w] = {w:0, d:0});
     o.w += pc * d; o.d += d; }));
   return Object.fromEntries(Object.entries(out).map(([k, v]) => [k, Object.keys(v).sort().map(w => ({w, pace:v[w].w / v[w].d}))]));
@@ -2413,11 +2999,11 @@ function asStatsHTML(aid, from, to){
       <div class="astv">${o.avg ? `${asPace(o.avg)}<small>/km</small>` : '—'}</div>
       <div class="asts">${o.avg ? `${o.n} séance${o.n > 1 ? 's' : ''} · ${fmtC(o.sec)}` : 'aucune saisie'}${tg ? ` · cible ${tg}` : ''}</div>
       ${asSpark(pts, AS_COLOR[k])}</div>`; }).join('');
-  return `<div class="asframe asst"><div class="ash">⏱️ Allure moyenne sur la période</div>
+  return `<div class="asframe asst"><div class="ash">⏱️ Allure moyenne sur la période <span class="ztxt" style="text-transform:none;font-weight:400">— VMA = I6 · AS10 = I5 · AS21 = I4 · AS42 = I3</span></div>
     <div class="astiles">${tiles}</div>
     ${used.length ? `<details class="asdet"><summary>Détail (meilleure et dernière allure)</summary><table class="stt"><thead><tr><th>Allure</th><th>Temps</th><th>Séances</th><th>Allure moy.</th><th>Meilleure</th><th>Dernière</th></tr></thead><tbody>
     ${used.map(([k]) => { const o = st[k]; return `<tr><td><span class="asdot" style="background:${AS_COLOR[k]}"></span><b>${k}</b></td><td>${fmtC(o.sec)}</td><td>${o.n}</td><td><b>${asPace(o.avg)}</b>/km</td><td>${asPace(o.best)}/km</td><td>${asPace(o.lastPace)}/km${o.last ? ` <span class="ztxt">${frDate(o.last)}</span>` : ''}</td></tr>`; }).join('')}
-    </tbody></table></details>` : '<div class="ztxt" style="font-size:.74rem;margin-top:4px">Les allures se renseignent dans le cadre « Allure moyenne » du bilan des séances de course.</div>'}
+    </tbody></table></details>` : '<div class="ztxt" style="font-size:.74rem;margin-top:4px">Les allures viennent du bilan des séances de course (allure moyenne en I3 à I6).</div>'}
   </div>`;
 }
 function weeklyStats(aid, endWeek, n, mode){
@@ -2427,11 +3013,23 @@ function weeklyStats(aid, endWeek, n, mode){
     const tot = {run:0, bike:0, swim:0, strength:0}, lng = {run:0, bike:0, swim:0};
     list.forEach(s => { const d = sessDur(s, mode); tot[s.sport] += d; if (lng[s.sport] !== undefined) lng[s.sport] = Math.max(lng[s.sport], d); });
     const as = Object.fromEntries(AS_TYPES.map(([k]) => [k, 0])); list.forEach(s => ((s.bilan && s.bilan.as) || []).forEach(r => { if (as[r.t] !== undefined) as[r.t] += parseMS(r.dur); }));
-    out.push({ws, tot, lng, as, total: tot.run + tot.bike + tot.swim + tot.strength});
+    out.push({ws, tot, lng, as, total: tot.run + tot.bike + tot.swim + tot.strength, tss: list.reduce((a, s) => a + sessTSS(s, mode), 0)});
   }
   return out;
 }
 function niceStep(maxH){ const steps = [0.5, 1, 2, 3, 5, 10, 15, 20]; return steps.find(s => maxH / s <= 5) || 25; }
+function tssChart(data){
+  const W = 1000, H = 110, L = 44, R = 10, T = 14, B = 20, pw = W - L - R, ph = H - T - B, n = data.length, slot = pw / n, bw = Math.min(46, slot * 0.58);
+  const mx = Math.max(50, ...data.map(d => d.tss)), step = mx > 600 ? 200 : mx > 300 ? 100 : 50, ymax = Math.ceil(mx * 1.1 / step) * step;
+  const y = v => T + ph - v / ymax * ph, cx = i => L + slot * i + slot / 2;
+  let g = '';
+  for (let v = 0; v <= ymax; v += step) g += `<line x1="${L}" x2="${W - R}" y1="${y(v)}" y2="${y(v)}" stroke="#e6ebf0"/><text x="${L - 6}" y="${y(v) + 3}" text-anchor="end" font-size="10" fill="#7a8896">${v}</text>`;
+  data.forEach((d, i) => { const h = ph - (y(d.tss) - T), x = cx(i) - bw / 2;
+    if (d.tss > 0) g += `<path d="M${x},${T + ph} v${-(h - 4)} q0,-4 4,-4 h${bw - 8} q4,0 4,4 v${h - 4} z" fill="#7a4bb3" opacity="${d.ws === ui.statWeek ? 1 : .8}"/>`;
+    if (d.tss > 0 && (n <= 26 || i % 2 === 0)) g += `<text x="${cx(i)}" y="${y(d.tss) - 3}" text-anchor="middle" font-size="10" fill="#3d4650">${d.tss}</text>`;
+    g += `<rect class="hit" data-a="statweek" data-i="${i}" x="${L + slot * i}" y="${T}" width="${slot}" height="${ph}" fill="transparent" style="cursor:pointer"><title>TSS ${d.tss}</title></rect>`; });
+  return `<svg viewBox="0 0 ${W} ${H}" width="100%" preserveAspectRatio="none" style="display:block;height:${H}px">${g}</svg>`;
+}
 function statsChart(data){
   const W = 1000, H = 190, L = 44, R = 10, T = 16, B = 24, pw = W - L - R, ph = H - T - B;
   const maxS = Math.max(3600, ...data.map(d => Math.max(d.total, ...LONG3.map(k => d.lng[k]))));
@@ -2464,7 +3062,7 @@ function statsChart(data){
     pts.forEach(p => { if (p[2] > 0) run.push(p); else flushRun(); }); flushRun();
     pts.forEach(p => { if (p[2] > 0) g += `<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="4.5" fill="${LINE_C[k]}" stroke="#fff" stroke-width="2"/>`; });
   });
-  data.forEach((d, i) => g += `<rect class="hit" data-i="${i}" x="${(L + slot * i).toFixed(1)}" y="${T}" width="${slot.toFixed(1)}" height="${ph}" fill="transparent"/>`);
+  data.forEach((d, i) => g += `<rect class="hit ${d.ws === ui.statWeek ? 'sel' : ''}" data-a="statweek" data-i="${i}" style="cursor:pointer" x="${(L + slot * i).toFixed(1)}" y="${T}" width="${slot.toFixed(1)}" height="${ph}" fill="transparent"/>`);
   return `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Temps hebdomadaire par sport et plus longue séance de la semaine">${g}</svg>`;
 }
 function statsView(aid){
@@ -2476,7 +3074,8 @@ function statsView(aid){
   const cur = mondayOf(todayStr());
   const rows = data.slice().reverse().map(d => { const dt = parseYmd(d.ws);
     return `<tr class="${d.ws === cur ? 'cur' : ''}"><td>${dt.getDate()} ${MONTHS[dt.getMonth()]}</td>${STACK.map(k => `<td>${fmtC(d.tot[k])}</td>`).join('')}<td><b>${fmtC(d.total)}</b></td>${AS_TYPES.map(([k]) => `<td>${fmtC(d.as[k])}</td>`).join('')}${LONG3.map(k => `<td>${fmtC(d.lng[k])}</td>`).join('')}</tr>`; }).join('');
-  const kstrip = `<div class="kstrip"><span>Total ${n} sem. <b>${fmtC(tot)}</b></span><span>Moy. / sem. <b>${fmtC(tot / n)}</b></span>${LONG3.map(k => `<span style="color:${SPORTS[k].color}">${icon(k, 12)} + longue <b>${fmtC(maxL(k))}</b></span>`).join('')}</div>`;
+  const tssT = data.reduce((a, d) => a + d.tss, 0);
+  const kstrip = `<div class="kstrip"><span>Total ${n} sem. <b>${fmtC(tot)}</b></span><span>Moy. / sem. <b>${fmtC(tot / n)}</b></span><span class="ktss">TSS moy. / sem. <b>${Math.round(tssT / n)}</b></span><span class="ktss">TSS max <b>${Math.max(0, ...data.map(d => d.tss))}</b></span>${LONG3.map(k => `<span style="color:${SPORTS[k].color}">${icon(k, 12)} + longue <b>${fmtC(maxL(k))}</b></span>`).join('')}</div>`;
   return `<div class="row" style="margin:2px 0 6px;gap:8px">
       <div class="seg"><button class="${mode==='realise'?'on':''}" data-a="mode" data-v="realise">Réalisé</button><button class="${mode==='prevu'?'on':''}" data-a="mode" data-v="prevu">Prévu</button></div>
       <div class="seg">${[8,12,26,52].map(k => `<button class="${n===k?'on':''}" data-a="statn" data-v="${k}">${k} sem.</button>`).join('')}</div>
@@ -2489,14 +3088,11 @@ function statsView(aid){
       ${statsChart(data)}
       <div class="tip" id="stattip"></div>
     </div>
+    <div class="chart tsschart"><div class="lg"><span class="sep">TSS par semaine</span><span class="ztxt">charge d'entraînement (${mode === 'prevu' ? 'prévue' : 'réalisée'}) · cliquez une barre pour le bilan de la semaine</span></div>${tssChart(data)}</div>
+    ${pmcHTML(aid, data[0].ws, addDays(end, 13))}
     ${kstrip}
-    ${asStatsHTML(aid, data[0].ws, addDays(end, 6))}
-    <details class="stdet"><summary>Détail par semaine (tableau)</summary>
-    <div class="pane" style="padding:0;overflow:auto;margin-top:4px"><table class="stt">
-      <thead><tr><th>Semaine du</th>${STACK.map(k => `<th>${SPORTS[k].label}</th>`).join('')}<th>Total</th>${AS_TYPES.map(([k]) => `<th>${k}</th>`).join('')}${LONG3.map(k => `<th>+ longue ${SPORTS[k].label}</th>`).join('')}</tr></thead>
-      <tbody>${rows}</tbody>
-      <tfoot><tr><td>Total</td>${STACK.map(k => `<td>${fmtC(sumK(k))}</td>`).join('')}<td>${fmtC(tot)}</td>${AS_TYPES.map(([k]) => `<td>${fmtC(data.reduce((a, d) => a + d.as[k], 0))}</td>`).join('')}${LONG3.map(k => `<td>${fmtC(maxL(k))}</td>`).join('')}</tr></tfoot>
-    </table></div></details>`;
+    ${statWeekHTML(aid)}
+    ${predictionsHTML(aid)}`;
 }
 // Infobulle du graphique
 document.addEventListener('mousemove', e => {
@@ -2504,7 +3100,7 @@ document.addEventListener('mousemove', e => {
   if (!tip) return;
   if (!hit){ tip.style.display = 'none'; return; }
   const d = window._statData[+hit.dataset.i], box = document.getElementById('statchart').getBoundingClientRect(), dt = parseYmd(d.ws);
-  tip.innerHTML = `<b>Semaine du ${dt.getDate()} ${MONTHS[dt.getMonth()]}</b><br>${STACK.map(k => `<i style="background:${SPORTS[k].color}"></i>${SPORTS[k].label} ${fmtC(d.tot[k])}`).join('<br>')}<br><b>Total ${fmtC(d.total)}</b><br>Plus longue : ${LONG3.map(k => `${SPORTS[k].label} ${fmtC(d.lng[k])}`).join(' · ')}`;
+  tip.innerHTML = `<b>Semaine du ${dt.getDate()} ${MONTHS[dt.getMonth()]}</b><br>${STACK.map(k => `<i style="background:${SPORTS[k].color}"></i>${SPORTS[k].label} ${fmtC(d.tot[k])}`).join('<br>')}<br><b>Total ${fmtC(d.total)}</b> · TSS ${d.tss}<br>Plus longue : ${LONG3.map(k => `${SPORTS[k].label} ${fmtC(d.lng[k])}`).join(' · ')}`;
   tip.style.display = 'block';
   let x = e.clientX - box.left + 14; if (x + tip.offsetWidth > box.width) x = e.clientX - box.left - tip.offsetWidth - 14;
   tip.style.left = x + 'px'; tip.style.top = Math.max(4, e.clientY - box.top - tip.offsetHeight / 2) + 'px';
@@ -3226,8 +3822,9 @@ function generatorHTML(){
       <div class="ss">${wk.sessions.slice().sort((a,b)=>a.day-b.day || a.ord-b.ord).map(s=>`<span style="background:${SPORTS[s.sport].bg};color:${SPORTS[s.sport].color}" title="${DAYS[s.day]} · ${esc(s.title)}">${DAYS[s.day]} ${esc(s.title)}${s.chain ? ' ⛓' : ''}</span>`).join('')}</div></div>`; }).join('');
   const total = plan.reduce((a,wk)=>a+wk.sessions.length,0), ld = planLoad(g);
   return `<div class="pane dense">
-    <div class="gtitle"><b>${esc(PLAN_DISC.find(d => d[0] === g.type)[1])} · ${esc(P.label)} · ${LEVELS.find(l => l[0] === g.level)[1]}</b> <span class="ztxt">${esc(P.d)}</span></div>
+    <div class="gtitle"><b>${esc(PLAN_DISC.find(d => d[0] === g.type)[1])} · ${esc(P.label)} · ${LEVELS.find(l => l[0] === g.level)[1]}</b> <span class="ztxt">${esc(P.d)}</span>${isDevUser() ? ' ' + modBadge(planKey(g.type, g.obj, g.level)) + modButtons(planKey(g.type, g.obj, g.level)) : ''}</div>
     <div class="gload"><span>Charge moyenne : <b>${fmtC(ld.avg)}</b> / sem.</span><span>Semaine la plus chargée : <b>${fmtC(ld.max)}</b></span><span>${plan.length} semaines · ${total} séances</span></div>
+    ${planCheckHTML(plan, curAid())}
     <div class="gen">
       ${has('customPlans') ? '' : '<div class="lockbox sm" style="grid-column:1/-1"><b>🔒 Personnaliser le plan</b><span>Avec votre licence, choisissez un plan dans le tableau et sa date de début. Modifier la durée ou le nombre de séances et enregistrer vos propres plans : licence Coach.</span></div>'}
       <div><label>Discipline</label><select data-g="type">${opt(PLAN_DISC.filter(([t]) => planAllowed(t)), g.type)}</select></div>
@@ -3259,10 +3856,10 @@ function cloneBlocks(blocks){
 function addFromTemplate(aid, t, date){
   if (t.parts){
     fixOrd(aid, date); const o0 = dayList(aid, date).length;
-    const made = t.parts.map((p, i) => ({id:newId(), athleteId:aid, date, sport:p.sport, title:p.title, blocks:cloneBlocks(p.blocks), bilan:emptyBilan(), chain:i < t.parts.length - 1, ord:o0 + i}));
+    const made = t.parts.map((p, i) => ({id:newId(), athleteId:aid, date, sport:p.sport, title:p.title, blocks:cloneBlocks(p.blocks), note:p.desc || (i === 0 ? t.desc || '' : ''), bilan:emptyBilan(), chain:i < t.parts.length - 1, ord:o0 + i}));
     state.sessions.push(...made); return made[0];
   }
-  const s = {id:newId(), athleteId:aid, date, sport:t.sport, title:t.title.replace(/^[^—]+—\s*/, ''), blocks:cloneBlocks(t.blocks), bilan:emptyBilan()};
+  const s = {id:newId(), athleteId:aid, date, sport:t.sport, title:t.title.replace(/^[^—]+—\s*/, ''), blocks:cloneBlocks(t.blocks), note:t.desc || '', terrain:t.terrain ? Object.assign({}, t.terrain) : null, bilan:emptyBilan()};
   state.sessions.push(s); return s;
 }
 function tplPickerRows(){
@@ -3279,24 +3876,33 @@ function refreshPicker(focusQ){
   if (f && !focusQ) f.outerHTML = filtersHTML(ui.pf, 'pk', filterTpls(ui.pf).length);
   else if (f){ const c = f.querySelector('.cnt'); const n = filterTpls(ui.pf).length; if (c) c.textContent = n + ' séance' + (n > 1 ? 's' : ''); }
 }
+// Nouvelle séance : étape 1 = sport + 4 grands choix ; la bibliothèque s'ouvre dans une seconde fenêtre
+function openNewChooser(){
+  ui.newSport = ui.newSport || 'run';
+  openModal(`<div class="mhead"><h3>➕ Nouvelle séance</h3><button class="mx" data-a="mclose" title="Fermer">✕</button></div>
+    <div class="mdate">📅 ${longDate(pendingDate)}</div>
+    <div class="sect">1. Sport</div>
+    <div class="sportpick sel" id="pkSports">${SPORT_KEYS.map(k => `<button class="${ui.newSport === k ? 'on' : ''}" style="background:${SPORTS[k].bg};border-left-color:${SPORTS[k].color};color:${SPORTS[k].color}" data-a="pksp" data-v="${k}">${icon(k, 18)} ${SPORTS[k].label}</button>`).join('')}</div>
+    <div class="sect">2. Comment créer la séance ?</div>
+    <div class="bigopts">
+      <button class="bo bo-simple" data-a="newsimple"><span class="boi">⏱</span><b>Simple</b><small>temps en Z1, Z2, Z3</small></button>
+      <button class="bo bo-detail ${has('detail') ? '' : 'bo-lock'}" data-a="newdetail"><span class="boi">☰</span><b>Détaillée${has('detail') ? '' : ' 🔒'}</b><small>${has('detail') ? 'blocs, répétitions, intensités' : 'avec l\'abonnement Standard'}</small></button>
+      <button class="bo bo-lib" data-a="newlib"><span class="boi">📚</span><b>Bibliothèque</b><small>partir d'une séance type</small></button>
+      <label class="bo bo-file"><span class="boi">📂</span><b>Importer un fichier</b><small>GPX / TCX : séance réalisée</small><input type="file" id="newfile" accept=".gpx,.tcx" style="display:none"></label>
+    </div>
+    <div class="mfoot"><button class="btn" data-a="mclose">Annuler</button></div>`, true);
+}
 function openTplPicker(mode){
   ui.pickMode = mode;
-  const head = mode === 'replace' ? '<h3>Charger une séance type</h3><p class="ztxt" style="margin:0">Le contenu de la séance sera remplacé par celui de la séance type.</p>'
-    : `<h3>Nouvelle séance · ${longDate(pendingDate)}</h3>
-       <div class="sect" style="margin-top:6px">1. Sport</div>
-       <div class="sportpick sel" id="pkSports" style="margin:6px 0 4px">${SPORT_KEYS.map(k=>`<button class="${(ui.newSport||'run')===k?'on':''}" style="background:${SPORTS[k].bg};border-left-color:${SPORTS[k].color};color:${SPORTS[k].color}" data-a="pksp" data-v="${k}">${icon(k, 18)} ${SPORTS[k].label}</button>`).join('')}</div>
-       <div class="sect">2. Créer</div>
-       <div class="newopts">
-         <button data-a="newsimple">⏱ Séance simple<small>seulement les temps en Z1, Z2 et Z3</small></button>
-         <button data-a="newdetail">☰ Séance détaillée<small>blocs, répétitions, intensités</small></button>
-         <label>📂 Importer une séance<small>fichier GPX / TCX : séance réalisée, bilan rempli</small><input type="file" id="newfile" accept=".gpx,.tcx" style="display:none"></label>
-       </div>
-       <div class="sect">Ou partir d'une séance type</div>`;
+  const head = mode === 'replace'
+    ? `<div class="mhead"><h3>📚 Charger une séance type</h3><button class="mx" data-a="mclose" title="Fermer">✕</button></div><p class="ztxt" style="margin:0 0 6px">Le contenu de la séance sera remplacé par celui de la séance type.</p>`
+    : `<div class="mhead"><button class="btn sm" data-a="newback">← Retour</button><h3>📚 Bibliothèque</h3><button class="mx" data-a="mclose" title="Fermer">✕</button></div>
+       <div class="mdate">📅 ${longDate(pendingDate)} · ${SPORTS[ui.newSport || 'run'].label}</div>`;
   const cur = mode === 'replace' && ui.sessionId ? getSession(ui.sessionId) : null;
   ui.newSport = ui.newSport || 'run';
   ui.pf = {sport: cur ? cur.sport : (mode === 'new' ? ui.newSport : 'all'), cat:'all', int:'all', lvl:'all', dur:'all', q:''};
   openModal(`${head}${has('library') ? '' : lockBox('library', true)}${filtersHTML(ui.pf, 'pk', filterTpls(ui.pf).length)}<div class="tpllist" id="tpllist">${tplPickerRows()}</div>
-    <div class="row" style="justify-content:flex-end;margin-top:10px"><button class="btn" data-a="mclose">Annuler</button></div>`, true);
+    <div class="mfoot"><button class="btn" data-a="mclose">Annuler</button></div>`, true);
 }
 document.addEventListener('input', e => {
   const el = e.target; if (!el.dataset || !el.dataset.lf || el.dataset.k !== 'q') return;
@@ -3312,7 +3918,7 @@ document.addEventListener('change', e => {
 // Éléments d'une semaine de plan : référence à une séance type [jour, id] ou séance enregistrée {day, sport, title, blocks}
 function planItems(w){
   return (w || []).map(it => {
-    if (Array.isArray(it)){ const t = state.library.sessions.find(x => x.id === it[1]); return t ? {day:it[0], sport:t.sport, title:t.title.replace(/^[^—]+—\s*/, ''), blocks:t.blocks} : null; }
+    if (Array.isArray(it)){ const t = state.library.sessions.find(x => x.id === it[1]); return t ? {day:it[0], sport:t.sport, title:t.title.replace(/^[^—]+—\s*/, ''), blocks:t.blocks, desc:t.desc || ''} : null; }
     return it;
   }).filter(Boolean);
 }
@@ -3326,8 +3932,9 @@ function libPlansView(aid){
   const matrix = `<table class="pmx"><thead><tr><th></th>${LEVELS.map(l => `<th>${l[1]}</th>`).join('')}</tr></thead><tbody>
     ${Object.entries(PLAN_SPECS[D]).map(([obj, P]) => `<tr><th class="pmxo" title="${esc(P.d)}">${esc(P.label)}<small>${esc(P.d)}</small></th>${LEVELS.map(([lv], i) => {
       const on = g.type === D && g.obj === obj && g.level === lv && +g.weeks === P.w[i] && +g.per === P.per[i];
-      const ok = planOk(D, obj, lv), free = false;
-      return `<td><button class="${on ? 'on' : ''} ${ok ? '' : 'plock'}" data-a="preset" data-t="${D}" data-o="${obj}" data-l="${lv}"><b>${ok ? '' : '🔒 '}${P.w[i]} sem.</b><span class="pper" title="${P.per[i]} séances par semaine">${P.per[i]}×/sem.</span><span class="pload" title="Charge moyenne par semaine">⌀ ${fmtC(planLoad({type:D, obj, level:lv, weeks:P.w[i], per:P.per[i]}).avg)}</span></button></td>`; }).join('')}</tr>`).join('')}
+      const ok = planOk(D, obj, lv), free = false, pk = planKey(D, obj, lv), mst = modOf(pk);
+      if (!isDevUser() && !catalogVisible(pk)) return `<td><span class="pmxna">—</span></td>`;
+      return `<td><button class="${on ? 'on' : ''} ${ok ? '' : 'plock'} ${isDevUser() ? 'mod-' + (mst || 'pend') : ''}" data-a="preset" data-t="${D}" data-o="${obj}" data-l="${lv}"><b>${ok ? '' : '🔒 '}${P.w[i]} sem.</b><span class="pper" title="${P.per[i]} séances par semaine">${P.per[i]}×/sem.</span><span class="pload" title="Charge moyenne par semaine">⌀ ${fmtC(planLoad({type:D, obj, level:lv, weeks:P.w[i], per:P.per[i]}).avg)}</span></button></td>`; }).join('')}</tr>`).join('')}
   </tbody></table>`;
   const plans = state.library.plans.map(p => {
     const items = planItems(p.weeks[0]), n = p.weeks.length ? Math.round(p.weeks.reduce((a, w) => a + planItems(w).length, 0) / p.weeks.length) : 0;
@@ -3340,6 +3947,8 @@ function libPlansView(aid){
     </div>`; }).join('');
   return `<section class="zone zweek"><div class="zhead"><span class="ztitle">Plans types</span></div><div class="zbody">
       <div class="ztxt" style="margin:2px 0 4px">${nAll} plans : choisissez la discipline, puis la distance et le niveau.</div>
+      ${isDevUser() ? `<div class="modbar"><b>Modération des plans</b><span class="modleg"><i class="mod-valide"></i>validé <i class="mod-pend"></i>à valider <i class="mod-supprime"></i>supprimé</span>
+        <button class="btn sm" data-a="modbulkplans" data-d="${D}">✓ Valider tous les plans « ${esc(PLAN_DISC.find(x => x[0] === D)[1])} » à valider</button><span class="ztxt">Ouvrez un plan pour le valider ou le supprimer.</span></div>` : ''}
       ${tabs}${matrix}
     </div></section>
     <section class="zone zrecap"><div class="zhead"><span class="ztitle">Enregistrés</span></div><div class="zbody">
@@ -3356,13 +3965,18 @@ function libSessionsView(aid){
   const tpls = filterTpls(ui.lf);
   const rows = tpls.map(t => {
     const open = ui.libOpen === t.id;
-    return `<div class="lrow"><div class="c" style="background:${SPORTS[t.sport].color}"></div>
-      <div><div class="tt">${tplIcons(t, 13)} ${esc(t.title)}${tplTags(t)}</div><div class="ds">${esc(t.desc||'')}</div></div>
+    return `<div class="lrow ${t.builtin && modOf(tplKey(t)) === 'supprime' ? 'moddel' : ''}"><div class="c" style="background:${SPORTS[t.sport].color}"></div>
+      <div><div class="tt">${tplIcons(t, 13)} ${esc(t.title)}${tplTags(t)}${t.builtin && isDevUser() ? ' ' + modBadge(tplKey(t)) + modButtons(tplKey(t)) : ''}</div><div class="ds">${esc(t.desc||'')}</div></div>
       <span class="du2" style="font-weight:700;text-align:right">${fmtC(tplDur(t))}</span><div class="lgraph">${sessionGraph(t, 20)}</div>
       <div class="act dense"><button class="ib" data-a="libopen" data-id="${t.id}" title="Détail">${open?'▲':'▼'}</button><input type="date" id="libd-${t.id}" value="${todayStr()}"><button class="btn sm" data-a="addtpl" data-id="${t.id}">Ajouter</button>${!t.builtin && (!t.ownerId || t.ownerId === me.id) ?`<button class="ib red" title="Retirer de la bibliothèque" data-a="libdel" data-id="${t.id}">✕</button>`:''}</div>
       ${open ? `<div class="prev">${tplPreview(t)}</div>` : ''}
     </div>`; }).join('');
-  return `${filtersHTML(ui.lf, 'lib', tpls.length)}
+  const dev = isDevUser(), nPend = dev ? tpls.filter(t => t.builtin && !modOf(tplKey(t))).length : 0;
+  const modbar = dev ? `<div class="modbar"><b>Modération</b>
+      <select data-a="modf" id="modf">${[['all','Tout'],['pend','À valider'],['valide','Validées'],['supprime','Supprimées']].map(([k, l]) => `<option value="${k}" ${(ui.modf || 'all') === k ? 'selected' : ''}>${l}</option>`).join('')}</select>
+      ${nPend ? `<button class="btn sm" data-a="modbulk">✓ Valider les ${nPend} séances affichées à valider</button>` : ''}
+      <span class="ztxt">Visible par les utilisateurs : ${rule('catalogue_mode').mode === 'valides' ? 'uniquement les éléments validés' : 'tout sauf les éléments supprimés'}</span></div>` : '';
+  return `${filtersHTML(ui.lf, 'lib', tpls.length)}${modbar}
     ${rows || '<div class="empty">Aucune séance type ne correspond à ces filtres.</div>'}
     ${me.role === 'developpeur' ? '<div class="hint">Pour ajouter une séance à cette bibliothèque : ouvrez-la dans l\'onglet Semaine, puis bouton ★ (titre, type, niveau).</div>' : ''}`;
 }
@@ -3623,7 +4237,7 @@ function pwFormHTML(){
   return `<div class="pane dense" style="margin-top:8px"><h4>Mon mot de passe</h4>
     <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
       ${me.login ? `<span class="ztxt">Identifiant : <b>${esc(me.login)}</b></span>` : ''}
-      <input type="password" id="np1" placeholder="nouveau mot de passe (8 car. min.)" autocomplete="new-password" style="width:220px!important">
+      <input type="password" id="np1" placeholder="nouveau mot de passe (10 car., lettres + chiffres)" autocomplete="new-password" style="width:220px!important">
       <input type="password" id="np2" placeholder="confirmer" autocomplete="new-password" style="width:150px!important">
       <button class="btn sm primary" data-a="chpw">Changer</button></div></div>`;
 }
@@ -3651,6 +4265,8 @@ function accountsView(){
   const others = state.users.filter(u => u.id !== me.id).sort((a,b) => (a.approved - b.approved) || a.name.localeCompare(b.name));
   return `<h2 style="margin-top:6px">Comptes</h2>
   ${infoAdminHTML()}
+  ${rulesAdminHTML()}
+  ${rgpdAdminHTML()}
   ${devFormHTML()}
   
   <p class="ztxt">Les adhérents créent leur compte eux-mêmes (avec Strava ou un e-mail) : il est actif tout de suite avec un mois d'essai gratuit, puis 20 € par mois sans engagement. Ici, vous pouvez marquer un compte comme abonné (abonnement offert ou payé hors ligne) ou prolonger son essai en changeant la date.</p>
@@ -3683,14 +4299,15 @@ let pendingDate = null;
 
 /* ===================== Événements ===================== */
 function refreshSessionBits(s){
-  if (ensurePrefill(s)) ZONES.forEach(z => ['time','fc','pw'].forEach(k => {
-    const inp = document.querySelector(`[data-f="bz"][data-z="${z}"][data-k="${k}"]`); if (inp) inp.value = s.bilan.zones[z][k];
-  }));
+  if (ensurePrefill(s)){ const v = intsView(s.bilan); INTS.forEach(it => ['time','pace','fc'].forEach(k => {
+    const inp = document.querySelector(`[data-f="bi"][data-i="${it.k}"][data-k="${k}"]`); if (inp) inp.value = v[it.k][k];
+  })); }
   const sm = document.getElementById('summary'); if (sm) sm.innerHTML = summaryHTML(s);
   s.blocks.forEach((b,i)=>{ const el = document.getElementById('bdur-'+i); if (el) el.textContent = fmtC(blockDur(b, s));
     b.steps.forEach((st,j) => { const e2 = document.getElementById(`est-${i}-${j}`); if (e2) e2.textContent = estTxt(st, s); }); });
   const sg = document.getElementById('sgraph'); if (sg) sg.innerHTML = sessionGraph(s, 46, true);
   const wb = document.getElementById('wkbilan'); if (wb) wb.innerHTML = weekSide(s.athleteId);
+  const wc = document.getElementById('wkcheck'); if (wc) wc.innerHTML = weekCheckHTML(s.athleteId, ui.week);
   const bt = document.getElementById('bztot'); if (bt) bt.innerHTML = bilanTotals(s);
   const nt = document.getElementById('nuttot'); if (nt) nt.textContent = nutTotalTxt(s);
   const ch = document.getElementById('chip-'+s.id); if (ch) ch.innerHTML = chipInner(s);
@@ -3701,6 +4318,8 @@ document.addEventListener('input', e => {
   const s = getSession(ui.sessionId); if (!s || !canEdit(s)) return;
   const b = el.dataset.b !== undefined ? s.blocks[+el.dataset.b] : null;
   if (f === 'title') s.title = el.value;
+  if (f === 'note') s.note = el.value;
+  if (f === 'ter'){ s.terrain = Object.assign({}, s.terrain || {lieu:'ext'}, {[el.dataset.k]:el.value}); if (el.dataset.k === 'type'){ save(); render(); return; } }
   else if (f === 'btitle') b.title = el.value;
   else if (f === 'breps') b.reps = el.value;
   else if (f === 'step'){
@@ -3712,6 +4331,9 @@ document.addEventListener('input', e => {
   }
   else if (f === 'simple'){ const st = s.blocks[0].steps[+el.dataset.i]; if (st) st.dur = secToDur(parseHM(el.value)); }
   else if (f === 'bz'){ s.bilan.zones[el.dataset.z][el.dataset.k] = el.value; s.bilan.edited = true; }
+  else if (f === 'bi'){ if (!s.bilan.ints) s.bilan.ints = JSON.parse(JSON.stringify(intsView(s.bilan)));
+    s.bilan.ints[el.dataset.i][el.dataset.k] = el.value; s.bilan.edited = true; s.bilan.zones = zonesFromInts(s.bilan.ints);
+    const row = el.closest('tr'); if (row) row.classList.toggle('on', !!parseHM(s.bilan.ints[el.dataset.i].time)); }
   else if (f === 'bcomment') s.bilan.comment = el.value;
   else if (f === 'bnut') s.bilan.nut = el.value;
   else if (f === 'bcho'){ s.bilan.cho = el.value; const t = document.getElementById('nuttot'); if (t) t.textContent = nutTotalTxt(s); }
@@ -3744,7 +4366,9 @@ async function authSubmit(mode){
       if (error) throw new Error(error.message === 'Invalid login credentials' ? 'Identifiant ou mot de passe incorrect.' : error.message === 'Email not confirmed' ? 'Confirmez d\'abord votre e-mail (lien reçu à l\'inscription).' : error.message);
       await startSession();
     } else if (mode === 'signup'){
-      const { data, error } = await sb.auth.signUp({ email:v('lg').trim(), password:v('pw'), options:{ data:{ name:v('su-name').trim() }, emailRedirectTo:SITE_URL } });
+      if (pwProblem(v('pw'))) throw new Error('Mot de passe : ' + pwProblem(v('pw')));
+      if (!document.getElementById('su-cgu').checked) throw new Error('Merci d\'accepter la politique de confidentialité.');
+      const { data, error } = await sb.auth.signUp({ email:v('lg').trim(), password:v('pw'), options:{ data:{ name:v('su-name').trim(), consent_at:new Date().toISOString(), consent_version:PRIVACY_VERSION }, emailRedirectTo:SITE_URL } });
       if (error) throw error;
       if (data.session) await startSession();
       else { ui.authMode = 'login'; ui.authMsg = 'Compte créé. Cliquez sur le lien reçu par e-mail pour le confirmer, puis connectez-vous.'; render(); }
@@ -3753,6 +4377,7 @@ async function authSubmit(mode){
       if (error) throw error;
       ui.authMsg = 'Si ce compte existe, un e-mail de réinitialisation vient d\'être envoyé.'; render();
     } else if (mode === 'newpw'){
+      if (pwProblem(v('pw'))) throw new Error('Mot de passe : ' + pwProblem(v('pw')));
       const { error } = await sb.auth.updateUser({ password:v('pw') });
       if (error) throw error;
       ui.authMode = 'login'; toast('Mot de passe modifié'); await startSession();
@@ -3792,19 +4417,21 @@ document.addEventListener('click', e => {
       sendMsg(s, t); render(); toast('Message envoyé : ' + (s.athleteId === me.id ? 'votre coach' : getUser(s.athleteId).name) + ' sera notifié'); break; }
     case 'back': ui.view = me.role === 'developpeur' ? 'athlete' : 'home'; ui.sessionId = null; render(); break;
     case 'stab': ui.stab = el.dataset.v; render(); break;
-    case 'new': pendingDate = el.dataset.d; openTplPicker('new'); break;
+    case 'new': pendingDate = el.dataset.d; openNewChooser(); break;
+    case 'newlib': openTplPicker('new'); break;
+    case 'newback': openNewChooser(); break;
     case 'loadtpl': openTplPicker('replace'); break;
     case 'picktpl': {
       const t = state.library.sessions.find(x => x.id === el.dataset.id); if (!t) break;
       if (ui.pickMode === 'replace' && s && t.parts){
         fixOrd(s.athleteId, s.date);
         const rest = dayList(s.athleteId, s.date).filter(x => x.ord > s.ord), p0 = t.parts[0];
-        s.sport = p0.sport; s.title = p0.title; s.blocks = cloneBlocks(p0.blocks); s.chain = true; if (!isDone(s)) s.bilan = emptyBilan();
+        s.sport = p0.sport; s.title = p0.title; s.blocks = cloneBlocks(p0.blocks); s.note = p0.desc || t.desc || ''; s.chain = true; if (!isDone(s)) s.bilan = emptyBilan();
         t.parts.slice(1).forEach((p, i) => state.sessions.push({id:newId(), athleteId:s.athleteId, date:s.date, sport:p.sport, title:p.title, blocks:cloneBlocks(p.blocks), bilan:emptyBilan(), chain:i < t.parts.length - 2, ord:s.ord + 1 + i}));
         rest.forEach(x => x.ord += t.parts.length - 1);
         save(); closeModal(); render(); toast('Séance mixte chargée : ' + t.parts.length + ' séances enchaînées');
       } else if (ui.pickMode === 'replace' && s){
-        s.sport = t.sport; s.title = t.title.replace(/^[^—]+—\s*/, ''); s.blocks = cloneBlocks(t.blocks);
+        s.sport = t.sport; s.title = t.title.replace(/^[^—]+—\s*/, ''); s.blocks = cloneBlocks(t.blocks); s.note = t.desc || ''; s.terrain = t.terrain ? Object.assign({}, t.terrain) : null;
         if (!isDone(s)) s.bilan = emptyBilan();
         save(); closeModal(); render(); toast('Séance type chargée');
       } else {
@@ -3812,8 +4439,8 @@ document.addEventListener('click', e => {
         save(); closeModal(); ui.sessionId = ns.id; ui.tab = 'agenda'; ui.week = mondayOf(pendingDate); render();
       }
       break; }
-    case 'pksp': ui.newSport = el.dataset.v; ui.pf.sport = el.dataset.v; ui.pf.cat = 'all';
-      document.querySelectorAll('#pkSports button').forEach(x => x.classList.toggle('on', x.dataset.v === ui.newSport)); refreshPicker(); break;
+    case 'pksp': ui.newSport = el.dataset.v; if (ui.pf){ ui.pf.sport = el.dataset.v; ui.pf.cat = 'all'; }
+      document.querySelectorAll('#pkSports button').forEach(x => x.classList.toggle('on', x.dataset.v === ui.newSport)); if (document.getElementById('tpllist')) refreshPicker(); break;
     case 'newsimple': case 'newdetail': {
       const aid = curAid();
       const blocks = a === 'newsimple' ? [simpleBlock()] : [block('Échauffement', 1, [(() => { const st = step('10:00','Z1'); setStepInt(st, 'I2'); return st; })()])];
@@ -3840,7 +4467,7 @@ document.addEventListener('click', e => {
     case 'applyplan': {
       const aid = curAid(), p = state.library.plans.find(x => x.id === el.dataset.id);
       const start = mondayOf(document.getElementById('libd-'+p.id).value || nextMonday()); let n = 0;
-      p.weeks.forEach((w, wi) => planItems(w).forEach((it, ii) => { state.sessions.push({id:(typeof newId === 'function' ? newId() : uid()), athleteId:aid, date:addDays(start, wi*7 + it.day), sport:it.sport, title:it.title, blocks:cloneBlocks(it.blocks), bilan:emptyBilan(), optional:!!it.optional, chain:!!it.chain, ord:ii}); n++; }));
+      p.weeks.forEach((w, wi) => planItems(w).forEach((it, ii) => { state.sessions.push({id:(typeof newId === 'function' ? newId() : uid()), athleteId:aid, date:addDays(start, wi*7 + it.day), sport:it.sport, title:it.title, blocks:cloneBlocks(it.blocks), note:it.desc || it.note || '', bilan:emptyBilan(), optional:!!it.optional, chain:!!it.chain, ord:ii}); n++; }));
       save(); ui.week = start; ui.tab = 'agenda'; ui.sessionId = null; render(); toast(`Plan appliqué : ${n} séances ajoutées`); break; }
     case 'libdel': { const t = state.library.sessions.find(x => x.id === el.dataset.id);
       confirmBox(`Retirer « ${t.title} » de la bibliothèque ?`, () => { state.library.sessions = state.library.sessions.filter(x => x !== t); save(); render(); }); break; }
@@ -3850,7 +4477,7 @@ document.addEventListener('click', e => {
         <div class="field"><label>Titre</label><input id="st-title" value="${esc(s.title || SPORTS[s.sport].label)}"></div>
         <div class="two"><div class="field"><label>Type</label><select id="st-cat">${TPL_CATS.map(([k,l]) => `<option value="${k}" ${k===cat0?'selected':''}>${l}</option>`).join('')}</select></div>
         <div class="field"><label>Niveau</label><select id="st-lvl"><option value="all">Tous niveaux</option>${TPL_LVLS.map(([k,l]) => `<option value="${k}">${l}</option>`).join('')}</select></div></div>
-        <div class="field"><label>Description (facultatif)</label><input id="st-desc" placeholder="objectif, consignes…"></div>
+        <div class="field"><label>Description (facultatif)</label><input id="st-desc" placeholder="objectif, consignes…" value="${esc(s.note || '')}"></div>
         <div class="ztxt">Sport : ${SPORTS[s.sport].label} · durée ${fmtC(sum(plannedZones(s)))}</div></div>
         <div class="row" style="justify-content:flex-end;margin-top:10px"><button class="btn" data-a="mclose">Annuler</button><button class="btn primary" data-a="savetpl2">Enregistrer</button></div>`);
       break; }
@@ -3874,7 +4501,7 @@ document.addEventListener('click', e => {
       if (!v('sp-title').trim()){ document.getElementById('sp-title').focus(); break; }
       const n = +v('sp-n') || 1, weeks = [];
       for (let i = 0; i < n; i++){ const ws = addDays(ui.week, 7*i);
-        weeks.push(sessionsOf(aid, ws).map(x => ({day:(parseYmd(x.date).getDay() + 6) % 7, sport:x.sport, title:x.title, blocks:cloneBlocks(x.blocks), optional:!!x.optional, chain:!!x.chain}))); }
+        weeks.push(sessionsOf(aid, ws).map(x => ({day:(parseYmd(x.date).getDay() + 6) % 7, sport:x.sport, title:x.title, blocks:cloneBlocks(x.blocks), note:x.note || '', optional:!!x.optional, chain:!!x.chain}))); }
       if (!weeks.some(w => w.length)){ toast('Aucune séance sur ces semaines'); break; }
       state.library.plans.push({ownerId:me.id, id:'up-'+uid(), title:v('sp-title').trim(), desc:v('sp-desc').trim(), weeks});
       save(); closeModal(); toast('Plan type enregistré dans la bibliothèque'); break; }
@@ -3884,11 +4511,60 @@ document.addEventListener('click', e => {
     case 'preset': {
       const t = el.dataset.t, P = PLAN_SPECS[t][el.dataset.o], lv = el.dataset.l, i = LEVELS.findIndex(l => l[0] === lv);
       if (!planOk(t, el.dataset.o, lv)){ lockedModal(t === 'tri' ? 'plansTri' : 'plans'); break; }
+      if (!isDevUser() && !catalogVisible(planKey(t, el.dataset.o, lv))) break;
       Object.assign(genDefaults(), {type:t, obj:el.dataset.o, level:lv, weeks:P.w[i], per:P.per[i]});
       render(); const gen = document.querySelector('.gen'); if (gen) gen.scrollIntoView({behavior:'smooth', block:'start'});
       toast(`${P.label} · ${LEVELS[i][1]} : réglez la date de début puis « Appliquer »`); break; }
     case 'stravasync': stravaSync(); break;
+    case 'privacy': openModal(privacyHTML(), true); break;
+    case 'terlieu': if (s && canEdit(s)){ const v = el.dataset.v; s.terrain = v ? Object.assign({type:'plat'}, s.terrain || {}, {lieu:v}) : null; save(); render(); } break;
+    case 'modset': if (!isDevUser()) break; setMods([[el.dataset.k, el.dataset.v]]); render(); toast(el.dataset.v === 'valide' ? 'Validé' : el.dataset.v === 'supprime' ? 'Supprimé du catalogue (masqué pour les utilisateurs)' : 'Remis « à valider »'); break;
+    case 'modbulk': { if (!isDevUser()) break; const ks = filterTpls(ui.lf).filter(x => x.builtin && !modOf(tplKey(x))).map(x => [tplKey(x), 'valide']);
+      confirmBox(`Valider ${ks.length} séance(s) type(s) ?`, () => { setMods(ks); render(); toast(ks.length + ' séance(s) validée(s)'); }); break; }
+    case 'modbulkplans': { if (!isDevUser()) break; const D = el.dataset.d, ks = [];
+      Object.keys(PLAN_SPECS[D]).forEach(o => LEVELS.forEach(([lv]) => { const k = planKey(D, o, lv); if (!modOf(k)) ks.push([k, 'valide']); }));
+      confirmBox(`Valider ${ks.length} plan(s) ?`, () => { setMods(ks); render(); toast(ks.length + ' plan(s) validé(s)'); }); break; }
+    case 'purgecheck': sb.rpc('purge_comptes_inactifs', {simulation:true}).then(({data, error}) => { if (error){ toast('Échec : ' + error.message); return; } ui.purgeN = data; render(); }); break;
+    case 'purgedo': confirmBox(`Supprimer définitivement ${ui.purgeN} compte(s) inactif(s) et toutes leurs données ?`, () => sb.rpc('purge_comptes_inactifs', {simulation:false}).then(async ({data, error}) => { if (error){ toast('Échec : ' + error.message); return; } ui.purgeN = null; await loadAll(); render(); toast(data + ' compte(s) supprimé(s)'); })); break;
+    case 'journalload': sb.from('journal').select('*').order('id', {ascending:false}).limit(50).then(({data, error}) => { if (error){ toast('Échec : ' + error.message); return; } ui.journal = data || []; if (!ui.journal.length) toast('Journal vide pour le moment'); render(); }); break;
+    case 'exportdata': exportMyData(); toast('Vos données sont téléchargées (fichier JSON)'); break;
+    case 'deleteme': openModal(`<div class="mhead"><h3>Supprimer mon compte</h3><button class="mx" data-a="mclose">✕</button></div>
+      <p>Toutes vos données seront <b>définitivement effacées</b> : séances, bilans, messages, partages. Cette action est irréversible.</p>
+      <p class="ztxt">Conseil : téléchargez d'abord vos données.</p>
+      <div class="field"><label>Pour confirmer, tapez <b>SUPPRIMER</b></label><input id="delconf" autocomplete="off"></div>
+      <div class="mfoot"><button class="btn" data-a="mclose">Annuler</button><button class="btn danger-ghost" data-a="deleteme2">Supprimer définitivement</button></div>`); break;
+    case 'deleteme2': { if ((document.getElementById('delconf') || {}).value !== 'SUPPRIMER'){ toast('Tapez SUPPRIMER pour confirmer'); break; }
+      sb.rpc('delete_my_account').then(({error}) => { if (error){ toast('Échec : ' + error.message); return; } closeModal(); sb.auth.signOut().finally(() => { me = null; state = null; render(); toast('Votre compte et vos données ont été supprimés'); }); }); break; }
+    case 'consentok': { if (!document.getElementById('cs1').checked || !document.getElementById('cs2').checked){ toast('Les deux cases sont nécessaires pour utiliser l\'application'); break; }
+      const at = new Date().toISOString(); sb.from('profiles').update({consent_at:at, consent_version:PRIVACY_VERSION}).eq('id', me.id).then(({error}) => { if (error){ toast('Échec : ' + error.message); return; } me.consentAt = at; me.consentVersion = PRIVACY_VERSION; render(); }); break; }
+    case 'pwtempok': { const p1 = document.getElementById('tp1').value, p2 = document.getElementById('tp2').value;
+      if (pwProblem(p1)){ toast('Mot de passe : ' + pwProblem(p1)); break; } if (p1 !== p2){ toast('Les deux mots de passe sont différents'); break; }
+      sb.auth.updateUser({ password:p1 }).then(async ({error}) => { if (error){ toast('Échec : ' + error.message); return; } await sb.from('profiles').update({pw_temp:false}).eq('id', me.id); me.pwTemp = false; render(); toast('Mot de passe enregistré'); }); break; }
     case 'statn': ui.statN = +el.dataset.v; render(); break;
+    case 'statweek': { const d = (window._statData || [])[+el.dataset.i]; if (!d) break; ui.statWeek = ui.statWeek === d.ws ? null : d.ws; render();
+      setTimeout(() => { const w = document.querySelector('.statwk'); if (w) w.scrollIntoView({behavior:'smooth', block:'nearest'}); }, 50); break; }
+    case 'statweekclose': ui.statWeek = null; render(); break;
+    case 'statgoweek': ui.week = ui.statWeek; ui.tab = 'agenda'; ui.statWeek = null; render(); break;
+    case 'rulessave': {
+      const g = id => (document.getElementById(id) || {}).value;
+      const rows = PRED_TYPES.map(([k, rk, l]) => ({cle:rk, libelle:(RULES_BUILTIN.find(r => r.cle === rk) || {}).libelle || l,
+        valeur:Object.assign({}, rule(rk), {intensite:g(`rl-${rk}-int`), min_minutes:+g(`rl-${rk}-min`) || 0, pct_vma:+g(`rl-${rk}-pct`) || 100})}));
+      rows.push({cle:'prediction_periode', libelle:'Période prise en compte', valeur:{jours:+g('rl-periode') || 90}});
+      rows.push({cle:'securite_inactivite', libelle:'Déconnexion après inactivité', valeur:{minutes:Math.max(5, +g('rl-idle') || 60)}});
+      rows.push({cle:'rgpd_conservation', libelle:'Suppression des comptes inactifs', valeur:{annees:Math.max(1, +g('rl-ret') || 3)}});
+      rows.push({cle:'controle_charge', libelle:'Contrôle : hausse de la charge de la semaine', valeur:{pct_max:+g('rl-c1') || 10}});
+      rows.push({cle:'controle_sortie_longue', libelle:'Contrôle : hausse de la sortie longue', valeur:{pct_max:+g('rl-c2') || 10}});
+      rows.push({cle:'controle_seances', libelle:'Contrôle : hausse du nombre de séances par discipline', valeur:{max_plus:Math.max(0, +g('rl-c3'))}});
+      rows.push({cle:'controle_polarise', libelle:'Contrôle : entraînement polarisé', valeur:{min_pct_basse:Math.min(100, Math.max(0, +g('rl-c4')))}});
+      rows.push({cle:'controle_repos', libelle:'Contrôle : jours de repos', valeur:{min_jours:Math.min(7, Math.max(0, +g('rl-c5')))}});
+      rows.push({cle:'controle_intensite', libelle:'Contrôle : séances avec bloc d\'intensité', valeur:{max_seances:Math.max(0, +g('rl-c6')), min_minutes:Math.max(0, +g('rl-c7')), intensite_min:g('rl-c8') || 'I4'}});
+      rows.push({cle:'controle_reference', libelle:'Contrôle : semaines de comparaison', valeur:{semaines:Math.min(6, Math.max(1, +g('rl-c9') || 3))}});
+      rows.push({cle:'tss_if', libelle:'TSS : facteur d\'intensité par zone', valeur:Object.fromEntries(INTS.map(it => [it.k, +g('rl-if-' + it.k) || rule('tss_if')[it.k]]))});
+      rows.push({cle:'tss_charge', libelle:'Forme / fatigue / fraîcheur (CTL, ATL, TSB)', valeur:{ctl_jours:+g('rl-ctl') || 42, atl_jours:+g('rl-atl') || 7, tsb_frais:+g('rl-tf'), tsb_surcharge:+g('rl-ts')}});
+      rows.push({cle:'catalogue_mode', libelle:'Catalogue visible par les utilisateurs', valeur:{mode:g('rl-cat') === 'valides' ? 'valides' : 'tous'}});
+      state.rules = rows;
+      sb.from('regles_metier').upsert(rows.map(r => Object.assign({}, r, {updated_at:new Date().toISOString()}))).then(({error}) => { if (error) toast('Échec : ' + error.message); else { render(); toast('Règles enregistrées'); } });
+      break; }
     case 'statprev': ui.statEnd = addDays(ui.statEnd || mondayOf(todayStr()), -7); render(); break;
     case 'statnext': ui.statEnd = addDays(ui.statEnd || mondayOf(todayStr()), 7); render(); break;
     case 'expick0': {
@@ -3928,24 +4604,26 @@ document.addEventListener('click', e => {
       if (j >= 0 && j < l.length){ const o = l[j].ord; l[j].ord = s.ord; s.ord = o; save(); render(); } } break;
     case 'chpw': {
       const a1 = document.getElementById('np1').value, a2 = document.getElementById('np2').value;
-      if (a1.length < 8){ toast('8 caractères minimum'); break; }
+      if (pwProblem(a1)){ toast('Mot de passe : ' + pwProblem(a1)); break; }
       if (a1 !== a2){ toast('Les deux mots de passe sont différents'); break; }
       sb.auth.updateUser({ password:a1 }).then(({ error }) => { if (error) toast('Échec : ' + error.message); else { toast('Mot de passe modifié'); render(); } });
       break; }
     case 'devcreate': {
       const g = id => document.getElementById(id).value.trim();
       const body = {action:'createuser', name:g('dv-name'), login:g('dv-login'), password:document.getElementById('dv-pw').value, license:g('dv-lic')};
+      if (pwProblem(body.password)){ toast('Mot de passe provisoire : ' + pwProblem(body.password)); break; }
       ui.devBusy = true; render();
       devCall(body).then(async () => { ui.devBusy = false; await loadAll(); render(); toast(`Compte créé : identifiant « ${body.login.toLowerCase()} »`); })
         .catch(err => { ui.devBusy = false; render(); ['dv-name','dv-login','dv-pw','dv-lic'].forEach(k => { const el = document.getElementById(k); if (el) el.value = k === 'dv-lic' ? body.license : k === 'dv-pw' ? body.password : body[k.slice(3)]; }); toast('Création impossible : ' + (err.message || err)); });
       break; }
     case 'devpw': {
       const u = getUser(el.dataset.id);
-      openModal(`<h3>Nouveau mot de passe pour ${esc(u.name)}</h3><div class="field"><label>Mot de passe provisoire (8 caractères min.)</label><input id="dvp"></div>
+      openModal(`<h3>Nouveau mot de passe pour ${esc(u.name)}</h3><div class="field"><label>Mot de passe provisoire (10 caractères, lettres et chiffres)</label><input id="dvp"></div>
         <div style="text-align:right;margin-top:10px"><button class="btn" data-a="mclose">Annuler</button> <button class="btn primary" data-a="devpw2" data-id="${u.id}">Enregistrer</button></div>`);
       break; }
     case 'devpw2': {
       const pw = document.getElementById('dvp').value;
+      if (pwProblem(pw)){ toast('Mot de passe : ' + pwProblem(pw)); break; }
       devCall({action:'setpassword', user_id:el.dataset.id, password:pw}).then(() => { closeModal(); toast('Mot de passe modifié : communiquez-le à la personne'); }).catch(err => toast('Échec : ' + (err.message || err)));
       break; }
     case 'upgrade': {
@@ -4030,7 +4708,7 @@ document.addEventListener('click', e => {
       if (st.int === 'I1') st.autre = 'récup';
       s.blocks[bi].steps.push(st); save(); render(); break; }
     case 'sdel': s.blocks[bi].steps.splice(+el.dataset.s, 1); save(); render(); break;
-    case 'prefill': s.bilan.zones = plannedBilanZones(s); s.bilan.prefilled = true; s.bilan.edited = false; save(); render(); break;
+    case 'prefill': s.bilan.ints = plannedBilanInts(s); s.bilan.zones = zonesFromInts(s.bilan.ints); s.bilan.prefilled = true; s.bilan.edited = false; save(); render(); break;
     case 'validate': {
       const t = getSession(el.dataset.id); if (!t || !canEdit(t)) break;
       const v = !isDone(t); setValidated(t, v); save(); render();
